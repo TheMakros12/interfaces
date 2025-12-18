@@ -49,6 +49,16 @@ void VentanaPrincipal::crearActions() {
     connect(actionDTablaRebotes, SIGNAL(triggered()),
             this, SLOT(slotDTablaRebotes()));
 
+    actionGuardarPartida = new QAction("Guardar Partida", this);
+	actionGuardarPartida->setShortcut(QKeySequence::Save);
+    connect(actionGuardarPartida, SIGNAL(triggered()),
+            this, SLOT(slotGuardarPartida()));
+
+    actionCargarPartida = new QAction("Cargar Partida", this);
+	actionCargarPartida->setShortcut(QKeySequence::Open);
+    connect(actionCargarPartida, SIGNAL(triggered()),
+            this, SLOT(slotCargarPartida()));
+
     actionSalir = new QAction("Salir", this);
 	actionSalir->setShortcut(QKeySequence::Quit);
     connect(actionSalir, SIGNAL(triggered()),
@@ -59,11 +69,13 @@ void VentanaPrincipal::crearActions() {
 void VentanaPrincipal::crearMenus() {
 
     QMenuBar *barraMenu = this->menuBar();
-    QMenu *menuArchivo = barraMenu->addMenu("Archivo");
+    QMenu *menuArchivo = barraMenu->addMenu("Partida");
 
     menuArchivo->addAction(actionDListaBolas);
     menuArchivo->addAction(actionDTablaBolas);
     menuArchivo->addAction(actionDTablaRebotes);
+    menuArchivo->addAction(actionGuardarPartida);
+    menuArchivo->addAction(actionCargarPartida);
     menuArchivo->addAction(actionSalir);
 
 }
@@ -110,6 +122,126 @@ void VentanaPrincipal::paintEvent(QPaintEvent *){
 
     for (int i= 0 ; i < bolas.length(); i++)
         bolas.at(i)->pintar(pintor);
+
+}
+
+void VentanaPrincipal::slotGuardarPartida() {
+
+    QJsonObject objectoPrincipal;
+
+    objectoPrincipal["nombre"] = QString("marcos");
+    objectoPrincipal["edad"] = 23;
+    objectoPrincipal["pausado"] = false;
+
+    QJsonArray arrayVersiones;
+    arrayVersiones.append(3);
+    arrayVersiones.append(2.3);
+    arrayVersiones.append(QString("beta"));
+
+    objectoPrincipal["version"] = arrayVersiones;
+
+    QJsonObject objetoJugador;
+
+    QJsonArray coloresBola;
+    coloresBola.append(bolas.at(0)->color.red());
+    coloresBola.append(bolas.at(0)->color.green());
+    coloresBola.append(bolas.at(0)->color.blue());
+    objetoJugador["color"] = coloresBola;
+
+    objetoJugador["posX"] = bolas.at(0)->posX;
+    objetoJugador["posY"] = bolas.at(0)->posY;
+
+    objectoPrincipal["bolaJugador"] = objetoJugador;
+
+    QJsonArray arrayBolas;
+    for (int i = 0; i < bolas.size(); i++) {
+        QJsonObject objetoBola;
+
+        QJsonArray colorsBola;
+        colorsBola.append(bolas.at(i)->color.red());
+        colorsBola.append(bolas.at(i)->color.green());
+        colorsBola.append(bolas.at(i)->color.blue());
+        objetoBola["color"] = colorsBola;
+
+        objetoBola["nombre"] = bolas.at(i)->nombre;
+        objetoBola["posX"] = bolas.at(i)->posX;
+        objetoBola["posY"] = bolas.at(i)->posY;
+
+        arrayBolas.append(objetoBola);
+    }
+
+    objectoPrincipal["bolas"] = arrayBolas;
+
+    QJsonDocument documento(objectoPrincipal);
+
+    QFile saveFile(QStringLiteral("partida.json"));
+    saveFile.open(QIODevice::WriteOnly);
+
+    saveFile.write(documento.toJson());
+
+}
+
+void VentanaPrincipal::slotCargarPartida() {
+
+    qDebug() << "Cargar Partida" << endl;
+
+    QFile loadFile(QStringLiteral("partida.json"));
+    if (!loadFile.open(QIODevice::ReadOnly))
+        return;
+
+    for (int i = 0; i <  bolas.size(); i++)
+        delete bolas[i];
+
+    bolas.clear();
+
+    QByteArray datosBrutos = loadFile.readAll();
+    QJsonDocument documento(QJsonDocument::fromJson(datosBrutos));
+
+    QJsonObject objectoPrincipal = documento.object();
+
+    QStringList listaClaves = objectoPrincipal.keys();
+    qDebug() << listaClaves;
+
+    if (listaClaves.contains("nombre")) {
+        QJsonValue valorNombre = objectoPrincipal["nombre"];
+        QString nombreJugador;
+        if (valorNombre.isString())
+            nombreJugador = valorNombre.toString();
+
+    qDebug() << "el nombre del jugador es: " << nombreJugador;
+    }
+
+    if (!objectoPrincipal.contains("nombre"))
+        qDebug() << "error, el fichero no contiene nombre";
+
+    if (objectoPrincipal.contains("bolaJugador")) {
+        QJsonValue valorJugador = objectoPrincipal["bolaJugador"];
+        if (valorJugador.isObject()) {
+            QJsonObject objetoJugador = valorJugador.toObject();
+
+        qDebug() << "============ OBJETO JUGADOR ============";
+        qDebug() << objetoJugador;
+        }
+    }
+
+    if (objectoPrincipal.contains("bolas")) {
+        QJsonValue valorBolas = objectoPrincipal["bolas"];
+        if (valorBolas.isArray()) {
+            QJsonArray arrayInfoBolas = valorBolas.toArray();
+            for (int i = 0; i < arrayInfoBolas.size(); i++) {
+                Bola *nuevaBola;
+                QJsonValue valorElemento = arrayInfoBolas[i];
+                if (valorElemento.isObject()) {
+                    QJsonObject objetoBola = valorElemento.toObject();
+                    if (objetoBola.contains("nombre"))
+                        nuevaBola->nombre = objetoBola["nombre"].toString();
+//                    ponColor(nuevaBola, objetoBola["colores"])
+
+                bolas.append(nuevaBola);
+                }
+            }
+        }
+    }
 
 }
 

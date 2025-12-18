@@ -8,6 +8,14 @@
 #include <QMenu>
 #include <QAction>
 #include <QMenuBar>
+#include <QFile>
+#include <QStringLiteral>
+#include <QIODevice>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
+#include <QByteArray>
 
 #include "bola.h"
 #include "dlistabolas.h"
@@ -32,6 +40,8 @@ public:
     QAction *actionDListaBolas;
     QAction *actionDTablaBolas;
     QAction *actionDTablaRebotes;
+    QAction *actionGuardarPartida;
+    QAction *actionCargarPartida;
     QAction *actionSalir;
 
     void paintEvent(QPaintEvent *event);
@@ -44,6 +54,8 @@ public slots:
     void slotDListaBolas();
     void slotDTablaBolas();
     void slotDTablaRebotes();
+    void slotGuardarPartida();
+    void slotCargarPartida();
 
 };
 #endif
