@@ -69,14 +69,15 @@ void VentanaPrincipal::crearActions() {
 void VentanaPrincipal::crearMenus() {
 
     QMenuBar *barraMenu = this->menuBar();
-    QMenu *menuArchivo = barraMenu->addMenu("Partida");
+    QMenu *menuDialogos = barraMenu->addMenu("Diálogos");
+    QMenu *menuPartida = barraMenu->addMenu("Partida");
 
-    menuArchivo->addAction(actionDListaBolas);
-    menuArchivo->addAction(actionDTablaBolas);
-    menuArchivo->addAction(actionDTablaRebotes);
-    menuArchivo->addAction(actionGuardarPartida);
-    menuArchivo->addAction(actionCargarPartida);
-    menuArchivo->addAction(actionSalir);
+    menuDialogos->addAction(actionDListaBolas);
+    menuDialogos->addAction(actionDTablaBolas);
+    menuDialogos->addAction(actionDTablaRebotes);
+    menuDialogos->addAction(actionSalir);
+    menuPartida->addAction(actionGuardarPartida);
+    menuPartida->addAction(actionCargarPartida);
 
 }
 
@@ -123,6 +124,15 @@ void VentanaPrincipal::paintEvent(QPaintEvent *){
     for (int i= 0 ; i < bolas.length(); i++)
         bolas.at(i)->pintar(pintor);
 
+}
+
+void VentanaPrincipal::closeEvent(QCloseEvent *event) {
+
+    qDebug() << "=======================";
+    qDebug() << "Has cerrado el programa";
+    qDebug() << "=======================";
+
+    event->accept();
 }
 
 void VentanaPrincipal::slotGuardarPartida() {
@@ -177,11 +187,13 @@ void VentanaPrincipal::slotGuardarPartida() {
 
     saveFile.write(documento.toJson());
 
+    qDebug() << "=======================";
+    qDebug() << "Has guardado la Partida";
+    qDebug() << "=======================";
+
 }
 
 void VentanaPrincipal::slotCargarPartida() {
-
-    qDebug() << "Cargar Partida" << endl;
 
     QFile loadFile(QStringLiteral("partida.json"));
     if (!loadFile.open(QIODevice::ReadOnly))
@@ -198,7 +210,6 @@ void VentanaPrincipal::slotCargarPartida() {
     QJsonObject objectoPrincipal = documento.object();
 
     QStringList listaClaves = objectoPrincipal.keys();
-    qDebug() << listaClaves;
 
     if (!objectoPrincipal.contains("bolas")) {
         qDebug() << "Error: No hay bolas";
@@ -219,6 +230,11 @@ void VentanaPrincipal::slotCargarPartida() {
             return;
         }
     } /*for (int i = 0; i < arrayBolas.size(); i++)*/
+
+
+    qDebug() << "======================";
+    qDebug() << "Has cargado la Partida";
+    qDebug() << "======================";
 
 }
 

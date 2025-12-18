@@ -45,6 +45,7 @@ public:
     QAction *actionSalir;
 
     void paintEvent(QPaintEvent *event);
+    void closeEvent(QCloseEvent *event);
     void inicializarBolas();
     void crearActions();
     void crearMenus();
