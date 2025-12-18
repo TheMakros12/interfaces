@@ -1,0 +1,21 @@
+
+#ifndef DTABLABOLAS_H
+#define DTABLABOLAS_H
+#include "ui_dtablabolas.h"
+
+#include <QVector>
+#include <QDialog>
+#include <QHBoxLayout>
+
+class dtablabolas : public QDialog, public Ui::dtablabolas {
+Q_OBJECT
+
+public:
+	dtablabolas(QWidget *parent = NULL);
+
+public slots:
+	void slotEjemplo();
+
+};
+
+#endif 

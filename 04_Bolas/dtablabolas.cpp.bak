@@ -1,0 +1,15 @@
+
+#include "dtablabolas.h"
+#include <QDebug>
+
+dtablabolas::dtablabolas(QWidget *parent): QDialog(parent){
+		setupUi(this);
+
+	
+}
+
+
+void dtablabolas::slotEjemplo(){
+
+}
+
