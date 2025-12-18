@@ -129,10 +129,6 @@ void VentanaPrincipal::slotGuardarPartida() {
 
     QJsonObject objectoPrincipal;
 
-    objectoPrincipal["nombre"] = QString("marcos");
-    objectoPrincipal["edad"] = 23;
-    objectoPrincipal["pausado"] = false;
-
     QJsonArray arrayVersiones;
     arrayVersiones.append(3);
     arrayVersiones.append(2.3);
@@ -140,7 +136,7 @@ void VentanaPrincipal::slotGuardarPartida() {
 
     objectoPrincipal["version"] = arrayVersiones;
 
-    QJsonObject objetoJugador;
+    /*QJsonObject objetoJugador;
 
     QJsonArray coloresBola;
     coloresBola.append(bolas.at(0)->color.red());
@@ -151,7 +147,7 @@ void VentanaPrincipal::slotGuardarPartida() {
     objetoJugador["posX"] = bolas.at(0)->posX;
     objetoJugador["posY"] = bolas.at(0)->posY;
 
-    objectoPrincipal["bolaJugador"] = objetoJugador;
+    objectoPrincipal["bolaJugador"] = objetoJugador;*/
 
     QJsonArray arrayBolas;
     for (int i = 0; i < bolas.size(); i++) {
@@ -166,6 +162,8 @@ void VentanaPrincipal::slotGuardarPartida() {
         objetoBola["nombre"] = bolas.at(i)->nombre;
         objetoBola["posX"] = bolas.at(i)->posX;
         objetoBola["posY"] = bolas.at(i)->posY;
+        objetoBola["velX"] = bolas.at(i)->velX;
+        objetoBola["velY"] = bolas.at(i)->velY;
 
         arrayBolas.append(objetoBola);
     }
@@ -202,46 +200,113 @@ void VentanaPrincipal::slotCargarPartida() {
     QStringList listaClaves = objectoPrincipal.keys();
     qDebug() << listaClaves;
 
-    if (listaClaves.contains("nombre")) {
-        QJsonValue valorNombre = objectoPrincipal["nombre"];
-        QString nombreJugador;
-        if (valorNombre.isString())
-            nombreJugador = valorNombre.toString();
-
-    qDebug() << "el nombre del jugador es: " << nombreJugador;
+    if (!objectoPrincipal.contains("bolas")) {
+        qDebug() << "Error: No hay bolas";
+        return;
     }
+    QJsonValue valorBolas = objectoPrincipal["bolas"];
 
-    if (!objectoPrincipal.contains("nombre"))
-        qDebug() << "error, el fichero no contiene nombre";
+    if (!valorBolas.isArray()) {
+        qDebug() << "Error: las bolas no son un array";
+        return;
+    }
+    QJsonArray arrayBolas = valorBolas.toArray();
 
-    if (objectoPrincipal.contains("bolaJugador")) {
-        QJsonValue valorJugador = objectoPrincipal["bolaJugador"];
-        if (valorJugador.isObject()) {
-            QJsonObject objetoJugador = valorJugador.toObject();
-
-        qDebug() << "============ OBJETO JUGADOR ============";
-        qDebug() << objetoJugador;
+    for (int i = 0; i < arrayBolas.size(); i++) {
+        QJsonValue elemento = arrayBolas [i];
+        if (!crearBolaJson(elemento)) {
+            qDebug() << "ERROR! No se pudo crear la Bola " << i;
+            return;
         }
-    }
+    } /*for (int i = 0; i < arrayBolas.size(); i++)*/
 
-    if (objectoPrincipal.contains("bolas")) {
-        QJsonValue valorBolas = objectoPrincipal["bolas"];
-        if (valorBolas.isArray()) {
-            QJsonArray arrayInfoBolas = valorBolas.toArray();
-            for (int i = 0; i < arrayInfoBolas.size(); i++) {
-                Bola *nuevaBola;
-                QJsonValue valorElemento = arrayInfoBolas[i];
-                if (valorElemento.isObject()) {
-                    QJsonObject objetoBola = valorElemento.toObject();
-                    if (objetoBola.contains("nombre"))
-                        nuevaBola->nombre = objetoBola["nombre"].toString();
-//                    ponColor(nuevaBola, objetoBola["colores"])
+}
 
-                bolas.append(nuevaBola);
-                }
-            }
-        }
-    }
+bool VentanaPrincipal::crearBolaJson(QJsonValue &elemento) {
+
+    if (!elemento.isObject()) {
+        qDebug() << "ERROR! No hay objeto en Array de bolas";
+        return false;
+    } /* if (!elemento.isObject()) */
+    QJsonObject objetoBola = elemento.toObject();
+
+    if (!objetoBola.contains("posX")) {
+        qDebug() << "ERROR! La Bola no tiene PosX";
+        return false;
+    } /* if (!objetoBola.contains("posX")) */
+    QJsonValue valorPosX = objetoBola["posX"];
+    if (!valorPosX.isDouble()) {
+        qDebug() << "ERROR! posX no es un número";
+        return false;
+    } /* if (!valorPosX.isDouble()) */
+    double posX = valorPosX.toDouble();
+
+    if (!objetoBola.contains("posY")) {
+        qDebug() << "ERROR! La Bola no tiene posY";
+        return false;
+    } /* if (!objetoBola.contains("posY")) */
+    QJsonValue valorPosY = objetoBola["posY"];
+    if (!valorPosY.isDouble()) {
+        qDebug() << "ERROR! posY no es un número";
+        return false;
+    } /* if (!valorPosY.isDouble()) */
+    double posY = valorPosY.toDouble();
+
+    if (!objetoBola.contains("velX")) {
+        qDebug() << "ERROR! La Bola no tiene velX";
+        return false;
+    } /* if (!objetoBola.contains("velX")) */
+    QJsonValue valorVelX = objetoBola["velX"];
+    if (!valorVelX.isDouble()) {
+        qDebug() << "ERROR! velX no es un número";
+        return false;
+    } /* if (!valorVelX.isDouble()) */
+    double velX = valorVelX.toDouble();
+
+    if (!objetoBola.contains("velY")) {
+        qDebug() << "ERROR! La Bola no tiene velY";
+        return false;
+    } /* if (!objetoBola.contains("velY")) */
+    QJsonValue valorVelY = objetoBola["velY"];
+    if (!valorVelY.isDouble()) {
+        qDebug() << "ERROR! velY no es un número";
+        return false;
+    } /* if (!valorVelY.isDouble()) */
+    double velY = valorVelY.toDouble();
+
+    if (!objetoBola.contains("nombre")) {
+        qDebug() << "ERROR! La Bola no tiene nombre";
+        return false;
+    } /* if (!objetoBola.contains("nombre")) */
+    QJsonValue valorNombre = objetoBola["nombre"];
+    if (!valorNombre.isString()) {
+        qDebug() << "ERROR! nombre no es un String";
+        return false;
+    } /* if (!valorNombre.isString()) */
+    QString nombre = valorNombre.toString();
+
+    int rojo, verde, azul;
+    if (!objetoBola.contains("color")) {
+        qDebug() << "ERROR! La Bola no tiene color";
+        return false;
+    } /* if (!objetoBola.contains("color")) */
+    QJsonValue valorColores = objetoBola["color"];
+    if (!valorColores.isArray()) {
+        qDebug() << "ERROR! color no está bien";
+        return false;
+    } /* if (!valorColores.isArray()) */
+    QJsonArray arrayColores = valorColores.toArray();
+    rojo = arrayColores[0].toDouble();
+    verde = arrayColores[1].toDouble();
+    azul = arrayColores[2].toDouble();
+
+    Bola *nuevaBola = new Bola(posX, posY, velX, velY);
+    nuevaBola->nombre = nombre;
+    nuevaBola->color = QColor(rojo, verde, azul);
+
+    bolas.append(nuevaBola);
+
+    return true;
 
 }
 

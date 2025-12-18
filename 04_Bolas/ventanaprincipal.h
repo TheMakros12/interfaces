@@ -48,6 +48,7 @@ public:
     void inicializarBolas();
     void crearActions();
     void crearMenus();
+    bool crearBolaJson(QJsonValue &);
 
 public slots:
     void slotTemporizador();
