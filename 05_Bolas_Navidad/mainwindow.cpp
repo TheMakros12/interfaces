@@ -30,12 +30,15 @@ void MainWindow::crearBolas() {
     int altura = height();
 
     for (int i = 0; i < 10; i++) {
-        Bola *nueva = new Bola();
+        int posIniX = random() % anchura;
+        int posIniY = random() % altura;
 
-        nueva->posX = random() % anchura;
-        nueva->posY = random() % altura;
-        nueva->velX = ((float)(random() % 10)) / 5 - 1;
-        nueva->velY = ((float)(random() % 10)) / 5 - 1;
+        float velIniX = (float)(random() % 100) / 50 - 1;
+        float velIniY = (float)(random() % 100) / 50 - 1;
+
+        Bola *nueva = new Bola(posIniX, posIniY, velIniX, velIniY);
+
+        nueva->color = QColor( rand() % 255, rand() % 255, rand() % 255 );
 
         bolas.append(nueva);
     }
@@ -76,6 +79,13 @@ void MainWindow::slotTemporizador() {
 
     for (int i = 0; i < bolas.size(); i++) {
         bolas[i]->mover(anchuraV, alturaV, alturaMenuBar);
+    }
+
+    for (int i = 0; i < bolas.size(); i++) {
+        for (int j = 0; j < bolas.size(); j++) {
+            if ( i != j )
+                bolas[i]->choca(bolas[j]);
+        }
     }
 
     update();
