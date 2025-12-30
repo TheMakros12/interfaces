@@ -12,6 +12,8 @@ Bola::Bola(float px, float py, float vx, float vy) :
 {
 
     color = QColor("black");
+    nombre = "Nombre";
+    especial = false;
 
 }
 
@@ -96,5 +98,15 @@ void Bola::pintar(QPainter &pintor) {
 
     pintor.setBrush(color);
     pintor.drawEllipse(posX, posY, diametro, diametro);
+
+    pintor.drawText(posX, posY + diametro + 15, nombre);
+
+    if (especial) {
+        pintor.setBrush(QColor(0,0,0));
+        pintor.drawEllipse(posX+10,
+                           posY+10,
+                           diametro-20,
+                           diametro-20);
+    }
 
 }

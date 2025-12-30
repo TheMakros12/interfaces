@@ -52,7 +52,7 @@ void Bola::pintar(QPainter &pintor) {
 
     pintor.setBrush(color);
     pintor.drawEllipse(posX, posY, diametro, diametro);
-    pintor.drawText(posX, posY + diametro + 10, nombre);
+    pintor.drawText(posX - 7, posY + diametro + 15, nombre);
 
     if (esImagen) {
         pintor.drawImage(posX, posY, img);

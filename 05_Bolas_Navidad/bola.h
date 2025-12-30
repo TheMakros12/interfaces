@@ -15,6 +15,9 @@ public:
     float posX, posY;
     float velX, velY;
     QColor color;
+    QString nombre;
+
+    bool especial;
 
     void mover(int, int, int);
     float distancia(Bola *otraBola);
