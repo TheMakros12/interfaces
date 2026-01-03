@@ -13,12 +13,15 @@
 #include "bola.h"
 #include "dinformacion.h"
 #include "dinfobolas.h"
+#include "dtablabolas.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
     MainWindow(QWidget *parent = 0);
+
+    static bool bolasDesaparecen;
 
     QVector<Bola*> bolas;
     Bola *bolaJugador;
@@ -31,14 +34,17 @@ public:
 
     QAction *actionDInformacion;
     QAction *actionDInfoBolas;
+    QAction *actionDTablaBolas;
 
     DInformacion *dInformacion;
     DInfoBolas *dInfoBolas;
+    DTablaBolas *dTablaBolas;
 
 public slots:
     void slotTemporizador();
     void slotDInformacion();
     void slotDInfoBolas();
+    void slotDTablaBolas();
 
 };
 #endif

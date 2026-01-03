@@ -7,6 +7,8 @@ DInfoBolas::DInfoBolas(QVector<Bola*> *lasBolas, QWidget *parent): bolasInfo(las
 
 		setupUi(this);
 
+		setWindowTitle("Lista de las Bolas");
+
 		QTimer *temporizador = new QTimer();
 		temporizador->setSingleShot(false);
 		temporizador->setInterval(40);

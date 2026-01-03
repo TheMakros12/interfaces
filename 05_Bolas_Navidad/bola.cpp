@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 int Bola::diametro = 40;
+int Bola::vidasIniciales = 10;
 
 Bola::Bola() : Bola(0,0,0,0) {
 
@@ -14,6 +15,7 @@ Bola::Bola(float px, float py, float vx, float vy) :
     color = QColor("black");
     nombre = "Nombre";
     especial = false;
+    vidas = vidasIniciales;
 
 }
 
@@ -24,7 +26,7 @@ void Bola::mover(int anchuraV, int alturaV, int alturaMenuBar) {
     if ( posX <= 0 )
         velX = fabs(velX);
 
-    if ( posY > (alturaV - diametro))
+    if ( posY > (alturaV - diametro) )
         velY = -fabs(velY);
     if ( posY <= alturaMenuBar )
         velY = fabs(velY);
@@ -102,11 +104,36 @@ void Bola::pintar(QPainter &pintor) {
     pintor.drawText(posX, posY + diametro + 15, nombre);
 
     if (especial) {
-        pintor.setBrush(QColor(0,0,0));
+        pintor.setBrush(QColor("White"));
         pintor.drawEllipse(posX+10,
                            posY+10,
                            diametro-20,
                            diametro-20);
     }
+
+    pintor.setBrush(QColor("Green"));
+
+    int anchoBarra = Bola::diametro;
+    float division = (float) vidas / (float) Bola::vidasIniciales;
+
+    anchoBarra = anchoBarra * division;
+    pintor.drawRect(posX,
+                    posY - 20,
+                    anchoBarra,
+                    5);
+    float acabaVerda = posX  + anchoBarra ;
+
+
+    int mortes = Bola::vidasIniciales  -  vidas;
+    division = (float)mortes / (float)Bola::vidasIniciales ;
+    anchoBarra = Bola::diametro * division;
+
+    pintor.setBrush(QColor("Red"));
+    pintor.drawRect(acabaVerda,
+                    posY - 20,
+                    anchoBarra,
+                    5);
+
+    pintor.drawText(posX+diametro/2, posY+diametro/2, QString::number(vidas));
 
 }

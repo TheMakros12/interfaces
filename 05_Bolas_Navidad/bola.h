@@ -12,10 +12,12 @@ public:
     Bola(float px, float py, float vx, float vy);
 
     static int diametro;
+    static int vidasIniciales;
     float posX, posY;
     float velX, velY;
     QColor color;
     QString nombre;
+    int vidas;
 
     bool especial;
 

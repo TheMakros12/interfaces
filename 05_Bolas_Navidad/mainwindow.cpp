@@ -4,11 +4,14 @@
 #include <QDebug>
 #include <stdlib.h>
 
+bool MainWindow::bolasDesaparecen = true;
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
+    bolaJugador = NULL;
     dInformacion = NULL;
     dInfoBolas = NULL;
-    bolaJugador = NULL;
+    dTablaBolas = NULL;
 
     QTimer *temporizador = new QTimer();
     temporizador->setSingleShot(false);
@@ -65,6 +68,10 @@ void MainWindow::crearActions() {
     connect(actionDInfoBolas, SIGNAL(triggered()),
             this, SLOT(slotDInfoBolas()));
 
+    actionDTablaBolas = new QAction("Tabla Bolas");
+    connect(actionDTablaBolas, SIGNAL(triggered()),
+            this, SLOT(slotDTablaBolas()));
+
 }
 
 void MainWindow::crearMenu() {
@@ -73,13 +80,16 @@ void MainWindow::crearMenu() {
     QMenu *menuArchivo = barraMenu->addMenu("Archivo");
     menuArchivo->addAction(actionDInformacion);
     menuArchivo->addAction(actionDInfoBolas);
+    menuArchivo->addAction(actionDTablaBolas);
 
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
 
-    int codigo = event->key();
-    switch( codigo ) {
+    if ( !bolaJugador )
+        return;
+
+    switch( event->key() ) {
         case Qt::Key_Up:
             bolaJugador->velY = bolaJugador->velY - 0.1;
             break;
@@ -104,7 +114,8 @@ void MainWindow::paintEvent(QPaintEvent *event) {
         bolas[i]->pintar(pintor);
     }
 
-    bolaJugador->pintar(pintor);
+    if (bolaJugador)
+        bolaJugador->pintar(pintor);
 
 }
 
@@ -121,15 +132,39 @@ void MainWindow::slotTemporizador() {
     for (int i = 0; i < bolas.size(); i++) {
         for (int j = 0; j < bolas.size(); j++) {
             if ( i != j )
-                bolas[i]->choca(bolas[j]);
+                if (bolas[i]->choca(bolas[j])) {
+                    bolas.at(i)->vidas--;
+                    bolas.at(j)->vidas--;
+
+                }
         }
     }
 
-    for (int i = 0; i < bolas.size(); i++) {
-        bolaJugador->choca(bolas[i]);
+    if ( bolaJugador ) {
+        bolaJugador->mover(anchuraV, alturaV, alturaMenuBar);
+
+        for (int i = 0; i < bolas.size(); i++) {
+            if (bolaJugador->choca(bolas[i])) {
+                bolas[i]->vidas--;
+                bolaJugador->vidas--;
+            }
+        }
     }
 
-    bolaJugador->mover(anchuraV, alturaV, alturaMenuBar);
+
+    for (int i = 0; i < bolas.length() && bolasDesaparecen; i++) {
+        if (bolas.at(i)->vidas <= 0) {
+            delete bolas.at(i);
+            bolas.removeAt(i);
+            break;
+        }
+    }
+
+    if ( bolaJugador && bolaJugador->vidas <= 0 && bolasDesaparecen ) {
+        delete bolaJugador;
+        bolaJugador = nullptr;
+    }
+
 
     update();
 
@@ -153,5 +188,14 @@ void MainWindow::slotDInfoBolas() {
         dInfoBolas = new DInfoBolas(&bolas);
 
     dInfoBolas->show();
+
+}
+
+void MainWindow::slotDTablaBolas() {
+
+    if ( dTablaBolas == NULL )
+        dTablaBolas = new DTablaBolas(&bolas);
+
+    dTablaBolas->show();
 
 }
