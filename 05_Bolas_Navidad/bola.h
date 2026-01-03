@@ -18,6 +18,7 @@ public:
     QColor color;
     QString nombre;
     int vidas;
+    int rArriba, rAbajo, rDerecha, rIzquierda;
 
     bool especial;
 

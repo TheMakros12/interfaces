@@ -56,20 +56,24 @@ SOURCES       = bola.cpp \
 		dinfobolas.cpp \
 		dinformacion.cpp \
 		dtablabolas.cpp \
+		dtablarebotes.cpp \
 		main.cpp \
 		mainwindow.cpp moc_dinfobolas.cpp \
 		moc_dinformacion.cpp \
 		moc_dtablabolas.cpp \
+		moc_dtablarebotes.cpp \
 		moc_mainwindow.cpp
 OBJECTS       = bola.o \
 		dinfobolas.o \
 		dinformacion.o \
 		dtablabolas.o \
+		dtablarebotes.o \
 		main.o \
 		mainwindow.o \
 		moc_dinfobolas.o \
 		moc_dinformacion.o \
 		moc_dtablabolas.o \
+		moc_dtablarebotes.o \
 		moc_mainwindow.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -156,10 +160,12 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		dinfobolas.h \
 		dinformacion.h \
 		dtablabolas.h \
+		dtablarebotes.h \
 		mainwindow.h bola.cpp \
 		dinfobolas.cpp \
 		dinformacion.cpp \
 		dtablabolas.cpp \
+		dtablarebotes.cpp \
 		main.cpp \
 		mainwindow.cpp
 QMAKE_TARGET  = 05_Bolas_Navidad
@@ -170,7 +176,7 @@ TARGET        = 05_Bolas_Navidad
 first: all
 ####### Build rules
 
-05_Bolas_Navidad: ui_dinfobolas.h ui_dinformacion.h ui_dtablabolas.h $(OBJECTS)  
+05_Bolas_Navidad: ui_dinfobolas.h ui_dinformacion.h ui_dtablabolas.h ui_dtablarebotes.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: 05_Bolas_Navidad.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -353,9 +359,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents bola.h dinfobolas.h dinformacion.h dtablabolas.h mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents bola.cpp dinfobolas.cpp dinformacion.cpp dtablabolas.cpp main.cpp mainwindow.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents dinfobolas.ui dinformacion.ui dtablabolas.ui $(DISTDIR)/
+	$(COPY_FILE) --parents bola.h dinfobolas.h dinformacion.h dtablabolas.h dtablarebotes.h mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents bola.cpp dinfobolas.cpp dinformacion.cpp dtablabolas.cpp dtablarebotes.cpp main.cpp mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents dinfobolas.ui dinformacion.ui dtablabolas.ui dtablarebotes.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -387,9 +393,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_dinfobolas.cpp moc_dinformacion.cpp moc_dtablabolas.cpp moc_mainwindow.cpp
+compiler_moc_header_make_all: moc_dinfobolas.cpp moc_dinformacion.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_mainwindow.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_dinfobolas.cpp moc_dinformacion.cpp moc_dtablabolas.cpp moc_mainwindow.cpp
+	-$(DEL_FILE) moc_dinfobolas.cpp moc_dinformacion.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_mainwindow.cpp
 moc_dinfobolas.cpp: dinfobolas.h \
 		ui_dinfobolas.h \
 		bola.h \
@@ -410,6 +416,12 @@ moc_dtablabolas.cpp: dtablabolas.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/05_Bolas_Navidad/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/05_Bolas_Navidad -I/home/marcosdi12/Documentos/di/interfaces/05_Bolas_Navidad -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dtablabolas.h -o moc_dtablabolas.cpp
 
+moc_dtablarebotes.cpp: dtablarebotes.h \
+		ui_dtablarebotes.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/05_Bolas_Navidad/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/05_Bolas_Navidad -I/home/marcosdi12/Documentos/di/interfaces/05_Bolas_Navidad -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dtablarebotes.h -o moc_dtablarebotes.cpp
+
 moc_mainwindow.cpp: mainwindow.h \
 		bola.h \
 		dinformacion.h \
@@ -418,6 +430,8 @@ moc_mainwindow.cpp: mainwindow.h \
 		ui_dinfobolas.h \
 		dtablabolas.h \
 		ui_dtablabolas.h \
+		dtablarebotes.h \
+		ui_dtablarebotes.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/05_Bolas_Navidad/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/05_Bolas_Navidad -I/home/marcosdi12/Documentos/di/interfaces/05_Bolas_Navidad -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include mainwindow.h -o moc_mainwindow.cpp
@@ -426,9 +440,9 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_dinfobolas.h ui_dinformacion.h ui_dtablabolas.h
+compiler_uic_make_all: ui_dinfobolas.h ui_dinformacion.h ui_dtablabolas.h ui_dtablarebotes.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_dinfobolas.h ui_dinformacion.h ui_dtablabolas.h
+	-$(DEL_FILE) ui_dinfobolas.h ui_dinformacion.h ui_dtablabolas.h ui_dtablarebotes.h
 ui_dinfobolas.h: dinfobolas.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic dinfobolas.ui -o ui_dinfobolas.h
@@ -440,6 +454,10 @@ ui_dinformacion.h: dinformacion.ui \
 ui_dtablabolas.h: dtablabolas.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic dtablabolas.ui -o ui_dtablabolas.h
+
+ui_dtablarebotes.h: dtablarebotes.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic dtablarebotes.ui -o ui_dtablarebotes.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -468,6 +486,10 @@ dtablabolas.o: dtablabolas.cpp dtablabolas.h \
 		bola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dtablabolas.o dtablabolas.cpp
 
+dtablarebotes.o: dtablarebotes.cpp dtablarebotes.h \
+		ui_dtablarebotes.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dtablarebotes.o dtablarebotes.cpp
+
 main.o: main.cpp mainwindow.h \
 		bola.h \
 		dinformacion.h \
@@ -475,7 +497,9 @@ main.o: main.cpp mainwindow.h \
 		dinfobolas.h \
 		ui_dinfobolas.h \
 		dtablabolas.h \
-		ui_dtablabolas.h
+		ui_dtablabolas.h \
+		dtablarebotes.h \
+		ui_dtablarebotes.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 mainwindow.o: mainwindow.cpp mainwindow.h \
@@ -485,7 +509,9 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		dinfobolas.h \
 		ui_dinfobolas.h \
 		dtablabolas.h \
-		ui_dtablabolas.h
+		ui_dtablabolas.h \
+		dtablarebotes.h \
+		ui_dtablarebotes.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
 
 moc_dinfobolas.o: moc_dinfobolas.cpp 
@@ -496,6 +522,9 @@ moc_dinformacion.o: moc_dinformacion.cpp
 
 moc_dtablabolas.o: moc_dtablabolas.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dtablabolas.o moc_dtablabolas.cpp
+
+moc_dtablarebotes.o: moc_dtablarebotes.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dtablarebotes.o moc_dtablarebotes.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

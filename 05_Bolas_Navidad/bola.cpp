@@ -16,20 +16,32 @@ Bola::Bola(float px, float py, float vx, float vy) :
     nombre = "Nombre";
     especial = false;
     vidas = vidasIniciales;
+    rArriba = rAbajo = rDerecha = rIzquierda = 0;
 
 }
 
 void Bola::mover(int anchuraV, int alturaV, int alturaMenuBar) {
 
-    if ( posX >= (anchuraV - diametro) )
-        velX = -fabs(velX);
-    if ( posX <= 0 )
-        velX = fabs(velX);
+    if ( vidas < 0 )
+        vidas = 0;
 
-    if ( posY > (alturaV - diametro) )
+    if ( posX >= (anchuraV - diametro) ){
+        velX = -fabs(velX);
+        rDerecha++;
+    }
+    if ( posX <= 0 ){
+        velX = fabs(velX);
+        rIzquierda++;
+    }
+
+    if ( posY > (alturaV - diametro) ){
         velY = -fabs(velY);
-    if ( posY <= alturaMenuBar )
+        rAbajo++;
+    }
+    if ( posY <= alturaMenuBar ){
         velY = fabs(velY);
+        rArriba++;
+    }
 
     posX += velX;
     posY += velY;

@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     dInformacion = NULL;
     dInfoBolas = NULL;
     dTablaBolas = NULL;
+    dTablaRebotes = NULL;
 
     QTimer *temporizador = new QTimer();
     temporizador->setSingleShot(false);
@@ -72,6 +73,10 @@ void MainWindow::crearActions() {
     connect(actionDTablaBolas, SIGNAL(triggered()),
             this, SLOT(slotDTablaBolas()));
 
+    actionDTablaRebotes = new QAction("Tabla Rebotes");
+    connect(actionDTablaRebotes, SIGNAL(triggered()),
+            this, SLOT(slotDTablaRebotes()));
+
 }
 
 void MainWindow::crearMenu() {
@@ -81,6 +86,7 @@ void MainWindow::crearMenu() {
     menuArchivo->addAction(actionDInformacion);
     menuArchivo->addAction(actionDInfoBolas);
     menuArchivo->addAction(actionDTablaBolas);
+    menuArchivo->addAction(actionDTablaRebotes);
 
 }
 
@@ -197,5 +203,14 @@ void MainWindow::slotDTablaBolas() {
         dTablaBolas = new DTablaBolas(&bolas);
 
     dTablaBolas->show();
+
+}
+
+void MainWindow::slotDTablaRebotes() {
+
+    if ( dTablaRebotes == NULL )
+        dTablaRebotes = new DTablaRebotes(&bolas);
+
+    dTablaRebotes->show();
 
 }

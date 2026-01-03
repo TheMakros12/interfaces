@@ -14,6 +14,7 @@
 #include "dinformacion.h"
 #include "dinfobolas.h"
 #include "dtablabolas.h"
+#include "dtablarebotes.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -35,16 +36,19 @@ public:
     QAction *actionDInformacion;
     QAction *actionDInfoBolas;
     QAction *actionDTablaBolas;
+    QAction *actionDTablaRebotes;
 
     DInformacion *dInformacion;
     DInfoBolas *dInfoBolas;
     DTablaBolas *dTablaBolas;
+    DTablaRebotes *dTablaRebotes;
 
 public slots:
     void slotTemporizador();
     void slotDInformacion();
     void slotDInfoBolas();
     void slotDTablaBolas();
+    void slotDTablaRebotes();
 
 };
 #endif
