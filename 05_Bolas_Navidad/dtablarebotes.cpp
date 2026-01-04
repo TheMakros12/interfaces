@@ -118,7 +118,6 @@ DTablaRebotes::DTablaRebotes(QVector<Bola*> *pBolas, QWidget *parent): QDialog(p
 
 }
 
-
 void DTablaRebotes::slotTemporizador(){
 
 	tablaRebotes->resizeColumnsToContents();
@@ -138,5 +137,9 @@ void DTablaRebotes::slotTemporizador(){
 	adjustSize();
 
 	modeloRebotes->update();
+
+}
+
+void DTablaRebotes::slotRestablecerRebotes(){
 
 }

@@ -9,12 +9,23 @@
 #include <QMenuBar>
 #include <QStringList>
 #include <QKeyEvent>
+#include <QShowEvent>
+#include <QCloseEvent>
+#include <QFile>
+#include <QStringLiteral>
+#include <QIODevice>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonValue>
+#include <QByteArray>
 
 #include "bola.h"
 #include "dinformacion.h"
 #include "dinfobolas.h"
 #include "dtablabolas.h"
 #include "dtablarebotes.h"
+#include "dcontrolbolas.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -32,16 +43,24 @@ public:
     void crearMenu();
     void paintEvent(QPaintEvent *event);
     void keyPressEvent(QKeyEvent *event);
+    void showEvent(QShowEvent *event);
+    void closeEvent(QCloseEvent *event);
+    bool crearBolaJson(QJsonValue &);
 
     QAction *actionDInformacion;
     QAction *actionDInfoBolas;
     QAction *actionDTablaBolas;
     QAction *actionDTablaRebotes;
+    QAction *actionDControlBolas;
+    QAction *actionGuardarPartida;
+    QAction *actionCargarPartida;
+    QAction *actionSalir;
 
     DInformacion *dInformacion;
     DInfoBolas *dInfoBolas;
     DTablaBolas *dTablaBolas;
     DTablaRebotes *dTablaRebotes;
+    DControlBolas *dControlBolas;
 
 public slots:
     void slotTemporizador();
@@ -49,6 +68,9 @@ public slots:
     void slotDInfoBolas();
     void slotDTablaBolas();
     void slotDTablaRebotes();
+    void slotDControlBolas();
+    void slotGuardarPartida();
+    void slotCargarPartida();
 
 };
 #endif

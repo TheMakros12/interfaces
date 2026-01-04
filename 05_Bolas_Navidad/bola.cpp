@@ -4,20 +4,12 @@
 int Bola::diametro = 40;
 int Bola::vidasIniciales = 10;
 
-Bola::Bola() : Bola(0,0,0,0) {
-
+Bola::Bola(QObject *parent): Bola(0, 0, 0, 0, parent) {
 }
 
-Bola::Bola(float px, float py, float vx, float vy) :
-    posX(px), posY(py), velX(vx), velY(vy)
-{
-
-    color = QColor("black");
-    nombre = "Nombre";
-    especial = false;
-    vidas = vidasIniciales;
-    rArriba = rAbajo = rDerecha = rIzquierda = 0;
-
+Bola::Bola(float px, float py, float vx, float vy, QObject *parent): QObject(parent),
+    posX(px), posY(py), velX(vx), velY(vy), color(Qt::black), nombre("Nombre"),
+    especial(false), vidas(vidasIniciales), rArriba(0), rAbajo(0), rDerecha(0), rIzquierda(0) {
 }
 
 void Bola::mover(int anchuraV, int alturaV, int alturaMenuBar) {

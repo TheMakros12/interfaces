@@ -4,12 +4,14 @@
 #include <math.h>
 #include <QPainter>
 #include <QColor>
+#include <QObject>
 
-class Bola {
+class Bola : public QObject {
+Q_OBJECT
 
 public:
-    Bola();
-    Bola(float px, float py, float vx, float vy);
+    explicit Bola(QObject *parent = nullptr);
+    Bola(float px, float py, float vx, float vy, QObject *parent = nullptr);
 
     static int diametro;
     static int vidasIniciales;

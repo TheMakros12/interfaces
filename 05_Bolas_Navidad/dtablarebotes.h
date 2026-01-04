@@ -39,6 +39,7 @@ public:
 
 public slots:
 	void slotTemporizador();
+	void slotRestablecerRebotes();
 
 };
 

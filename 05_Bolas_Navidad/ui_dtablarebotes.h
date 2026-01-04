@@ -13,32 +13,58 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_DTablaRebotes
 {
 public:
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QTableView *tablaRebotes;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *btnRestablecerRebotes;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DTablaRebotes)
     {
         if (DTablaRebotes->objectName().isEmpty())
             DTablaRebotes->setObjectName(QString::fromUtf8("DTablaRebotes"));
-        DTablaRebotes->resize(481, 377);
-        verticalLayout = new QVBoxLayout(DTablaRebotes);
+        DTablaRebotes->resize(398, 336);
+        layoutWidget = new QWidget(DTablaRebotes);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(9, 9, 381, 321));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        tablaRebotes = new QTableView(DTablaRebotes);
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        tablaRebotes = new QTableView(layoutWidget);
         tablaRebotes->setObjectName(QString::fromUtf8("tablaRebotes"));
 
         verticalLayout->addWidget(tablaRebotes);
 
-        buttonBox = new QDialogButtonBox(DTablaRebotes);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        btnRestablecerRebotes = new QPushButton(layoutWidget);
+        btnRestablecerRebotes->setObjectName(QString::fromUtf8("btnRestablecerRebotes"));
+
+        horizontalLayout->addWidget(btnRestablecerRebotes);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        buttonBox = new QDialogButtonBox(layoutWidget);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
@@ -56,6 +82,7 @@ public:
     void retranslateUi(QDialog *DTablaRebotes)
     {
         DTablaRebotes->setWindowTitle(QCoreApplication::translate("DTablaRebotes", "Dialog", nullptr));
+        btnRestablecerRebotes->setText(QCoreApplication::translate("DTablaRebotes", "Restablecer Rebotes", nullptr));
     } // retranslateUi
 
 };
