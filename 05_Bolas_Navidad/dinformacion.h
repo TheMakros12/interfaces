@@ -10,7 +10,7 @@ class DInformacion : public QDialog, public Ui::DInformacion {
 Q_OBJECT
 
 public:
-	DInformacion(int anchura, int altura, int numBOlas, QWidget *parent = NULL);
+	DInformacion(int anchura, int altura, int numBolas, QWidget *parent = NULL);
 
 public slots:
 	void slotEjemplo();

@@ -18,6 +18,8 @@ public:
 
 	QPointer<Bola> bola() const { return miBola; }
 
+	void inicializarColores();
+
 private:
 	QPointer<Bola> miBola;
 

@@ -17,13 +17,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
     QTimer *temporizador = new QTimer();
     temporizador->setSingleShot(false);
-    temporizador->setInterval(40);
+    temporizador->setInterval(10);
     temporizador->start();
 
     connect(temporizador, SIGNAL(timeout()),
             this, SLOT(slotTemporizador()));
 
-    resize(600,400);
+    resize(800,600);
 
     crearActions();
     crearMenu();
@@ -39,8 +39,8 @@ void MainWindow::crearBolas() {
     int altura = height();
 
     for (int i = 0; i < 10; i++) {
-        int posIniX = random() % anchura;
-        int posIniY = random() % altura;
+        int posIniX = (random() % anchura) - 20;
+        int posIniY = (random() % altura) - 20;
 
         float velIniX = (float)(random() % 100) / 50 - 1;
         float velIniY = (float)(random() % 100) / 50 - 1;
@@ -48,7 +48,7 @@ void MainWindow::crearBolas() {
         Bola *nueva = new Bola(posIniX, posIniY, velIniX, velIniY, this);
 
         nueva->color = QColor( rand() % 255, rand() % 255, rand() % 255 );
-        nueva->nombre = nombres.at(i % nombres.size());
+        nueva->nombre = nombres.at( i % nombres.size() );
 
         bolas.append(nueva);
     }
@@ -62,6 +62,7 @@ void MainWindow::crearBolas() {
 void MainWindow::crearActions() {
 
     actionDInformacion = new QAction("Información");
+    actionDInformacion->setShortcut(QKeySequence::WhatsThis);
     connect(actionDInformacion, SIGNAL(triggered()),
             this, SLOT(slotDInformacion()));
 
@@ -101,12 +102,14 @@ void MainWindow::crearActions() {
 void MainWindow::crearMenu() {
 
     QMenuBar *barraMenu = this->menuBar();
+
     QMenu *menuPartida = barraMenu->addMenu("Partida");
-    QMenu *menuDialogos = barraMenu->addMenu("Diálogos");
     menuPartida->addAction(actionDInformacion);
     menuPartida->addAction(actionGuardarPartida);
     menuPartida->addAction(actionCargarPartida);
     menuPartida->addAction(actionSalir);
+
+    QMenu *menuDialogos = barraMenu->addMenu("Diálogos");
     menuDialogos->addAction(actionDInfoBolas);
     menuDialogos->addAction(actionDTablaBolas);
     menuDialogos->addAction(actionDTablaRebotes);
@@ -122,7 +125,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
         bolas[i]->pintar(pintor);
     }
 
-    if (bolaJugador)
+    if ( bolaJugador )
         bolaJugador->pintar(pintor);
 
 }
@@ -281,7 +284,7 @@ void MainWindow::slotTemporizador() {
     for (int i = 0; i < bolas.size(); i++) {
         for (int j = 0; j < bolas.size(); j++) {
             if ( i != j )
-                if (bolas[i]->choca(bolas[j])) {
+                if ( bolas[i]->choca(bolas[j]) ) {
                     bolas.at(i)->vidas--;
                     bolas.at(j)->vidas--;
 
@@ -292,7 +295,7 @@ void MainWindow::slotTemporizador() {
     if ( bolaJugador ) {
         bolaJugador->mover(anchuraV, alturaV, alturaMenuBar);
         for (int i = 0; i < bolas.size(); i++) {
-            if (bolaJugador->choca(bolas[i])) {
+            if ( bolaJugador->choca(bolas[i]) ) {
                 bolas[i]->vidas--;
                 bolaJugador->vidas--;
             }
@@ -300,7 +303,7 @@ void MainWindow::slotTemporizador() {
     }
 
     for (int i = 0; i < bolas.length() && bolasDesaparecen; i++) {
-        if (bolas.at(i)->vidas <= 0) {
+        if ( bolas.at(i)->vidas <= 0 ) {
             delete bolas.at(i);
             bolas.removeAt(i);
             break;
@@ -318,7 +321,7 @@ void MainWindow::slotTemporizador() {
 
 void MainWindow::slotDInformacion() {
 
-    if ( dInformacion == NULL)
+    if ( dInformacion == NULL )
         dInformacion = new DInformacion(width(), height(), bolas.size());
 
     dInformacion->show();
@@ -364,13 +367,6 @@ void MainWindow::slotDControlBolas() {
 void MainWindow::slotGuardarPartida() {
 
     QJsonObject objectoPrincipal;
-
-    QJsonArray arrayVersiones;
-    arrayVersiones.append(3);
-    arrayVersiones.append(2.3);
-    arrayVersiones.append(QString("beta"));
-
-    objectoPrincipal["version"] = arrayVersiones;
 
     QJsonArray arrayBolas;
     for (int i = 0; i < bolas.size(); i++) {

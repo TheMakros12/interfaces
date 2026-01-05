@@ -10,6 +10,8 @@
 #include <QModelIndex>
 #include <QTimer>
 
+/************************ModeloTabla***************************/
+
 class ModeloBolasRebotes : public QAbstractTableModel {
 
 public:
@@ -20,13 +22,17 @@ public:
 
 	int	columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
+
+	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
 	void update();
 
 };
+
+/************************ModeloTabla***************************/
+
+/************************DTablaRebotes***************************/
 
 class DTablaRebotes : public QDialog, public Ui::DTablaRebotes {
 	Q_OBJECT
@@ -42,5 +48,7 @@ public slots:
 	void slotRestablecerRebotes();
 
 };
+
+/************************DTablaRebotes***************************/
 
 #endif

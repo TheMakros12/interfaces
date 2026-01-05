@@ -15,6 +15,8 @@
 
 #include "bola.h"
 
+/************************ModeloTabla***************************/
+
 class ModeloTabla : public QAbstractTableModel {
 
 public:
@@ -32,6 +34,10 @@ public:
 
 };
 
+/************************ModeloTabla***************************/
+
+/***********************SpinBoxDelegate*************************/
+
 class SpinBoxDelegate : public QStyledItemDelegate {
 Q_OBJECT
 
@@ -46,8 +52,11 @@ public:
 
 	void updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
-
 };
+
+/***********************SpinBoxDelegate*************************/
+
+/*************************DTablaBolas***************************/
 
 class DTablaBolas : public QDialog, public Ui::DTablaBolas {
 Q_OBJECT
@@ -61,5 +70,7 @@ public slots:
 	void slotTemporizador();
 
 };
+
+/*************************DTablaBolas***************************/
 
 #endif 

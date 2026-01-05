@@ -1,6 +1,8 @@
 #include "dtablarebotes.h"
 #include <QDebug>
 
+/************************ModeloTabla***************************/
+
 ModeloBolasRebotes::ModeloBolasRebotes(QVector<Bola*> *lasBolas) {
 
 	pBolas = lasBolas;
@@ -19,64 +21,22 @@ int ModeloBolasRebotes::columnCount(const QModelIndex &parent) const {
 
 }
 
-QVariant ModeloBolasRebotes::data(const QModelIndex &index, int role) const {
-
-	if (role != Qt::DisplayRole)
-		return QVariant();
-
-	int fila = index.row();
-	int columna = index.column();
-	Bola *bola = pBolas->at(fila);
-
-	int sumaRebotes, rebVeritcales, rebHorizontales = 0;
-	QString resultado;
-	switch (columna) {
-		case 0:
-			sumaRebotes = bola->rIzquierda + bola->rDerecha + bola->rArriba + bola->rAbajo;
-			resultado = QString::number(sumaRebotes);
-			break;
-		case 1:
-			rebVeritcales = bola->rArriba + bola->rAbajo;
-			resultado = QString::number(rebVeritcales);
-			break;
-		case 2:
-			rebHorizontales = bola->rIzquierda + bola->rDerecha;
-			resultado = QString::number(rebHorizontales);
-			break;
-		case 3:  //Ifs con return
-			if (bola->rArriba > bola->rAbajo &&
-				bola->rArriba > bola->rDerecha &&
-				bola->rArriba > bola->rIzquierda
-			) return QVariant("Arriba");
-			if (bola->rAbajo > bola->rDerecha &&
-				bola->rAbajo > bola->rIzquierda
-			) return QVariant("Abajo");
-			if (bola->rIzquierda > bola->rDerecha)
-				return QVariant("Izquierda");
-		return QVariant("Derecha");
-		break;
-	};
-
-	return QVariant(resultado);
-
-}
-
 QVariant ModeloBolasRebotes::headerData(int section, Qt::Orientation orientation, int role) const {
 
-	if (role != Qt::DisplayRole)
+	if ( role != Qt::DisplayRole )
 		return QVariant();
 
 	QString cadena;
-	if (orientation == Qt::Horizontal) {
-		switch(section) {
-			case 0: cadena = "Total Rebotes"; break;
+	if ( orientation == Qt::Horizontal ) {
+		switch( section ) {
+			case 0: cadena = "T Rebotes"; break;
 			case 1: cadena = "Rebotes Y"; break;
 			case 2: cadena = "Rebotes X"; break;
 			case 3: cadena = "Dirección"; break;
 		}
 	}
 
-	if (orientation == Qt::Vertical) {
+	if ( orientation == Qt::Vertical ) {
 		cadena = pBolas->at(section)->nombre;
 	}
 
@@ -84,17 +44,57 @@ QVariant ModeloBolasRebotes::headerData(int section, Qt::Orientation orientation
 
 }
 
+QVariant ModeloBolasRebotes::data(const QModelIndex &index, int role) const {
+
+	if ( role != Qt::DisplayRole )
+		return QVariant();
+
+	int fila = index.row();
+	int columna = index.column();
+	Bola *bola = pBolas->at(fila);
+
+	int sumaRebotes = bola->rArriba + bola->rAbajo + bola->rIzquierda + bola->rDerecha;
+	int rebVeritcales = bola->rArriba + bola->rAbajo;
+	int rebHorizontales = bola->rIzquierda + bola->rDerecha;
+
+	QString resultado;
+	switch (columna) {
+		case 0:
+			resultado = QString::number(sumaRebotes); break;
+		case 1:
+			resultado = QString::number(rebVeritcales); break;
+		case 2:
+			resultado = QString::number(rebHorizontales); break;
+		case 3:
+			if ( bola->rArriba > bola->rAbajo &&
+				bola->rArriba > bola->rDerecha &&
+				bola->rArriba > bola->rIzquierda )
+				return QVariant("Arriba");
+
+			if ( bola->rAbajo > bola->rDerecha &&
+				bola->rAbajo > bola->rIzquierda )
+				return QVariant("Abajo");
+
+			if ( bola->rIzquierda > bola->rDerecha )
+				return QVariant("Izquierda");
+
+			return QVariant("Derecha");
+			break;
+	};
+
+	return QVariant(resultado);
+
+}
+
 void ModeloBolasRebotes::update() {
 
-	beginResetModel();
-	emit layoutChanged();
 	QModelIndex topLeft = index(0,0);
 	QModelIndex bottomRight = index(pBolas->size()-1, 3);
 	emit dataChanged(topLeft, bottomRight);
 
-
-
 }
+
+/************************ModeloTabla***************************/
 
 DTablaRebotes::DTablaRebotes(QVector<Bola*> *pBolas, QWidget *parent): QDialog(parent){
 
@@ -116,6 +116,9 @@ DTablaRebotes::DTablaRebotes(QVector<Bola*> *pBolas, QWidget *parent): QDialog(p
 
 	temporizador->start();
 
+	connect(btnRestablecerRebotes, SIGNAL(clicked()),
+			this, SLOT(slotRestablecerRebotes()));
+
 }
 
 void DTablaRebotes::slotTemporizador(){
@@ -134,12 +137,21 @@ void DTablaRebotes::slotTemporizador(){
 	}
 
 	tablaRebotes->setMinimumSize(ancho, largo);
-	adjustSize();
 
 	modeloRebotes->update();
+	adjustSize();
 
 }
 
 void DTablaRebotes::slotRestablecerRebotes(){
+
+	for (Bola *bola : *modeloRebotes->pBolas) {
+		bola->rArriba = 0;
+		bola->rAbajo = 0;
+		bola->rIzquierda = 0;
+		bola->rDerecha = 0;
+	}
+
+	modeloRebotes->update();
 
 }

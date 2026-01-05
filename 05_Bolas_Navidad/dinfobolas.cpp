@@ -5,21 +5,22 @@
 
 DInfoBolas::DInfoBolas(QVector<Bola*> *lasBolas, QWidget *parent): bolasInfo(lasBolas), QDialog(parent){
 
-		setupUi(this);
+	setupUi(this);
 
-		setWindowTitle("Lista de las Bolas");
+	setWindowTitle("Lista de las Bolas");
 
-		QTimer *temporizador = new QTimer();
-		temporizador->setSingleShot(false);
-		temporizador->setInterval(40);
-		temporizador->start();
+	QTimer *temporizador = new QTimer();
+	temporizador->setSingleShot(false);
+	temporizador->setInterval(40);
+	temporizador->start();
 
-		connect(temporizador, SIGNAL(timeout()),
-				this, SLOT(slotTemporizador()));
+	connect(temporizador, SIGNAL(timeout()),
+			this, SLOT(slotTemporizador()));
 	
 }
 
 double luminance(const QColor& c) {
+
 	auto channel = [](double v) {
 		v /= 255.0;
 		return (v <= 0.03928) ? v / 12.92 : powf((v + 0.055) / 1.055, 2.4);
@@ -30,6 +31,7 @@ double luminance(const QColor& c) {
 	double b = channel(c.blue());
 
 	return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
 }
 
 void DInfoBolas::actualizar() {
@@ -53,7 +55,7 @@ void DInfoBolas::actualizar() {
 		QListWidgetItem *item = new QListWidgetItem(cadena);
 		item->setBackground(bolasInfo->at(i)->color);
 
-		if (luminance(bolasInfo->at(i)->color) < 0.5)
+		if ( luminance(bolasInfo->at(i)->color) < 0.5 )
 			item->setForeground(QColor("white"));
 
 		listaBolas->addItem(item);

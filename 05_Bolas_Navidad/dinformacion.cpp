@@ -1,15 +1,17 @@
 #include "dinformacion.h"
 #include <QDebug>
 
-DInformacion::DInformacion(int anchura, int altura, int numBOlas, QWidget *parent): QDialog(parent){
+DInformacion::DInformacion(int anchura, int altura, int numBolas, QWidget *parent): QDialog(parent){
 
-		setupUi(this);
+	setupUi(this);
 
-		QString dimensiones("");
-		dimensiones = dimensiones + QString::number(anchura) + " x " + QString::number(altura);
+	setWindowTitle("Información del Juego");
 
-		lblDimensiones->setText(dimensiones);
-		lblNumBolas->setText(QString::number(numBOlas));
+	QString dimensiones("");
+	dimensiones = dimensiones + QString::number(anchura) + " x " + QString::number(altura);
+
+	lblDimensiones->setText(dimensiones);
+	lblNumBolas->setText(QString::number(numBolas));
 
 	
 }

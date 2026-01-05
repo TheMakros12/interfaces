@@ -5,6 +5,9 @@ WidgetBola::WidgetBola(Bola *bolaPasada, QWidget *parent): QWidget(parent), miBo
 
 	setupUi(this);
 
+	lblNombreBola->setText(miBola->nombre);
+	inicializarColores();
+
 	connect(btnParar, SIGNAL(clicked()),
 			this, SLOT(slotPararBola()));
 
@@ -14,6 +17,13 @@ WidgetBola::WidgetBola(Bola *bolaPasada, QWidget *parent): QWidget(parent), miBo
 	connect(btnColor, SIGNAL(clicked()),
 			this, SLOT(slotColorBola()));
 	
+}
+
+void WidgetBola::inicializarColores() {
+
+	lblBolaRed->setText(QString::number(miBola->color.red()));
+	lblBolaGreen->setText(QString::number(miBola->color.green()));
+	lblBolaBlue->setText(QString::number(miBola->color.blue()));
 }
 
 void WidgetBola::slotPararBola(){
@@ -38,5 +48,7 @@ void WidgetBola::slotColorBola(){
 	QColor c = QColorDialog::getColor(miBola->color, this);
 	if (c.isValid())
 		miBola->color = c;
+
+	inicializarColores();
 
 }

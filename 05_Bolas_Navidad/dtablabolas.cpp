@@ -1,6 +1,8 @@
 #include "dtablabolas.h"
 #include <QDebug>
 
+/************************ModeloTabla***************************/
+
 ModeloTabla::ModeloTabla(QVector<Bola*> *bolasPasadas, QObject *parent) {
 
 	lasBolas = bolasPasadas;
@@ -27,12 +29,12 @@ QVariant ModeloTabla::headerData(int section, Qt::Orientation orientation, int r
 
 	QString cadena;
 	if ( orientation == Qt::Horizontal ) {
-		switch (section) {
+		switch ( section ) {
 			case 0: cadena = "Pos X"; break;
 			case 1: cadena = "Pos Y"; break;
 			case 2: cadena = "Vel X"; break;
-			case 3: cadena = "Vel Y";break;
-		}
+			case 3: cadena = "Vel Y"; break;
+		};
 	}
 
 	if ( orientation == Qt::Vertical )
@@ -44,31 +46,33 @@ QVariant ModeloTabla::headerData(int section, Qt::Orientation orientation, int r
 
 QVariant ModeloTabla::data(const QModelIndex &index, int role) const {
 
-	if ( role != Qt::DisplayRole )
-		return QVariant();
-
 	int fila = index.row();
 	int columna = index.column();
 	Bola *laBola = lasBolas->at(fila);
 
-	QString cadena;
+	if ( role == Qt::DisplayRole ) {
+		switch (columna) {
+			case 0: return laBola->posX;
+			case 1: return laBola->posY;
+			case 2: return laBola->velX;
+			case 3: return laBola->velY;
+		}
+	}
 
-	switch ( columna ) {
-		case 0:
-			cadena = QString::number(laBola->posX);
-			break;
-		case 1:
-			cadena = QString::number(laBola->posY);
-			break;
-		case 2:
-			cadena = QString::number(laBola->velX);
-			break;
-		case 3:
-			cadena = QString::number(laBola->velY);
-			break;
-	};
+	if ( role == Qt::DecorationRole ) {
 
-	return QVariant(cadena);
+		if ( columna == 0 || columna == 1 )
+			return laBola->color;
+
+		if ( columna == 2 )
+			return laBola->velX >= 0 ? QColor(Qt::green) : QColor(Qt::red);
+
+		if ( columna == 3 )
+			return laBola->velY >= 0 ? QColor(Qt::green) : QColor(Qt::red);
+
+	}
+
+	return QVariant();
 
 }
 
@@ -82,14 +86,10 @@ bool ModeloTabla::setData(const QModelIndex &index, const QVariant &value, int r
 	if ( !ok ) return false;
 
 	switch ( index.column() ) {
-		case 0:
-			laBola->posX = valor; break;
-		case 1:
-			laBola->posY = valor; break;
-		case 2:
-			laBola->velX = valor; break;
-		case 3:
-			laBola->velY = valor; break;
+		case 0: laBola->posX = valor; break;
+		case 1: laBola->posY = valor; break;
+		case 2: laBola->velX = valor; break;
+		case 3: laBola->velY = valor; break;
 	};
 
 	emit dataChanged(index, index);
@@ -108,6 +108,11 @@ void ModeloTabla::actualizarDatos() {
 	emit layoutChanged();
 
 }
+
+/************************ModeloTabla***************************/
+
+
+/***********************SpinBoxDelegate*************************/
 
 SpinBoxDelegate::SpinBoxDelegate(QObject *parent) : QStyledItemDelegate(parent) {
 
@@ -147,6 +152,11 @@ void SpinBoxDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionVi
 
 }
 
+/***********************SpinBoxDelegate*************************/
+
+
+/*************************DTablaBolas***************************/
+
 DTablaBolas::DTablaBolas(QVector<Bola*> *bolasPasadas, QWidget *parent): QDialog(parent), lasBolas(bolasPasadas) {
 
 	setupUi(this);
@@ -158,6 +168,7 @@ DTablaBolas::DTablaBolas(QVector<Bola*> *bolasPasadas, QWidget *parent): QDialog
 	tablaBolas->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	tablaBolas->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	tablaBolas->setItemDelegate(new SpinBoxDelegate());
+
 
 	QTimer *temporizaddor = new QTimer();
 	temporizaddor->setInterval(10);
@@ -175,3 +186,4 @@ void DTablaBolas::slotTemporizador(){
 
 }
 
+/*************************DTablaBolas***************************/

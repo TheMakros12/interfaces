@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int Bola::diametro = 40;
-int Bola::vidasIniciales = 10;
+int Bola::vidasIniciales = 5;
 
 Bola::Bola(QObject *parent): Bola(0, 0, 0, 0, parent) {
 }
@@ -107,7 +107,7 @@ void Bola::pintar(QPainter &pintor) {
 
     pintor.drawText(posX, posY + diametro + 15, nombre);
 
-    if (especial) {
+    if ( especial ) {
         pintor.setBrush(QColor("White"));
         pintor.drawEllipse(posX+10,
                            posY+10,
