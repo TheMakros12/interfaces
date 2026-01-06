@@ -31,6 +31,11 @@ public:
         if (DTablaBolas->objectName().isEmpty())
             DTablaBolas->setObjectName(QString::fromUtf8("DTablaBolas"));
         DTablaBolas->resize(481, 377);
+        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(DTablaBolas->sizePolicy().hasHeightForWidth());
+        DTablaBolas->setSizePolicy(sizePolicy);
         verticalLayout = new QVBoxLayout(DTablaBolas);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         tablaBolas = new QTableView(DTablaBolas);

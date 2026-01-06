@@ -20,8 +20,9 @@
 class ModeloTabla : public QAbstractTableModel {
 
 public:
-	ModeloTabla(QVector<Bola*> *, QObject *parent = nullptr);
+	ModeloTabla(QVector<Bola*> *, Bola **bolaJugador = nullptr, QObject *parent = nullptr);
 	QVector<Bola*> *lasBolas;
+	Bola **bolaJugador = nullptr;
 
 	int	rowCount(const QModelIndex &parent = QModelIndex()) const;
 	int	columnCount(const QModelIndex &parent = QModelIndex()) const;
@@ -62,7 +63,7 @@ class DTablaBolas : public QDialog, public Ui::DTablaBolas {
 Q_OBJECT
 
 public:
-	DTablaBolas(QVector<Bola*> *, QWidget *parent = NULL);
+	DTablaBolas(QVector<Bola*> *, Bola **bolaEspecial = nullptr, QWidget *parent = NULL);
 	QVector<Bola*> *lasBolas;
 	ModeloTabla *modelo;
 

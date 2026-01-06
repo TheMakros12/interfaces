@@ -340,7 +340,7 @@ void MainWindow::slotDInfoBolas() {
 void MainWindow::slotDTablaBolas() {
 
     if ( dTablaBolas == NULL )
-        dTablaBolas = new DTablaBolas(&bolas);
+        dTablaBolas = new DTablaBolas(&bolas, &bolaJugador);
 
     dTablaBolas->show();
 

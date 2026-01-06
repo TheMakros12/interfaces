@@ -3,15 +3,14 @@
 
 /************************ModeloTabla***************************/
 
-ModeloTabla::ModeloTabla(QVector<Bola*> *bolasPasadas, QObject *parent) {
-
-	lasBolas = bolasPasadas;
+ModeloTabla::ModeloTabla(QVector<Bola*> *bolasPasadas, Bola **bolaEspecial, QObject *parent) : lasBolas(bolasPasadas), bolaJugador(bolaEspecial) {
 
 }
 
 int	ModeloTabla::rowCount(const QModelIndex &parent) const {
 
-	return lasBolas->size();
+	int extra = (bolaJugador && *bolaJugador) ? 1 : 0;
+	return lasBolas->size() + extra;
 
 }
 
@@ -37,8 +36,14 @@ QVariant ModeloTabla::headerData(int section, Qt::Orientation orientation, int r
 		};
 	}
 
-	if ( orientation == Qt::Vertical )
-		cadena = lasBolas->at(section)->nombre;
+	if ( orientation == Qt::Vertical ) {
+		if ( bolaJugador && *bolaJugador ) {
+			if (section == 0) return "Jugador";
+			else return lasBolas->at(section - 1)->nombre;
+		} else {
+			return lasBolas->at(section)->nombre;
+		}
+	}
 
 	return QVariant(cadena);
 
@@ -48,7 +53,17 @@ QVariant ModeloTabla::data(const QModelIndex &index, int role) const {
 
 	int fila = index.row();
 	int columna = index.column();
-	Bola *laBola = lasBolas->at(fila);
+	Bola *laBola = nullptr;
+
+	if ( bolaJugador && *bolaJugador ) {
+		if ( fila == 0 ) {
+			laBola = *bolaJugador;
+		} else {
+			laBola = lasBolas->at(fila - 1);
+		}
+	} else {
+		laBola = lasBolas->at(fila);
+	}
 
 	if ( role == Qt::DisplayRole ) {
 		switch (columna) {
@@ -157,13 +172,13 @@ void SpinBoxDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionVi
 
 /*************************DTablaBolas***************************/
 
-DTablaBolas::DTablaBolas(QVector<Bola*> *bolasPasadas, QWidget *parent): QDialog(parent), lasBolas(bolasPasadas) {
+DTablaBolas::DTablaBolas(QVector<Bola*> *bolasPasadas, Bola **bolaEspecial, QWidget *parent): QDialog(parent), lasBolas(bolasPasadas) {
 
 	setupUi(this);
 
 	setWindowTitle("Tabla de las Bolas");
 
-	modelo = new ModeloTabla(lasBolas);
+	modelo = new ModeloTabla(lasBolas, bolaEspecial);
 	tablaBolas->setModel(modelo);
 	tablaBolas->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	tablaBolas->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -180,10 +195,30 @@ DTablaBolas::DTablaBolas(QVector<Bola*> *bolasPasadas, QWidget *parent): QDialog
 	
 }
 
-void DTablaBolas::slotTemporizador(){
-
+void DTablaBolas::slotTemporizador() {
+	// Actualizar los datos del modelo
 	modelo->actualizarDatos();
 
+	// Ajustar el tamaño de filas y columnas automáticamente
+	tablaBolas->resizeRowsToContents();
+	tablaBolas->resizeColumnsToContents();
+
+	// Calcular ancho mínimo: suma de todas las columnas + margen + frame
+	int totalWidth = tablaBolas->verticalHeader()->width(); // ancho del header vertical
+	for (int c = 0; c < modelo->columnCount(); ++c)
+		totalWidth += tablaBolas->columnWidth(c);
+	totalWidth += 2 * tablaBolas->frameWidth() + 20; // margen extra
+	tablaBolas->setMinimumWidth(totalWidth);
+
+	// Calcular altura mínima: suma de todas las filas + header horizontal + frame
+	int totalHeight = tablaBolas->horizontalHeader()->height();
+	for (int r = 0; r < modelo->rowCount(); ++r)
+		totalHeight += tablaBolas->rowHeight(r);
+	totalHeight += 2 * tablaBolas->frameWidth();
+	tablaBolas->setMinimumHeight(totalHeight);
+
+	// Ajustar el tamaño del diálogo al contenido de la tabla
+	adjustSize();
 }
 
 /*************************DTablaBolas***************************/
