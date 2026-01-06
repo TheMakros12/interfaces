@@ -11,9 +11,10 @@ class DInfoBolas : public QDialog, public Ui::DInfoBolas {
 Q_OBJECT
 
 public:
-	DInfoBolas(QVector<Bola*> *lasBolas, QWidget *parent = NULL);
+	DInfoBolas(QVector<Bola*> *lasBolas, Bola **bolaEspecial, QWidget *parent = NULL);
 
 	QVector<Bola*> *bolasInfo;
+	Bola **bolaJugador;
 
 	void actualizar();
 

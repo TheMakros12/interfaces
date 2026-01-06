@@ -331,7 +331,7 @@ void MainWindow::slotDInformacion() {
 void MainWindow::slotDInfoBolas() {
 
     if ( dInfoBolas == NULL )
-        dInfoBolas = new DInfoBolas(&bolas);
+        dInfoBolas = new DInfoBolas(&bolas, &bolaJugador);
 
     dInfoBolas->show();
 
