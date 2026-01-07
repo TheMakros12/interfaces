@@ -18,6 +18,7 @@ public:
 	void inicializarColores();
 
 public slots:
+	void slotCambiarNombre();
 	void slotCambiarRojo(int);
 	void slotCambiarVerde(int);
 	void slotCambiarAzul(int);

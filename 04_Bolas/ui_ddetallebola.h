@@ -18,6 +18,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -27,12 +28,11 @@ class Ui_DDetalleBola
 {
 public:
     QDialogButtonBox *buttonBox;
-    QLabel *lblNombreBola;
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
-    QLineEdit *lePosicionX;
+    QLineEdit *leNuevoNombre;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
@@ -48,8 +48,12 @@ public:
     QLabel *lblIntAzul;
     QHBoxLayout *horizontalLayout_5;
     QPushButton *btnAnterior;
+    QSpacerItem *horizontalSpacer_2;
     QPushButton *btnSiguiente;
     QWidget *layoutWidget1;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *lblNombreBola;
+    QSpacerItem *horizontalSpacer;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_5;
     QLabel *lblNumBola;
@@ -58,15 +62,12 @@ public:
     {
         if (DDetalleBola->objectName().isEmpty())
             DDetalleBola->setObjectName(QString::fromUtf8("DDetalleBola"));
-        DDetalleBola->resize(450, 355);
+        DDetalleBola->resize(444, 356);
         buttonBox = new QDialogButtonBox(DDetalleBola);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
-        buttonBox->setGeometry(QRect(60, 310, 341, 32));
+        buttonBox->setGeometry(QRect(60, 290, 341, 32));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
-        lblNombreBola = new QLabel(DDetalleBola);
-        lblNombreBola->setObjectName(QString::fromUtf8("lblNombreBola"));
-        lblNombreBola->setGeometry(QRect(120, 20, 66, 19));
         layoutWidget = new QWidget(DDetalleBola);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
         layoutWidget->setGeometry(QRect(80, 50, 281, 221));
@@ -80,10 +81,10 @@ public:
 
         horizontalLayout->addWidget(label);
 
-        lePosicionX = new QLineEdit(layoutWidget);
-        lePosicionX->setObjectName(QString::fromUtf8("lePosicionX"));
+        leNuevoNombre = new QLineEdit(layoutWidget);
+        leNuevoNombre->setObjectName(QString::fromUtf8("leNuevoNombre"));
 
-        horizontalLayout->addWidget(lePosicionX);
+        horizontalLayout->addWidget(leNuevoNombre);
 
 
         verticalLayout_2->addLayout(horizontalLayout);
@@ -163,6 +164,10 @@ public:
 
         horizontalLayout_5->addWidget(btnAnterior);
 
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_5->addItem(horizontalSpacer_2);
+
         btnSiguiente = new QPushButton(layoutWidget);
         btnSiguiente->setObjectName(QString::fromUtf8("btnSiguiente"));
 
@@ -173,10 +178,21 @@ public:
 
         layoutWidget1 = new QWidget(DDetalleBola);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(250, 20, 95, 21));
-        horizontalLayout_6 = new QHBoxLayout(layoutWidget1);
+        layoutWidget1->setGeometry(QRect(120, 20, 205, 23));
+        horizontalLayout_7 = new QHBoxLayout(layoutWidget1);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
+        lblNombreBola = new QLabel(layoutWidget1);
+        lblNombreBola->setObjectName(QString::fromUtf8("lblNombreBola"));
+
+        horizontalLayout_7->addWidget(lblNombreBola);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_7->addItem(horizontalSpacer);
+
+        horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        horizontalLayout_6->setContentsMargins(0, 0, 0, 0);
         label_5 = new QLabel(layoutWidget1);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
@@ -186,6 +202,9 @@ public:
         lblNumBola->setObjectName(QString::fromUtf8("lblNumBola"));
 
         horizontalLayout_6->addWidget(lblNumBola);
+
+
+        horizontalLayout_7->addLayout(horizontalLayout_6);
 
 
         retranslateUi(DDetalleBola);
@@ -198,8 +217,7 @@ public:
     void retranslateUi(QDialog *DDetalleBola)
     {
         DDetalleBola->setWindowTitle(QCoreApplication::translate("DDetalleBola", "Dialog", nullptr));
-        lblNombreBola->setText(QCoreApplication::translate("DDetalleBola", "Nombre", nullptr));
-        label->setText(QCoreApplication::translate("DDetalleBola", "Posici\303\263n X:", nullptr));
+        label->setText(QCoreApplication::translate("DDetalleBola", "NUevo nombre:", nullptr));
         label_2->setText(QCoreApplication::translate("DDetalleBola", "Rojo:", nullptr));
         lblIntRojo->setText(QCoreApplication::translate("DDetalleBola", "0", nullptr));
         label_3->setText(QCoreApplication::translate("DDetalleBola", "Verde:", nullptr));
@@ -208,6 +226,7 @@ public:
         lblIntAzul->setText(QCoreApplication::translate("DDetalleBola", "0", nullptr));
         btnAnterior->setText(QCoreApplication::translate("DDetalleBola", "Bola Anterior", nullptr));
         btnSiguiente->setText(QCoreApplication::translate("DDetalleBola", "Bola Siguiente", nullptr));
+        lblNombreBola->setText(QCoreApplication::translate("DDetalleBola", "Nombre", nullptr));
         label_5->setText(QCoreApplication::translate("DDetalleBola", "N\302\272:", nullptr));
         lblNumBola->setText(QCoreApplication::translate("DDetalleBola", "TextLabel", nullptr));
     } // retranslateUi

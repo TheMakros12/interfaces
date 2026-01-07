@@ -398,6 +398,7 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_ddetallebola.cpp moc_dlistabolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_ventanaprincipal.cpp
 moc_ddetallebola.cpp: ddetallebola.h \
 		ui_ddetallebola.h \
+		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/04_Bolas/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/04_Bolas -I/home/marcosdi12/Documentos/interfaces/04_Bolas -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ddetallebola.h -o moc_ddetallebola.cpp
@@ -474,7 +475,8 @@ bola.o: bola.cpp bola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bola.o bola.cpp
 
 ddetallebola.o: ddetallebola.cpp ddetallebola.h \
-		ui_ddetallebola.h
+		ui_ddetallebola.h \
+		bola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ddetallebola.o ddetallebola.cpp
 
 dlistabolas.o: dlistabolas.cpp dlistabolas.h \

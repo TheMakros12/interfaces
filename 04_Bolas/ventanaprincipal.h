@@ -31,7 +31,6 @@ public:
 
     static bool bolasDesaparecen;
     QVector<Bola *> bolas;
-    Bola bola;
     DListaBolas *dListaBolas;
     DTablaBolas *dTablaBolas;
     DTablaRebotes *dTablaRebotes;

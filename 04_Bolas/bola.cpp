@@ -136,6 +136,6 @@ void Bola::pintar(QPainter &pintor) {
                     anchoBarra,
                     5);
 
-    pintor.drawText(posX+diametro/2, posY+diametro/2, QString::number(vidas));
+    pintor.drawText((posX+diametro/2)-5, (posY+diametro/2)+4, QString::number(vidas));
 
 }

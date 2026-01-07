@@ -17,6 +17,9 @@ DDetalleBola::DDetalleBola(QVector<Bola*> *bolas, QWidget *parent): QDialog(pare
 
 	btnAnterior->setEnabled(false);
 
+	connect(leNuevoNombre, SIGNAL(returnPressed()),
+			this, SLOT(slotCambiarNombre()));
+
 	connect(slRojo, SIGNAL(valueChanged(int)),
 			this, SLOT(slotCambiarRojo(int)));
 
@@ -46,6 +49,13 @@ void DDetalleBola::inicializarColores() {
 
 }
 
+void DDetalleBola::slotCambiarNombre() {
+
+	QString nuevoNombre = leNuevoNombre->text();
+	lasBolas->at(numBola)->nombre = nuevoNombre;
+
+}
+
 void DDetalleBola::slotCambiarRojo(int valorRojo){
 
 	lasBolas->at(numBola)->color.setRed(valorRojo);
@@ -67,7 +77,7 @@ void DDetalleBola::slotAnterior() {
 
 	btnSiguiente->setEnabled(true);
 
-	if (numBola == 1)
+	if ( numBola == 1 )
 		btnAnterior->setEnabled(false);
 
 	numBola--;
@@ -82,10 +92,10 @@ void DDetalleBola::slotSiguiente() {
 
 	btnAnterior->setEnabled(true);
 
-	numBola++;
-
-	if (numBola == 9)
+	if ( numBola == 8 )
 		btnSiguiente->setEnabled(false);
+
+	numBola++;
 
 	lblNombreBola->setText(lasBolas->at(numBola)->nombre);
 	lblNumBola->setText(QString::number(numBola));

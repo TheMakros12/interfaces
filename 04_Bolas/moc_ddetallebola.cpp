@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DDetalleBola_t {
-    QByteArrayData data[7];
-    char stringdata0[90];
+    QByteArrayData data[8];
+    char stringdata0[108];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,17 +33,18 @@ struct qt_meta_stringdata_DDetalleBola_t {
 static const qt_meta_stringdata_DDetalleBola_t qt_meta_stringdata_DDetalleBola = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "DDetalleBola"
-QT_MOC_LITERAL(1, 13, 15), // "slotCambiarRojo"
-QT_MOC_LITERAL(2, 29, 0), // ""
-QT_MOC_LITERAL(3, 30, 16), // "slotCambiarVerde"
-QT_MOC_LITERAL(4, 47, 15), // "slotCambiarAzul"
-QT_MOC_LITERAL(5, 63, 12), // "slotAnterior"
-QT_MOC_LITERAL(6, 76, 13) // "slotSiguiente"
+QT_MOC_LITERAL(1, 13, 17), // "slotCambiarNombre"
+QT_MOC_LITERAL(2, 31, 0), // ""
+QT_MOC_LITERAL(3, 32, 15), // "slotCambiarRojo"
+QT_MOC_LITERAL(4, 48, 16), // "slotCambiarVerde"
+QT_MOC_LITERAL(5, 65, 15), // "slotCambiarAzul"
+QT_MOC_LITERAL(6, 81, 12), // "slotAnterior"
+QT_MOC_LITERAL(7, 94, 13) // "slotSiguiente"
 
     },
-    "DDetalleBola\0slotCambiarRojo\0\0"
-    "slotCambiarVerde\0slotCambiarAzul\0"
-    "slotAnterior\0slotSiguiente"
+    "DDetalleBola\0slotCambiarNombre\0\0"
+    "slotCambiarRojo\0slotCambiarVerde\0"
+    "slotCambiarAzul\0slotAnterior\0slotSiguiente"
 };
 #undef QT_MOC_LITERAL
 
@@ -53,7 +54,7 @@ static const uint qt_meta_data_DDetalleBola[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,13 +62,15 @@ static const uint qt_meta_data_DDetalleBola[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x0a /* Public */,
-       3,    1,   42,    2, 0x0a /* Public */,
-       4,    1,   45,    2, 0x0a /* Public */,
-       5,    0,   48,    2, 0x0a /* Public */,
-       6,    0,   49,    2, 0x0a /* Public */,
+       1,    0,   44,    2, 0x0a /* Public */,
+       3,    1,   45,    2, 0x0a /* Public */,
+       4,    1,   48,    2, 0x0a /* Public */,
+       5,    1,   51,    2, 0x0a /* Public */,
+       6,    0,   54,    2, 0x0a /* Public */,
+       7,    0,   55,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void, QMetaType::Int,    2,
     QMetaType::Void, QMetaType::Int,    2,
     QMetaType::Void, QMetaType::Int,    2,
@@ -83,11 +86,12 @@ void DDetalleBola::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         auto *_t = static_cast<DDetalleBola *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->slotCambiarRojo((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 1: _t->slotCambiarVerde((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 2: _t->slotCambiarAzul((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 3: _t->slotAnterior(); break;
-        case 4: _t->slotSiguiente(); break;
+        case 0: _t->slotCambiarNombre(); break;
+        case 1: _t->slotCambiarRojo((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->slotCambiarVerde((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->slotCambiarAzul((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->slotAnterior(); break;
+        case 5: _t->slotSiguiente(); break;
         default: ;
         }
     }
@@ -124,13 +128,13 @@ int DDetalleBola::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

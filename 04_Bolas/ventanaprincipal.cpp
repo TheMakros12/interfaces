@@ -17,12 +17,6 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 
     temporizador->start();
 
-    bola.posX = 500;
-    bola.posY = 200;
-
-    bola.velX = 0.4;
-    bola.velY = 2;
-
     resize(800,600);
 
     dListaBolas = NULL;
@@ -38,15 +32,17 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 
 void VentanaPrincipal::crearActions() {
 
-    actionDListaBolas = new QAction("Lista Bolas", this);
+    /*Aquí creamos todas las QAction para los diferentes menús*/
+
+    actionDListaBolas = new QAction("Lista de las Bolas", this);
     connect(actionDListaBolas, SIGNAL(triggered()),
             this, SLOT(slotDListaBolas()));
 
-    actionDTablaBolas = new QAction("Tabla Bolas", this);
+    actionDTablaBolas = new QAction("Tabla de las Bolas", this);
     connect(actionDTablaBolas, SIGNAL(triggered()),
             this, SLOT(slotDTablaBolas()));
 
-    actionDTablaRebotes = new QAction("Tabla Rebotes", this);
+    actionDTablaRebotes = new QAction("Tabla de los Rebotes", this);
     connect(actionDTablaRebotes, SIGNAL(triggered()),
             this, SLOT(slotDTablaRebotes()));
 
@@ -65,13 +61,15 @@ void VentanaPrincipal::crearActions() {
     connect(actionSalir, SIGNAL(triggered()),
 			this, SLOT(close()));
 
-    actionDDetalleBola = new QAction("Detalle Bola", this);
+    actionDDetalleBola = new QAction("Detalle de la Bola", this);
     connect(actionDDetalleBola, SIGNAL(triggered()),
 			this, SLOT(slotDDetalleBola()));
 
 }
 
 void VentanaPrincipal::crearMenus() {
+
+    /*Creamos un QMenuBar y luego los diferentes menús que vamos a utilizar*/
 
     QMenuBar *barraMenu = this->menuBar();
 
@@ -89,6 +87,8 @@ void VentanaPrincipal::crearMenus() {
 }
 
 void VentanaPrincipal::inicializarBolas() {
+
+    /* Este método es el encargado de la creación del QVector<Bola*> con todos sus atributos iniciales */
 
     QStringList nombres = {"marcos", "lucia", "juan","david","alex","paula","aroa","alba","diego","modest","perico","andres"
     };
@@ -124,9 +124,10 @@ void VentanaPrincipal::inicializarBolas() {
 }
 
 void VentanaPrincipal::paintEvent(QPaintEvent *){
-    QPainter pintor(this);
 
-    //pintor.fillRect(20,20,400,anchura,"red");
+    /* Aquí llamamos al método que tiene la clase Bola, para poder pintarlas */
+
+    QPainter pintor(this);
 
     for (int i= 0 ; i < bolas.length(); i++)
         bolas.at(i)->pintar(pintor);
@@ -135,14 +136,20 @@ void VentanaPrincipal::paintEvent(QPaintEvent *){
 
 void VentanaPrincipal::closeEvent(QCloseEvent *event) {
 
-    qDebug() << "=======================";
-    qDebug() << "Has cerrado el programa";
-    qDebug() << "=======================";
+    /* Simplemente sobreescribimos este métedo par que muestre este mensaje por la terminal */
+
+    qDebug() << "";
+    qDebug() << "|===========================|";
+    qDebug() << "|  Has cerrado el programa  |";
+    qDebug() << "|===========================|";
+    qDebug() << "";
 
     event->accept();
 }
 
 void VentanaPrincipal::slotGuardarPartida() {
+
+    /* En este método guardamos todos los datos que queremos en un documento .json. Este mismo se guarda en la propia carpeta del programa */
 
     QJsonObject objectoPrincipal;
 
@@ -152,19 +159,6 @@ void VentanaPrincipal::slotGuardarPartida() {
     arrayVersiones.append(QString("beta"));
 
     objectoPrincipal["version"] = arrayVersiones;
-
-    /*QJsonObject objetoJugador;
-
-    QJsonArray coloresBola;
-    coloresBola.append(bolas.at(0)->color.red());
-    coloresBola.append(bolas.at(0)->color.green());
-    coloresBola.append(bolas.at(0)->color.blue());
-    objetoJugador["color"] = coloresBola;
-
-    objetoJugador["posX"] = bolas.at(0)->posX;
-    objetoJugador["posY"] = bolas.at(0)->posY;
-
-    objectoPrincipal["bolaJugador"] = objetoJugador;*/
 
     QJsonArray arrayBolas;
     for (int i = 0; i < bolas.size(); i++) {
@@ -194,16 +188,20 @@ void VentanaPrincipal::slotGuardarPartida() {
 
     saveFile.write(documento.toJson());
 
-    qDebug() << "=======================";
-    qDebug() << "Has guardado la Partida";
-    qDebug() << "=======================";
+    qDebug() << "";
+    qDebug() << "|===========================|";
+    qDebug() << "|  Has guardado la Partida  |";
+    qDebug() << "|===========================|";
+    qDebug() << "";
 
 }
 
 void VentanaPrincipal::slotCargarPartida() {
 
+    /* Cargamos una partida a partir de un .json que tengamos en la misma carpeta que el proyecto */
+
     QFile loadFile(QStringLiteral("partida.json"));
-    if (!loadFile.open(QIODevice::ReadOnly))
+    if ( !loadFile.open(QIODevice::ReadOnly) )
         return;
 
     for (int i = 0; i <  bolas.size(); i++)
@@ -218,13 +216,13 @@ void VentanaPrincipal::slotCargarPartida() {
 
     QStringList listaClaves = objectoPrincipal.keys();
 
-    if (!objectoPrincipal.contains("bolas")) {
+    if ( !objectoPrincipal.contains("bolas") ) {
         qDebug() << "Error: No hay bolas";
         return;
     }
     QJsonValue valorBolas = objectoPrincipal["bolas"];
 
-    if (!valorBolas.isArray()) {
+    if ( !valorBolas.isArray() ) {
         qDebug() << "Error: las bolas no son un array";
         return;
     }
@@ -232,92 +230,101 @@ void VentanaPrincipal::slotCargarPartida() {
 
     for (int i = 0; i < arrayBolas.size(); i++) {
         QJsonValue elemento = arrayBolas [i];
-        if (!crearBolaJson(elemento)) {
+        if ( !crearBolaJson(elemento) ) {
             qDebug() << "ERROR! No se pudo crear la Bola " << i;
             return;
         }
-    } /*for (int i = 0; i < arrayBolas.size(); i++)*/
+    }
 
-
-    qDebug() << "======================";
-    qDebug() << "Has cargado la Partida";
-    qDebug() << "======================";
+    qDebug() << "";
+    qDebug() << "|==========================|";
+    qDebug() << "|  Has cargado la Partida  |";
+    qDebug() << "|==========================|";
+    qDebug() << "";
 
 }
 
 bool VentanaPrincipal::crearBolaJson(QJsonValue &elemento) {
 
-    if (!elemento.isObject()) {
+    /* Aquí devolvemos true/false dependiendo de si se ha podido crear un Elemento tipo Json con las Bolas del programa */
+
+    if ( !elemento.isObject() ) {
         qDebug() << "ERROR! No hay objeto en Array de bolas";
         return false;
-    } /* if (!elemento.isObject()) */
+    }
     QJsonObject objetoBola = elemento.toObject();
 
-    if (!objetoBola.contains("posX")) {
+    if ( !objetoBola.contains("posX") ) {
         qDebug() << "ERROR! La Bola no tiene PosX";
         return false;
-    } /* if (!objetoBola.contains("posX")) */
+    }
     QJsonValue valorPosX = objetoBola["posX"];
-    if (!valorPosX.isDouble()) {
+
+    if ( !valorPosX.isDouble() ) {
         qDebug() << "ERROR! posX no es un número";
         return false;
-    } /* if (!valorPosX.isDouble()) */
+    }
     double posX = valorPosX.toDouble();
 
-    if (!objetoBola.contains("posY")) {
+    if ( !objetoBola.contains("posY") ) {
         qDebug() << "ERROR! La Bola no tiene posY";
         return false;
-    } /* if (!objetoBola.contains("posY")) */
+    }
     QJsonValue valorPosY = objetoBola["posY"];
-    if (!valorPosY.isDouble()) {
+
+    if ( !valorPosY.isDouble() ) {
         qDebug() << "ERROR! posY no es un número";
         return false;
-    } /* if (!valorPosY.isDouble()) */
+    }
     double posY = valorPosY.toDouble();
 
-    if (!objetoBola.contains("velX")) {
+    if ( !objetoBola.contains("velX") ) {
         qDebug() << "ERROR! La Bola no tiene velX";
         return false;
-    } /* if (!objetoBola.contains("velX")) */
+    }
     QJsonValue valorVelX = objetoBola["velX"];
-    if (!valorVelX.isDouble()) {
+
+    if ( !valorVelX.isDouble() ) {
         qDebug() << "ERROR! velX no es un número";
         return false;
-    } /* if (!valorVelX.isDouble()) */
+    }
     double velX = valorVelX.toDouble();
 
     if (!objetoBola.contains("velY")) {
         qDebug() << "ERROR! La Bola no tiene velY";
         return false;
-    } /* if (!objetoBola.contains("velY")) */
+    }
     QJsonValue valorVelY = objetoBola["velY"];
-    if (!valorVelY.isDouble()) {
+
+    if ( !valorVelY.isDouble() ) {
         qDebug() << "ERROR! velY no es un número";
         return false;
-    } /* if (!valorVelY.isDouble()) */
+    }
     double velY = valorVelY.toDouble();
 
-    if (!objetoBola.contains("nombre")) {
+    if ( !objetoBola.contains("nombre") ) {
         qDebug() << "ERROR! La Bola no tiene nombre";
         return false;
-    } /* if (!objetoBola.contains("nombre")) */
+    }
     QJsonValue valorNombre = objetoBola["nombre"];
-    if (!valorNombre.isString()) {
+
+    if ( !valorNombre.isString() ) {
         qDebug() << "ERROR! nombre no es un String";
         return false;
-    } /* if (!valorNombre.isString()) */
+    }
     QString nombre = valorNombre.toString();
 
     int rojo, verde, azul;
-    if (!objetoBola.contains("color")) {
+    if ( !objetoBola.contains("color") ) {
         qDebug() << "ERROR! La Bola no tiene color";
         return false;
-    } /* if (!objetoBola.contains("color")) */
+    }
     QJsonValue valorColores = objetoBola["color"];
-    if (!valorColores.isArray()) {
+
+    if ( !valorColores.isArray() ) {
         qDebug() << "ERROR! color no está bien";
         return false;
-    } /* if (!valorColores.isArray()) */
+    }
     QJsonArray arrayColores = valorColores.toArray();
     rojo = arrayColores[0].toDouble();
     verde = arrayColores[1].toDouble();
@@ -335,6 +342,8 @@ bool VentanaPrincipal::crearBolaJson(QJsonValue &elemento) {
 
 void VentanaPrincipal::slotTemporizador() {
 
+    /* Método que se va a ejectutar repetidamento por el QTimer. Aquí gestionamos el movimiento de las Bolas, los colisiones de las mismas y la gestión de las vidas. */
+
     float anchuraV = width();
     float alturaV = height();
     float alturaMenuBar = menuBar()->height();
@@ -345,13 +354,13 @@ void VentanaPrincipal::slotTemporizador() {
 
     for (int i = 0; i < bolas.length(); i++)
         for (int j = 0; j < bolas.length(); j++)
-            if (bolas.at(i)->choca(bolas.at(j))) {
+            if ( bolas.at(i)->choca(bolas.at(j)) ) {
                 bolas.at(i)->vidas--;
                 bolas.at(j)->vidas--;
             }
 
     for (int i = 0; i < bolas.length() && bolasDesaparecen; i++) {
-        if (bolas.at(i)->vidas <= 0) {
+        if ( bolas.at(i)->vidas <= 0 ) {
             delete bolas.at(i);
             bolas.removeAt(i);
             break;
@@ -361,9 +370,11 @@ void VentanaPrincipal::slotTemporizador() {
     repaint();
 }
 
+/* A partir de aquí declaramos los diferentes SLOTS para poder ejecutar todos los Diálogos que hayamos implementado */
+
 void VentanaPrincipal::slotDListaBolas() {
 
-    if (dListaBolas == NULL) {
+    if ( dListaBolas == NULL ) {
         dListaBolas = new DListaBolas(&bolas);
     }
     dListaBolas->show();
@@ -372,7 +383,7 @@ void VentanaPrincipal::slotDListaBolas() {
 
 void VentanaPrincipal::slotDTablaBolas() {
 
-    if (dTablaBolas == NULL)
+    if ( dTablaBolas == NULL )
         dTablaBolas = new DTablaBolas(&bolas);
 
     dTablaBolas->show();
@@ -381,7 +392,7 @@ void VentanaPrincipal::slotDTablaBolas() {
 
 void VentanaPrincipal::slotDTablaRebotes() {
 
-    if (dTablaRebotes == NULL)
+    if ( dTablaRebotes == NULL )
         dTablaRebotes = new DTablaRebotes(&bolas);
 
     dTablaRebotes->show();
@@ -390,7 +401,7 @@ void VentanaPrincipal::slotDTablaRebotes() {
 
 void VentanaPrincipal::slotDDetalleBola() {
 
-    if (dDetalleBola == NULL)
+    if ( dDetalleBola == NULL )
         dDetalleBola = new DDetalleBola(&bolas);
 
     dDetalleBola->show();
