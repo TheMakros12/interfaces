@@ -15,7 +15,6 @@ public:
     QVector<Bola*> *pBolas;
 
 public slots:
-    void slotEjemplo();
     void slotActualizar();
 
 };

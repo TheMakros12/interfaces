@@ -5,26 +5,24 @@
 #include <QTimer>
 #include <math.h>
 
-DListaBolas::DListaBolas(QVector <Bola*> *lasBolas, QWidget *parent): QDialog(parent) {
-
-    pBolas = lasBolas;
+DListaBolas::DListaBolas(QVector <Bola*> *lasBolas, QWidget *parent): QDialog(parent), pBolas(lasBolas) {
 
     setupUi(this);
 
-    this->setWindowTitle("Tabla de las Bolas");
+    this->setWindowTitle("Lista de las Bolas");
 
     QTimer *temporizador = new QTimer();
-    temporizador->setInterval(500);
+    temporizador->setInterval(40);
     temporizador->setSingleShot(false);
+    temporizador->start();
 
     connect(temporizador, SIGNAL(timeout()),
             this, SLOT(slotActualizar()));
 
-    temporizador->start();
-
-}
-
-void DListaBolas::slotEjemplo() {
+    listaBolas->setUniformItemSizes(true);
+    listaBolas->setStyleSheet("QListWidget::item { height: 28px; }");
+    listaBolas->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    listaBolas->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 }
 
@@ -63,5 +61,28 @@ void DListaBolas::slotActualizar() {
         listaBolas->addItem(item);
 
     }
+
+    listaBolas->doItemsLayout();
+
+    int totalHeight = 0;
+
+    for (int i = 0; i < listaBolas->count(); i++)
+        totalHeight += listaBolas->sizeHintForRow(i);
+
+    totalHeight += 2 * listaBolas->frameWidth();
+    listaBolas->setFixedHeight(totalHeight);
+
+    QFontMetrics fm(listaBolas->font());
+    int maxWidth = 0;
+
+    for (int i = 0; i < listaBolas->count(); i++) {
+        int w = fm.horizontalAdvance(listaBolas->item(i)->text());
+        maxWidth = qMax(maxWidth, w);
+    }
+
+    maxWidth += 40;
+    listaBolas->setFixedWidth(maxWidth);
+
+    adjustSize();
 
 }

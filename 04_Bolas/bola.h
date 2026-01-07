@@ -6,6 +6,7 @@
 #include <QImage>
 
 class Bola {
+
 public:
     Bola();
     Bola(float, float, float, float);
@@ -19,10 +20,10 @@ public:
     int vidas;
     int rArriba, rAbajo, rDerecha, rIzquierda;
 
-    void mover(float, float);
-    void pintar(QPainter&);
-    bool choca(Bola*);
+    void mover(float, float, int);
     float distancia(Bola*);
+    bool choca(Bola*);
+    void pintar(QPainter&);
 
 };
 

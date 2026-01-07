@@ -20,55 +20,13 @@ int ModeloBolasRebotes::columnCount(const QModelIndex &parent) const {
 
 }
 
-QVariant ModeloBolasRebotes::data(const QModelIndex &index, int role) const {
-
-	if (role != Qt::DisplayRole)
-		return QVariant();
-
-	int fila = index.row();
-	int columna = index.column();
-	Bola *bola = pBolas->at(fila);
-
-	int sumaRebotes, rebVeritcales, rebHorizontales = 0;
-	QString resultado;
-	switch (columna) {
-		case 0:
-			sumaRebotes = bola->rIzquierda + bola->rDerecha + bola->rArriba + bola->rAbajo;
-			resultado = QString::number(sumaRebotes);
-			break;
-		case 1:
-			rebVeritcales = bola->rArriba - bola->rAbajo;
-			resultado = QString::number(rebVeritcales);
-			break;
-		case 2:
-			rebHorizontales = bola->rIzquierda + bola->rDerecha;
-			resultado = QString::number(rebHorizontales);
-			break;
-		case 3:  //Ifs con return
-			if (bola->rArriba > bola->rAbajo &&
-				bola->rArriba > bola->rDerecha &&
-				bola->rArriba > bola->rIzquierda
-			) return QVariant("Arriba");
-			if (bola->rAbajo > bola->rDerecha &&
-				bola->rAbajo > bola->rIzquierda
-			) return QVariant("Abajo");
-			if (bola->rIzquierda > bola->rDerecha)
-				return QVariant("Izquierda");
-		return QVariant("Derecha");
-			break;
-	};
-
-	return QVariant(resultado);
-
-}
-
 QVariant ModeloBolasRebotes::headerData(int section, Qt::Orientation orientation, int role) const {
 
-	if (role != Qt::DisplayRole)
+	if ( role != Qt::DisplayRole )
 		return QVariant();
 
 	QString cadena;
-	if (orientation == Qt::Horizontal) {
+	if ( orientation == Qt::Horizontal ) {
 		switch(section) {
 			case 0: cadena = "Total Rebotes"; break;
 			case 1: cadena = "Rebotes Y"; break;
@@ -77,11 +35,50 @@ QVariant ModeloBolasRebotes::headerData(int section, Qt::Orientation orientation
 		}
 	}
 
-	if (orientation == Qt::Vertical) {
+	if ( orientation == Qt::Vertical ) {
 		cadena = pBolas->at(section)->nombre;
 	}
 
 	return QVariant(cadena);
+
+}
+
+QVariant ModeloBolasRebotes::data(const QModelIndex &index, int role) const {
+
+	if ( role != Qt::DisplayRole )
+		return QVariant();
+
+	int fila = index.row();
+	int columna = index.column();
+	Bola *bola = pBolas->at(fila);
+
+	int sumaRebotes = bola->rIzquierda + bola->rDerecha + bola->rArriba + bola->rAbajo;
+	int rebVeritcales = bola->rArriba + bola->rAbajo;
+	int rebHorizontales = bola->rIzquierda + bola->rDerecha;
+
+	QString resultado;
+	switch (columna) {
+		case 0: resultado = QString::number(sumaRebotes); break;
+		case 1: resultado = QString::number(rebVeritcales); break;
+		case 2: resultado = QString::number(rebHorizontales); break;
+		case 3:
+			if ( bola->rArriba > bola->rAbajo &&
+				bola->rArriba > bola->rDerecha &&
+				bola->rArriba > bola->rIzquierda )
+				return QVariant("Arriba");
+
+			if ( bola->rAbajo > bola->rDerecha &&
+				bola->rAbajo > bola->rIzquierda )
+				return QVariant("Abajo");
+
+			if ( bola->rIzquierda > bola->rDerecha )
+				return QVariant("Izquierda");
+
+		return QVariant("Derecha");
+			break;
+	};
+
+	return QVariant(resultado);
 
 }
 

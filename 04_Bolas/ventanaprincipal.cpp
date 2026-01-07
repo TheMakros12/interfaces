@@ -328,8 +328,12 @@ bool VentanaPrincipal::crearBolaJson(QJsonValue &elemento) {
 
 void VentanaPrincipal::slotTemporizador() {
 
+    float anchuraV = width();
+    float alturaV = height();
+    float alturaMenuBar = menuBar()->height();
+
     for (int i = 0; i < bolas.size(); i++) {
-        bolas.at(i)->mover(width(), height());
+        bolas.at(i)->mover(anchuraV, alturaV, alturaMenuBar);
     }
 
     for (int i = 0; i < bolas.length(); i++)
