@@ -23,29 +23,49 @@ int	ModeloTabla::columnCount(const QModelIndex &parent) const {
 
 QVariant ModeloTabla::headerData(int section, Qt::Orientation orientation, int role) const {
 
-	if ( role != Qt::DisplayRole )
-			return QVariant();
+	if ( role == Qt::DisplayRole ){
+		if ( orientation == Qt::Horizontal ) {
+			switch ( section ) {
+				case 0: return "Pos X";
+				case 1: return "Pos Y";
+				case 2: return "Vel X";
+				case 3: return "Vel Y";
+			};
+		}
 
-	QString cadena;
-	if ( orientation == Qt::Horizontal ) {
-		switch ( section ) {
-			case 0: cadena = "Pos X"; break;
-			case 1: cadena = "Pos Y"; break;
-			case 2: cadena = "Vel X"; break;
-			case 3: cadena = "Vel Y"; break;
-		};
-	}
-
-	if ( orientation == Qt::Vertical ) {
-		if ( bolaJugador && *bolaJugador ) {
-			if (section == 0) return "Jugador";
-			else return lasBolas->at(section - 1)->nombre;
-		} else {
-			return lasBolas->at(section)->nombre;
+		if ( orientation == Qt::Vertical ) {
+			if ( bolaJugador && *bolaJugador ) {
+				if (section == 0) return "Jugador";
+				else return lasBolas->at(section - 1)->nombre;
+			} else {
+				return lasBolas->at(section)->nombre;
+			}
 		}
 	}
 
-	return QVariant(cadena);
+	if (orientation == Qt::Vertical &&
+		(role == Qt::BackgroundRole || role == Qt::ForegroundRole)) {
+
+		Bola *laBola = nullptr;
+
+	if (bolaJugador && *bolaJugador) {
+		laBola = (section == 0)
+		? *bolaJugador
+		: lasBolas->at(section - 1);
+	} else {
+		laBola = lasBolas->at(section);
+	}
+
+	if (role == Qt::BackgroundRole)
+		return QBrush(laBola->color);
+
+		if (role == Qt::ForegroundRole)
+			return QBrush(laBola->color.lightness() > 128
+			? Qt::black
+			: Qt::white);
+		}
+
+	return QVariant();
 
 }
 
@@ -196,28 +216,24 @@ DTablaBolas::DTablaBolas(QVector<Bola*> *bolasPasadas, Bola **bolaEspecial, QWid
 }
 
 void DTablaBolas::slotTemporizador() {
-	// Actualizar los datos del modelo
+
 	modelo->actualizarDatos();
 
-	// Ajustar el tamaño de filas y columnas automáticamente
 	tablaBolas->resizeRowsToContents();
 	tablaBolas->resizeColumnsToContents();
 
-	// Calcular ancho mínimo: suma de todas las columnas + margen + frame
-	int totalWidth = tablaBolas->verticalHeader()->width(); // ancho del header vertical
+	int totalWidth = tablaBolas->verticalHeader()->width();
 	for (int c = 0; c < modelo->columnCount(); ++c)
 		totalWidth += tablaBolas->columnWidth(c);
-	totalWidth += 2 * tablaBolas->frameWidth() + 20; // margen extra
+	totalWidth += 2 * tablaBolas->frameWidth() + 20;
 	tablaBolas->setMinimumWidth(totalWidth);
 
-	// Calcular altura mínima: suma de todas las filas + header horizontal + frame
 	int totalHeight = tablaBolas->horizontalHeader()->height();
 	for (int r = 0; r < modelo->rowCount(); ++r)
 		totalHeight += tablaBolas->rowHeight(r);
 	totalHeight += 2 * tablaBolas->frameWidth();
 	tablaBolas->setMinimumHeight(totalHeight);
 
-	// Ajustar el tamaño del diálogo al contenido de la tabla
 	adjustSize();
 }
 

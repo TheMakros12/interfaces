@@ -21,24 +21,37 @@ int ModeloBolas::columnCount(const QModelIndex &parent) const {
 
 QVariant ModeloBolas::headerData(int section, Qt::Orientation orientation, int role) const {
 
-	if ( role != Qt::DisplayRole )
-		return QVariant();
+	if ( role == Qt::DisplayRole ) {
 
-	QString cadena;
-	if ( orientation == Qt::Horizontal ) {
-		switch(section) {
-			case 0: cadena = "PosX"; break;
-			case 1: cadena = "PosY"; break;
-			case 2: cadena = "VelX"; break;
-			case 3: cadena = "VelY"; break;
+		if ( orientation == Qt::Horizontal ) {
+			switch (section) {
+				case 0: return "PosX";
+				case 1: return "PosY";
+				case 2: return "VelX";
+				case 3: return "VelY";
+			}
+		}
+
+		if ( orientation == Qt::Vertical ) {
+			return pBolas->at(section)->nombre;
 		}
 	}
 
-	if ( orientation == Qt::Vertical ) {
-		cadena = pBolas->at(section)->nombre;
+	if ( role == Qt::BackgroundRole && orientation == Qt::Vertical ) {
+		Bola *bola = pBolas->at(section);
+		return QBrush(bola->color);
 	}
 
-	return QVariant(cadena);
+	if ( role == Qt::ForegroundRole && orientation == Qt::Vertical ) {
+		QColor fondo = pBolas->at(section)->color;
+		if (fondo.lightness() > 128) {
+			return QBrush(Qt::black);
+		} else {
+			return QBrush(Qt::white);
+		}
+	}
+
+	return QVariant();
 
 }
 
@@ -96,8 +109,29 @@ DTablaBolas::DTablaBolas(QVector<Bola*> *pBolas, QWidget *parent): QDialog(paren
 	
 }
 
+void DTablaBolas::ajustarTamano()
+{
+	int ancho =
+	vistaBolas->verticalHeader()->width() +
+	vistaBolas->frameWidth() * 2;
+
+	for (int c = 0; c < modeloBolas->columnCount(); ++c)
+		ancho += vistaBolas->columnWidth(c);
+
+	int alto =
+	vistaBolas->horizontalHeader()->height() +
+	vistaBolas->frameWidth() * 2;
+
+	for (int r = 0; r < modeloBolas->rowCount(); ++r)
+		alto += vistaBolas->rowHeight(r);
+
+	vistaBolas->setFixedSize(ancho, alto);
+	setFixedSize(sizeHint());
+}
 
 void DTablaBolas::slotTemporizador(){
+
+	ajustarTamano();
 
 	vistaBolas->resizeColumnsToContents();
 	vistaBolas->resizeRowsToContents();

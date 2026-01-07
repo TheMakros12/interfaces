@@ -22,24 +22,37 @@ int ModeloBolasRebotes::columnCount(const QModelIndex &parent) const {
 
 QVariant ModeloBolasRebotes::headerData(int section, Qt::Orientation orientation, int role) const {
 
-	if ( role != Qt::DisplayRole )
-		return QVariant();
+	if ( role == Qt::DisplayRole ) {
 
-	QString cadena;
-	if ( orientation == Qt::Horizontal ) {
-		switch(section) {
-			case 0: cadena = "Total Rebotes"; break;
-			case 1: cadena = "Rebotes Y"; break;
-			case 2: cadena = "Rebotes X"; break;
-			case 3: cadena = "Dirección"; break;
+		if ( orientation == Qt::Horizontal ) {
+			switch (section) {
+				case 0: return "Total Rebotes";
+				case 1: return "Rebotes Y";
+				case 2: return "Rebotes X";
+				case 3: return "Dirección";
+			}
+		}
+
+		if ( orientation == Qt::Vertical ) {
+			return pBolas->at(section)->nombre;
 		}
 	}
 
-	if ( orientation == Qt::Vertical ) {
-		cadena = pBolas->at(section)->nombre;
+	if ( role == Qt::BackgroundRole && orientation == Qt::Vertical ) {
+		Bola *bola = pBolas->at(section);
+		return QBrush(bola->color);
 	}
 
-	return QVariant(cadena);
+	if ( role == Qt::ForegroundRole && orientation == Qt::Vertical ) {
+		QColor fondo = pBolas->at(section)->color;
+		if (fondo.lightness() > 128) {
+			return QBrush(Qt::black);
+		} else {
+			return QBrush(Qt::white);
+		}
+	}
+
+	return QVariant();
 
 }
 

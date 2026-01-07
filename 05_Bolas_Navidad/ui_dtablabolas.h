@@ -30,7 +30,7 @@ public:
     {
         if (DTablaBolas->objectName().isEmpty())
             DTablaBolas->setObjectName(QString::fromUtf8("DTablaBolas"));
-        DTablaBolas->resize(481, 377);
+        DTablaBolas->resize(440, 377);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
