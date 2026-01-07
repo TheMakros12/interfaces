@@ -18,6 +18,7 @@
 #include <QByteArray>
 
 #include "bola.h"
+#include "dinformacion.h"
 #include "dlistabolas.h"
 #include "dtablabolas.h"
 #include "dtablarebotes.h"
@@ -31,6 +32,7 @@ public:
 
     static bool bolasDesaparecen;
     QVector<Bola *> bolas;
+    DInformacion *dInformacion;
     DListaBolas *dListaBolas;
     DTablaBolas *dTablaBolas;
     DTablaRebotes *dTablaRebotes;
@@ -38,6 +40,7 @@ public:
 
     QTimer *temporizador;
 
+    QAction *actionDInformacion;
     QAction *actionDListaBolas;
     QAction *actionDTablaBolas;
     QAction *actionDTablaRebotes;
@@ -55,6 +58,7 @@ public:
 
 public slots:
     void slotTemporizador();
+    void slotDInformacion();
     void slotDListaBolas();
     void slotDTablaBolas();
     void slotDTablaRebotes();

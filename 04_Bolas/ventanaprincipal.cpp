@@ -7,6 +7,11 @@ bool VentanaPrincipal::bolasDesaparecen = true;
 
 VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 
+    qDebug() << "";
+    qDebug() << "|===========================|";
+    qDebug() << "|  Has iniciado la Partida  |";
+    qDebug() << "|===========================|";
+    qDebug() << "";
 
     temporizador = new QTimer();
     temporizador->setInterval(10);
@@ -19,6 +24,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 
     resize(800,600);
 
+    dInformacion = NULL;
     dListaBolas = NULL;
     dTablaBolas = NULL;
     dTablaRebotes = NULL;
@@ -33,6 +39,11 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 void VentanaPrincipal::crearActions() {
 
     /*Aquí creamos todas las QAction para los diferentes menús*/
+
+    actionDInformacion = new QAction("Información", this);
+    actionDInformacion->setShortcut(QKeySequence::WhatsThis);
+    connect(actionDInformacion, SIGNAL(triggered()),
+            this, SLOT(slotDInformacion()));
 
     actionDListaBolas = new QAction("Lista de las Bolas", this);
     connect(actionDListaBolas, SIGNAL(triggered()),
@@ -74,9 +85,10 @@ void VentanaPrincipal::crearMenus() {
     QMenuBar *barraMenu = this->menuBar();
 
     QMenu *menuPartida = barraMenu->addMenu("Partida");
-    menuPartida->addAction(actionSalir);
+    menuPartida->addAction(actionDInformacion);
     menuPartida->addAction(actionGuardarPartida);
     menuPartida->addAction(actionCargarPartida);
+    menuPartida->addAction(actionSalir);
 
     QMenu *menuDialogos = barraMenu->addMenu("Diálogos");
     menuDialogos->addAction(actionDListaBolas);
@@ -371,6 +383,15 @@ void VentanaPrincipal::slotTemporizador() {
 }
 
 /* A partir de aquí declaramos los diferentes SLOTS para poder ejecutar todos los Diálogos que hayamos implementado */
+
+void VentanaPrincipal::slotDInformacion() {
+
+    if (dInformacion == NULL )
+        dInformacion = new DInformacion(width(), height(), bolas.size());
+
+    dInformacion->show();
+
+}
 
 void VentanaPrincipal::slotDListaBolas() {
 
