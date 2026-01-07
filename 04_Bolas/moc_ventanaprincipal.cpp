@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VentanaPrincipal_t {
-    QByteArrayData data[8];
-    char stringdata0[122];
+    QByteArrayData data[9];
+    char stringdata0[139];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,13 +39,14 @@ QT_MOC_LITERAL(3, 35, 15), // "slotDListaBolas"
 QT_MOC_LITERAL(4, 51, 15), // "slotDTablaBolas"
 QT_MOC_LITERAL(5, 67, 17), // "slotDTablaRebotes"
 QT_MOC_LITERAL(6, 85, 18), // "slotGuardarPartida"
-QT_MOC_LITERAL(7, 104, 17) // "slotCargarPartida"
+QT_MOC_LITERAL(7, 104, 17), // "slotCargarPartida"
+QT_MOC_LITERAL(8, 122, 16) // "slotDDetalleBola"
 
     },
     "VentanaPrincipal\0slotTemporizador\0\0"
     "slotDListaBolas\0slotDTablaBolas\0"
     "slotDTablaRebotes\0slotGuardarPartida\0"
-    "slotCargarPartida"
+    "slotCargarPartida\0slotDDetalleBola"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,7 +56,7 @@ static const uint qt_meta_data_VentanaPrincipal[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -63,14 +64,16 @@ static const uint qt_meta_data_VentanaPrincipal[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x0a /* Public */,
-       3,    0,   45,    2, 0x0a /* Public */,
-       4,    0,   46,    2, 0x0a /* Public */,
-       5,    0,   47,    2, 0x0a /* Public */,
-       6,    0,   48,    2, 0x0a /* Public */,
-       7,    0,   49,    2, 0x0a /* Public */,
+       1,    0,   49,    2, 0x0a /* Public */,
+       3,    0,   50,    2, 0x0a /* Public */,
+       4,    0,   51,    2, 0x0a /* Public */,
+       5,    0,   52,    2, 0x0a /* Public */,
+       6,    0,   53,    2, 0x0a /* Public */,
+       7,    0,   54,    2, 0x0a /* Public */,
+       8,    0,   55,    2, 0x0a /* Public */,
 
  // slots: parameters
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -93,6 +96,7 @@ void VentanaPrincipal::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 3: _t->slotDTablaRebotes(); break;
         case 4: _t->slotGuardarPartida(); break;
         case 5: _t->slotCargarPartida(); break;
+        case 6: _t->slotDDetalleBola(); break;
         default: ;
         }
     }
@@ -128,13 +132,13 @@ int VentanaPrincipal::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

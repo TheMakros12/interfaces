@@ -28,6 +28,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     dListaBolas = NULL;
     dTablaBolas = NULL;
     dTablaRebotes = NULL;
+    dDetalleBola = NULL;
     crearActions();
     crearMenus();
 
@@ -64,20 +65,26 @@ void VentanaPrincipal::crearActions() {
     connect(actionSalir, SIGNAL(triggered()),
 			this, SLOT(close()));
 
+    actionDDetalleBola = new QAction("Detalle Bola", this);
+    connect(actionDDetalleBola, SIGNAL(triggered()),
+			this, SLOT(slotDDetalleBola()));
+
 }
 
 void VentanaPrincipal::crearMenus() {
 
     QMenuBar *barraMenu = this->menuBar();
-    QMenu *menuDialogos = barraMenu->addMenu("Diálogos");
-    QMenu *menuPartida = barraMenu->addMenu("Partida");
 
+    QMenu *menuPartida = barraMenu->addMenu("Partida");
+    menuPartida->addAction(actionSalir);
+    menuPartida->addAction(actionGuardarPartida);
+    menuPartida->addAction(actionCargarPartida);
+
+    QMenu *menuDialogos = barraMenu->addMenu("Diálogos");
     menuDialogos->addAction(actionDListaBolas);
     menuDialogos->addAction(actionDTablaBolas);
     menuDialogos->addAction(actionDTablaRebotes);
-    menuDialogos->addAction(actionSalir);
-    menuPartida->addAction(actionGuardarPartida);
-    menuPartida->addAction(actionCargarPartida);
+    menuDialogos->addAction(actionDDetalleBola);
 
 }
 
@@ -378,5 +385,14 @@ void VentanaPrincipal::slotDTablaRebotes() {
         dTablaRebotes = new DTablaRebotes(&bolas);
 
     dTablaRebotes->show();
+
+}
+
+void VentanaPrincipal::slotDDetalleBola() {
+
+    if (dDetalleBola == NULL)
+        dDetalleBola = new DDetalleBola(&bolas);
+
+    dDetalleBola->show();
 
 }
