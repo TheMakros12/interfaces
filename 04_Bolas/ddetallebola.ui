@@ -32,7 +32,7 @@
   <widget class="QLabel" name="lblNombreBola">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>120</x>
      <y>20</y>
      <width>66</width>
      <height>19</height>
@@ -42,7 +42,7 @@
     <string>Nombre</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -84,6 +84,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="lblIntRojo">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -102,6 +109,13 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QLabel" name="lblIntVerde">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -117,6 +131,13 @@
          <widget class="QSlider" name="slAzul">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblIntAzul">
+          <property name="text">
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -141,6 +162,32 @@
        </widget>
       </item>
      </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>20</y>
+     <width>95</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_6">
+    <item>
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Nº:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lblNumBola">
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

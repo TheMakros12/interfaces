@@ -15,6 +15,8 @@ public:
 	QVector<Bola*> *lasBolas;
 	int numBola;
 
+	void inicializarColores();
+
 public slots:
 	void slotCambiarRojo(int);
 	void slotCambiarVerde(int);
