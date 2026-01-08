@@ -29,6 +29,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     dTablaBolas = NULL;
     dTablaRebotes = NULL;
     dDetalleBola = NULL;
+    dConfiguracionBola = NULL;
     crearActions();
     crearMenus();
 
@@ -76,6 +77,10 @@ void VentanaPrincipal::crearActions() {
     connect(actionDDetalleBola, SIGNAL(triggered()),
 			this, SLOT(slotDDetalleBola()));
 
+    actionDConfiguracionBola = new QAction("Configuracion de la Bola", this);
+    connect(actionDConfiguracionBola, SIGNAL(triggered()),
+			this, SLOT(slotDDConfiguracionBola()));
+
 }
 
 void VentanaPrincipal::crearMenus() {
@@ -95,6 +100,7 @@ void VentanaPrincipal::crearMenus() {
     menuDialogos->addAction(actionDTablaBolas);
     menuDialogos->addAction(actionDTablaRebotes);
     menuDialogos->addAction(actionDDetalleBola);
+    menuDialogos->addAction(actionDConfiguracionBola);
 
 }
 
@@ -426,5 +432,14 @@ void VentanaPrincipal::slotDDetalleBola() {
         dDetalleBola = new DDetalleBola(&bolas);
 
     dDetalleBola->show();
+
+}
+
+void VentanaPrincipal::slotDDConfiguracionBola() {
+
+    if ( dConfiguracionBola == NULL )
+        dConfiguracionBola = new DConfiguracionBola(&bolas);
+
+    dConfiguracionBola->show();
 
 }

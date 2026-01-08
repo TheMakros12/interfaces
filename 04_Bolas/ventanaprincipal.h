@@ -23,6 +23,7 @@
 #include "dtablabolas.h"
 #include "dtablarebotes.h"
 #include "ddetallebola.h"
+#include "dconfiguracionbola.h"
 
 class VentanaPrincipal : public QMainWindow {
 Q_OBJECT
@@ -37,6 +38,7 @@ public:
     DTablaBolas *dTablaBolas;
     DTablaRebotes *dTablaRebotes;
     DDetalleBola *dDetalleBola;
+    DConfiguracionBola *dConfiguracionBola;
 
     QTimer *temporizador;
 
@@ -48,6 +50,7 @@ public:
     QAction *actionCargarPartida;
     QAction *actionSalir;
     QAction *actionDDetalleBola;
+    QAction *actionDConfiguracionBola;
 
     void paintEvent(QPaintEvent *event);
     void closeEvent(QCloseEvent *event);
@@ -65,6 +68,7 @@ public slots:
     void slotGuardarPartida();
     void slotCargarPartida();
     void slotDDetalleBola();
+    void slotDDConfiguracionBola();
 
 };
 #endif
