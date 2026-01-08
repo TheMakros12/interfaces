@@ -225,12 +225,14 @@ void DTablaBolas::slotTemporizador() {
 	int totalWidth = tablaBolas->verticalHeader()->width();
 	for (int c = 0; c < modelo->columnCount(); ++c)
 		totalWidth += tablaBolas->columnWidth(c);
+
 	totalWidth += 2 * tablaBolas->frameWidth() + 20;
 	tablaBolas->setMinimumWidth(totalWidth);
 
 	int totalHeight = tablaBolas->horizontalHeader()->height();
 	for (int r = 0; r < modelo->rowCount(); ++r)
 		totalHeight += tablaBolas->rowHeight(r);
+
 	totalHeight += 2 * tablaBolas->frameWidth();
 	tablaBolas->setMinimumHeight(totalHeight);
 

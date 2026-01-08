@@ -349,7 +349,7 @@ void MainWindow::slotDTablaBolas() {
 void MainWindow::slotDTablaRebotes() {
 
     if ( dTablaRebotes == NULL )
-        dTablaRebotes = new DTablaRebotes(&bolas);
+        dTablaRebotes = new DTablaRebotes(&bolas, &bolaJugador);
 
     dTablaRebotes->show();
 

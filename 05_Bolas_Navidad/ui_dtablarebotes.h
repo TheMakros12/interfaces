@@ -38,10 +38,10 @@ public:
     {
         if (DTablaRebotes->objectName().isEmpty())
             DTablaRebotes->setObjectName(QString::fromUtf8("DTablaRebotes"));
-        DTablaRebotes->resize(379, 337);
+        DTablaRebotes->resize(412, 356);
         layoutWidget = new QWidget(DTablaRebotes);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(9, 9, 361, 321));
+        layoutWidget->setGeometry(QRect(9, 9, 391, 341));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);

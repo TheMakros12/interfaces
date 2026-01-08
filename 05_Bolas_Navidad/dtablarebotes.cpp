@@ -3,15 +3,14 @@
 
 /************************ModeloTabla***************************/
 
-ModeloBolasRebotes::ModeloBolasRebotes(QVector<Bola*> *lasBolas) {
-
-	pBolas = lasBolas;
+ModeloBolasRebotes::ModeloBolasRebotes(QVector<Bola*> *bolasPasadas, Bola **bolaEspecial, QObject *parent) : pBolas(bolasPasadas), bolaJugador(bolaEspecial) {
 
 }
 
 int ModeloBolasRebotes::rowCount(const QModelIndex &parent) const {
 
-	return pBolas->size();
+	int extra = (bolaJugador && *bolaJugador) ? 1 : 0;
+	return pBolas->size() + extra;
 
 }
 
@@ -23,86 +22,118 @@ int ModeloBolasRebotes::columnCount(const QModelIndex &parent) const {
 
 QVariant ModeloBolasRebotes::headerData(int section, Qt::Orientation orientation, int role) const {
 
-	if ( role != Qt::DisplayRole )
-		return QVariant();
+	if ( role == Qt::DisplayRole ){
+		if ( orientation == Qt::Horizontal ) {
+			switch ( section ) {
+				case 0: return "Total Rebotes";
+				case 1: return "Rebotes Y";
+				case 2: return "Rebotes X";
+				case 3: return "Dirección";
+			};
+		}
 
-	QString cadena;
-	if ( orientation == Qt::Horizontal ) {
-		switch( section ) {
-			case 0: cadena = "T Rebotes"; break;
-			case 1: cadena = "Rebotes Y"; break;
-			case 2: cadena = "Rebotes X"; break;
-			case 3: cadena = "Dirección"; break;
+		if ( orientation == Qt::Vertical ) {
+			if ( bolaJugador && *bolaJugador ) {
+				if (section == 0) return "Jugador";
+				else return pBolas->at(section - 1)->nombre;
+			} else {
+				return pBolas->at(section)->nombre;
+			}
 		}
 	}
 
-	if ( orientation == Qt::Vertical ) {
-		cadena = pBolas->at(section)->nombre;
+	if (orientation == Qt::Vertical &&
+		(role == Qt::BackgroundRole || role == Qt::ForegroundRole)) {
+
+		Bola *laBola = nullptr;
+
+	if (bolaJugador && *bolaJugador) {
+		laBola = (section == 0)
+		? *bolaJugador
+		: pBolas->at(section - 1);
+	} else {
+		laBola = pBolas->at(section);
 	}
 
-	return QVariant(cadena);
+	if (role == Qt::BackgroundRole)
+		return QBrush(laBola->color);
+
+		if (role == Qt::ForegroundRole)
+			return QBrush(laBola->color.lightness() > 128
+			? Qt::black
+			: Qt::white);
+		}
+
+	return QVariant();
 
 }
 
 QVariant ModeloBolasRebotes::data(const QModelIndex &index, int role) const {
 
-	if ( role != Qt::DisplayRole )
-		return QVariant();
-
 	int fila = index.row();
 	int columna = index.column();
-	Bola *bola = pBolas->at(fila);
+	Bola *laBola = nullptr;
 
-	int sumaRebotes = bola->rArriba + bola->rAbajo + bola->rIzquierda + bola->rDerecha;
-	int rebVeritcales = bola->rArriba + bola->rAbajo;
-	int rebHorizontales = bola->rIzquierda + bola->rDerecha;
+	if ( bolaJugador && *bolaJugador ) {
+		if ( fila == 0 ) {
+			laBola = *bolaJugador;
+		} else {
+			laBola = pBolas->at(fila - 1);
+		}
+	} else {
+		laBola = pBolas->at(fila);
+	}
 
-	QString resultado;
-	switch (columna) {
-		case 0:
-			resultado = QString::number(sumaRebotes); break;
-		case 1:
-			resultado = QString::number(rebVeritcales); break;
-		case 2:
-			resultado = QString::number(rebHorizontales); break;
-		case 3:
-			if ( bola->rArriba > bola->rAbajo &&
-				bola->rArriba > bola->rDerecha &&
-				bola->rArriba > bola->rIzquierda )
-				return QVariant("Arriba");
+	int sumaRebotes = laBola->rArriba + laBola->rAbajo + laBola->rIzquierda + laBola->rDerecha;
+	int rebVeritcales = laBola->rArriba + laBola->rAbajo;
+	int rebHorizontales = laBola->rIzquierda + laBola->rDerecha;
 
-			if ( bola->rAbajo > bola->rDerecha &&
-				bola->rAbajo > bola->rIzquierda )
-				return QVariant("Abajo");
+		if ( role == Qt::DisplayRole ){
+			switch (columna) {
+			case 0:
+				return sumaRebotes;
+			case 1:
+				return rebVeritcales;
+			case 2:
+				return rebHorizontales;
+			case 3:
+				if ( laBola->rArriba > laBola->rAbajo &&
+					laBola->rArriba > laBola->rDerecha &&
+					laBola->rArriba > laBola->rIzquierda )
+					return "Arriba";
 
-			if ( bola->rIzquierda > bola->rDerecha )
-				return QVariant("Izquierda");
+				if ( laBola->rAbajo > laBola->rDerecha &&
+					laBola->rAbajo > laBola->rIzquierda )
+					return "Abajo";
 
-			return QVariant("Derecha");
-			break;
-	};
+				if ( laBola->rIzquierda > laBola->rDerecha )
+					return "Izquierda";
 
-	return QVariant(resultado);
+				return "Derecha";
+				break;
+			};
+
+		}
+
+	return QVariant();
 
 }
 
 void ModeloBolasRebotes::update() {
 
-	QModelIndex topLeft = index(0,0);
-	QModelIndex bottomRight = index(pBolas->size()-1, 3);
-	emit dataChanged(topLeft, bottomRight);
+    emit layoutChanged();
 
 }
 
 /************************ModeloTabla***************************/
 
-DTablaRebotes::DTablaRebotes(QVector<Bola*> *pBolas, QWidget *parent): QDialog(parent){
+DTablaRebotes::DTablaRebotes(QVector<Bola*> *bolasPasadas, Bola **bolaEspecial, QWidget *parent): QDialog(parent), pBolas(bolasPasadas) {
 
 	setupUi(this);
 
 	this->setWindowTitle("Tabla de los Rebotes");
 
-	modeloRebotes = new ModeloBolasRebotes(pBolas);
+	modeloRebotes = new ModeloBolasRebotes(pBolas, bolaEspecial);
 	tablaRebotes->setModel(modeloRebotes);
 	tablaRebotes->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 	tablaRebotes->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -123,22 +154,27 @@ DTablaRebotes::DTablaRebotes(QVector<Bola*> *pBolas, QWidget *parent): QDialog(p
 
 void DTablaRebotes::slotTemporizador(){
 
-	tablaRebotes->resizeColumnsToContents();
+	modeloRebotes->update();
+
 	tablaRebotes->resizeRowsToContents();
+	tablaRebotes->resizeColumnsToContents();
 
 	int ancho = tablaRebotes->verticalHeader()->width();
 	for (int i = 0; i <  modeloRebotes->columnCount(); i++) {
 		ancho += tablaRebotes->columnWidth(i);
 	}
+	ancho += 2 * tablaRebotes->frameWidth() + 20;
+	tablaRebotes->setMinimumWidth(ancho);
 
 	int largo = tablaRebotes->horizontalHeader()->height();
 	for (int j = 0; j <  modeloRebotes->rowCount(); j++) {
 		largo += tablaRebotes->rowHeight(j);
 	}
+	largo += 2 * tablaRebotes->frameWidth();
+	tablaRebotes->setMinimumHeight(largo);
 
 	tablaRebotes->setMinimumSize(ancho, largo);
 
-	modeloRebotes->update();
 	adjustSize();
 
 }

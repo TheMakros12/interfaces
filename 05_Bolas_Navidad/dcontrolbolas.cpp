@@ -66,7 +66,8 @@ void DControlBolas::slotActualizarTabs(){
 		}
 	}
 
-	for (Bola *b : *bolas) {
+	for (int idx = 0; idx < bolas->size(); ++idx) {
+		Bola *b = bolas->at(idx);
 		bool existe = false;
 
 		for (int i = 0; i < tabBolas->count(); ++i) {
@@ -78,8 +79,8 @@ void DControlBolas::slotActualizarTabs(){
 		}
 
 		if (!existe) {
-			tabBolas->addTab(new WidgetBola(b), b->nombre);
+			QString nombre = QString("Bola %1 ").arg(idx);
+			tabBolas->addTab(new WidgetBola(b), nombre);
 		}
 	}
 }
-

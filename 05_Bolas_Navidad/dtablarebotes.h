@@ -15,8 +15,9 @@
 class ModeloBolasRebotes : public QAbstractTableModel {
 
 public:
-	ModeloBolasRebotes(QVector<Bola*> *);
+	ModeloBolasRebotes(QVector<Bola*> *,  Bola **bolaJugador = nullptr, QObject *parent = nullptr);
 	QVector<Bola*> *pBolas;
+	Bola **bolaJugador = nullptr;
 
 	int	rowCount(const QModelIndex &parent = QModelIndex()) const;
 
@@ -38,8 +39,9 @@ class DTablaRebotes : public QDialog, public Ui::DTablaRebotes {
 	Q_OBJECT
 
 public:
+	DTablaRebotes(QVector<Bola*> *, Bola **bolaEspecial = nullptr, QWidget *parent = NULL);
+	QVector<Bola*> *pBolas;
 	ModeloBolasRebotes *modeloRebotes;
-	DTablaRebotes(QVector<Bola*> *,QWidget *parent = NULL);
 
 	QTimer *temporizador;
 
