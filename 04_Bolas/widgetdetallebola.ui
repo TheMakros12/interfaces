@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>387</width>
-    <height>296</height>
+    <width>299</width>
+    <height>252</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>10</x>
      <y>40</y>
      <width>281</width>
      <height>201</height>
@@ -28,7 +28,7 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>NUevo nombre:</string>
+         <string>Nuevo nombre:</string>
         </property>
        </widget>
       </item>
@@ -114,8 +114,33 @@
         </item>
        </layout>
       </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
       <item>
        <widget class="QPushButton" name="btnPararBola">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
         <property name="text">
          <string>Parar Bola</string>
         </property>
@@ -128,7 +153,7 @@
   <widget class="QWidget" name="layoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>50</x>
      <y>10</y>
      <width>205</width>
      <height>23</height>

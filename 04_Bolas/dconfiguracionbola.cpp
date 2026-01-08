@@ -13,6 +13,10 @@ DConfiguracionBola::DConfiguracionBola(QVector<Bola*> *bolasPasadas, QWidget *pa
 		tabWidget->addTab(new WidgetDetalleBola(lasBolas->at(i)),
 						  lasBolas->at(i)->nombre);
 	}
+
+	cbActivarBotones->setChecked(true);
+
+	adjustSize();
 	
 }
 
@@ -33,9 +37,8 @@ void DConfiguracionBola::on_btnPararTodas_clicked() {
 
 void DConfiguracionBola::on_cbActivarBotones_toggled(bool activo) {
 
-	for (int i = 0; i < lasBolas->size(); i++) {
-		qobject_cast<WidgetDetalleBola*>(tabWidget->widget(i)->btnPararBola->setEnabled(activo));
-	}
+	for (int i = 0; i < lasBolas->size(); i++)
+		qobject_cast<WidgetDetalleBola*>(tabWidget->widget(i))->btnPararBola->setEnabled(activo);
 
 }
 

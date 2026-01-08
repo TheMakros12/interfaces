@@ -20,11 +20,18 @@ WidgetDetalleBola::WidgetDetalleBola(Bola *bolaPasada, QWidget *parent): QWidget
 	connect(slAzul, SIGNAL(valueChanged(int)),
 			this, SLOT(slotCambiarAzul(int)));
 
-	// connect(btnPararBola, SIGNAL(clicked()),
-	// 		this, SLOT(slotPararBola()));
+	connect(leNuevoNombre, SIGNAL(returnPressed()),
+			this, SLOT(slotCambiarNombre()));
 
 	inicializarColores();
 	
+}
+
+void WidgetDetalleBola::slotCambiarNombre() {
+
+	QString nuevoNombre = leNuevoNombre->text();
+	laBola->nombre = nuevoNombre;
+
 }
 
 void WidgetDetalleBola::inicializarColores() {

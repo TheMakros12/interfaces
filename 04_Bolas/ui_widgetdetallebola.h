@@ -42,6 +42,7 @@ public:
     QLabel *label_4;
     QSlider *slAzul;
     QLabel *lblIntAzul;
+    QHBoxLayout *horizontalLayout_5;
     QPushButton *btnPararBola;
     QWidget *layoutWidget_2;
     QHBoxLayout *horizontalLayout_7;
@@ -51,10 +52,10 @@ public:
     {
         if (WidgetDetalleBola->objectName().isEmpty())
             WidgetDetalleBola->setObjectName(QString::fromUtf8("WidgetDetalleBola"));
-        WidgetDetalleBola->resize(387, 296);
+        WidgetDetalleBola->resize(299, 252);
         layoutWidget = new QWidget(WidgetDetalleBola);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(60, 40, 281, 201));
+        layoutWidget->setGeometry(QRect(10, 40, 281, 201));
         verticalLayout_2 = new QVBoxLayout(layoutWidget);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -138,17 +139,31 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_4);
 
-        btnPararBola = new QPushButton(layoutWidget);
-        btnPararBola->setObjectName(QString::fromUtf8("btnPararBola"));
-
-        verticalLayout->addWidget(btnPararBola);
-
 
         verticalLayout_2->addLayout(verticalLayout);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(0);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        horizontalLayout_5->setSizeConstraint(QLayout::SetNoConstraint);
+        btnPararBola = new QPushButton(layoutWidget);
+        btnPararBola->setObjectName(QString::fromUtf8("btnPararBola"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(btnPararBola->sizePolicy().hasHeightForWidth());
+        btnPararBola->setSizePolicy(sizePolicy);
+        btnPararBola->setBaseSize(QSize(0, 0));
+        btnPararBola->setLayoutDirection(Qt::LeftToRight);
+
+        horizontalLayout_5->addWidget(btnPararBola);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_5);
+
         layoutWidget_2 = new QWidget(WidgetDetalleBola);
         layoutWidget_2->setObjectName(QString::fromUtf8("layoutWidget_2"));
-        layoutWidget_2->setGeometry(QRect(100, 10, 205, 23));
+        layoutWidget_2->setGeometry(QRect(50, 10, 205, 23));
         horizontalLayout_7 = new QHBoxLayout(layoutWidget_2);
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
         horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
@@ -167,7 +182,7 @@ public:
     void retranslateUi(QWidget *WidgetDetalleBola)
     {
         WidgetDetalleBola->setWindowTitle(QCoreApplication::translate("WidgetDetalleBola", "Form", nullptr));
-        label->setText(QCoreApplication::translate("WidgetDetalleBola", "NUevo nombre:", nullptr));
+        label->setText(QCoreApplication::translate("WidgetDetalleBola", "Nuevo nombre:", nullptr));
         label_2->setText(QCoreApplication::translate("WidgetDetalleBola", "Rojo:", nullptr));
         lblIntRojo->setText(QCoreApplication::translate("WidgetDetalleBola", "0", nullptr));
         label_3->setText(QCoreApplication::translate("WidgetDetalleBola", "Verde:", nullptr));

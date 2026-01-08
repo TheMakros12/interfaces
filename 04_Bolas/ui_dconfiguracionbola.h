@@ -16,6 +16,7 @@
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -25,48 +26,32 @@ QT_BEGIN_NAMESPACE
 class Ui_DConfiguracionBola
 {
 public:
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QTabWidget *tabWidget;
     QWidget *tab;
-    QWidget *horizontalLayoutWidget;
+    QWidget *tab_2;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnPararTodas;
+    QSpacerItem *horizontalSpacer;
     QCheckBox *cbActivarBotones;
-    QWidget *tab_2;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DConfiguracionBola)
     {
         if (DConfiguracionBola->objectName().isEmpty())
             DConfiguracionBola->setObjectName(QString::fromUtf8("DConfiguracionBola"));
-        DConfiguracionBola->resize(694, 407);
-        widget = new QWidget(DConfiguracionBola);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(20, 0, 441, 391));
-        verticalLayout = new QVBoxLayout(widget);
+        DConfiguracionBola->resize(474, 400);
+        layoutWidget = new QWidget(DConfiguracionBola);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(20, 0, 441, 391));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        tabWidget = new QTabWidget(widget);
+        tabWidget = new QTabWidget(layoutWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         tab = new QWidget();
         tab->setObjectName(QString::fromUtf8("tab"));
-        horizontalLayoutWidget = new QWidget(tab);
-        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(0, 280, 439, 31));
-        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        btnPararTodas = new QPushButton(horizontalLayoutWidget);
-        btnPararTodas->setObjectName(QString::fromUtf8("btnPararTodas"));
-
-        horizontalLayout->addWidget(btnPararTodas);
-
-        cbActivarBotones = new QCheckBox(horizontalLayoutWidget);
-        cbActivarBotones->setObjectName(QString::fromUtf8("cbActivarBotones"));
-
-        horizontalLayout->addWidget(cbActivarBotones);
-
         tabWidget->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QString::fromUtf8("tab_2"));
@@ -74,7 +59,26 @@ public:
 
         verticalLayout->addWidget(tabWidget);
 
-        buttonBox = new QDialogButtonBox(widget);
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        btnPararTodas = new QPushButton(layoutWidget);
+        btnPararTodas->setObjectName(QString::fromUtf8("btnPararTodas"));
+
+        horizontalLayout->addWidget(btnPararTodas);
+
+        horizontalSpacer = new QSpacerItem(140, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        cbActivarBotones = new QCheckBox(layoutWidget);
+        cbActivarBotones->setObjectName(QString::fromUtf8("cbActivarBotones"));
+
+        horizontalLayout->addWidget(cbActivarBotones);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+        buttonBox = new QDialogButtonBox(layoutWidget);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
@@ -92,10 +96,10 @@ public:
     void retranslateUi(QDialog *DConfiguracionBola)
     {
         DConfiguracionBola->setWindowTitle(QCoreApplication::translate("DConfiguracionBola", "Dialog", nullptr));
-        btnPararTodas->setText(QCoreApplication::translate("DConfiguracionBola", "Parar Todas", nullptr));
-        cbActivarBotones->setText(QCoreApplication::translate("DConfiguracionBola", "Activar Bot\303\263n Parar", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("DConfiguracionBola", "Tab 1", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("DConfiguracionBola", "Tab 2", nullptr));
+        btnPararTodas->setText(QCoreApplication::translate("DConfiguracionBola", "Parar Todas", nullptr));
+        cbActivarBotones->setText(QCoreApplication::translate("DConfiguracionBola", "Activar Bot\303\263n Parar", nullptr));
     } // retranslateUi
 
 };
