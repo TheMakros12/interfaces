@@ -36,6 +36,9 @@ public:
     QHBoxLayout *horizontalLayout;
     QLabel *label;
     QLabel *lblNombreBola;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *label_2;
+    QLabel *lblVidasBola;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_3;
     QVBoxLayout *verticalLayout_3;
@@ -53,7 +56,7 @@ public:
     {
         if (WidgetBola->objectName().isEmpty())
             WidgetBola->setObjectName(QString::fromUtf8("WidgetBola"));
-        WidgetBola->resize(430, 227);
+        WidgetBola->resize(597, 290);
         layoutWidget = new QWidget(WidgetBola);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
         layoutWidget->setGeometry(QRect(30, 30, 361, 171));
@@ -112,6 +115,22 @@ public:
 
 
         verticalLayout_2->addLayout(horizontalLayout);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        label_2 = new QLabel(layoutWidget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setFont(font);
+
+        horizontalLayout_7->addWidget(label_2);
+
+        lblVidasBola = new QLabel(layoutWidget);
+        lblVidasBola->setObjectName(QString::fromUtf8("lblVidasBola"));
+
+        horizontalLayout_7->addWidget(lblVidasBola);
+
+
+        verticalLayout_2->addLayout(horizontalLayout_7);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
@@ -191,6 +210,8 @@ public:
         btnColor->setText(QCoreApplication::translate("WidgetBola", "Color", nullptr));
         label->setText(QCoreApplication::translate("WidgetBola", "Nombre:", nullptr));
         lblNombreBola->setText(QCoreApplication::translate("WidgetBola", "TextLabel", nullptr));
+        label_2->setText(QCoreApplication::translate("WidgetBola", "Vidas:", nullptr));
+        lblVidasBola->setText(QCoreApplication::translate("WidgetBola", "TextLabel", nullptr));
         label_3->setText(QCoreApplication::translate("WidgetBola", "Color:", nullptr));
         lblColorBola->setText(QCoreApplication::translate("WidgetBola", "R: ", nullptr));
         lblBolaRed->setText(QCoreApplication::translate("WidgetBola", "Red", nullptr));

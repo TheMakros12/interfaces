@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <stdlib.h>
 
-bool MainWindow::bolasDesaparecen = true;
+bool MainWindow::bolasDesaparecen = false;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 

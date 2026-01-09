@@ -23,6 +23,7 @@ private slots:
 	void slotPararTodas();
 	void slotMoverTodas();
 	void slotActualizarTabs();
+	void slotCambiarTamanyoBolas(int);
 
 };
 

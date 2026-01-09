@@ -30,9 +30,9 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     dTablaRebotes = NULL;
     dDetalleBola = NULL;
     dConfiguracionBola = NULL;
+
     crearActions();
     crearMenus();
-
     inicializarBolas();
 
 }
@@ -45,18 +45,6 @@ void VentanaPrincipal::crearActions() {
     actionDInformacion->setShortcut(QKeySequence::WhatsThis);
     connect(actionDInformacion, SIGNAL(triggered()),
             this, SLOT(slotDInformacion()));
-
-    actionDListaBolas = new QAction("Lista de las Bolas", this);
-    connect(actionDListaBolas, SIGNAL(triggered()),
-            this, SLOT(slotDListaBolas()));
-
-    actionDTablaBolas = new QAction("Tabla de las Bolas", this);
-    connect(actionDTablaBolas, SIGNAL(triggered()),
-            this, SLOT(slotDTablaBolas()));
-
-    actionDTablaRebotes = new QAction("Tabla de los Rebotes", this);
-    connect(actionDTablaRebotes, SIGNAL(triggered()),
-            this, SLOT(slotDTablaRebotes()));
 
     actionGuardarPartida = new QAction("Guardar Partida", this);
 	actionGuardarPartida->setShortcut(QKeySequence::Save);
@@ -72,6 +60,18 @@ void VentanaPrincipal::crearActions() {
 	actionSalir->setShortcut(QKeySequence::Quit);
     connect(actionSalir, SIGNAL(triggered()),
 			this, SLOT(close()));
+
+    actionDListaBolas = new QAction("Lista de las Bolas", this);
+    connect(actionDListaBolas, SIGNAL(triggered()),
+            this, SLOT(slotDListaBolas()));
+
+    actionDTablaBolas = new QAction("Tabla de las Bolas", this);
+    connect(actionDTablaBolas, SIGNAL(triggered()),
+            this, SLOT(slotDTablaBolas()));
+
+    actionDTablaRebotes = new QAction("Tabla de los Rebotes", this);
+    connect(actionDTablaRebotes, SIGNAL(triggered()),
+            this, SLOT(slotDTablaRebotes()));
 
     actionDDetalleBola = new QAction("Detalle de la Bola", this);
     connect(actionDDetalleBola, SIGNAL(triggered()),

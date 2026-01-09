@@ -6,6 +6,7 @@ WidgetBola::WidgetBola(Bola *bolaPasada, QWidget *parent): QWidget(parent), miBo
 	setupUi(this);
 
 	lblNombreBola->setText(miBola->nombre);
+	lblVidasBola->setText(QString::number(miBola->vidas));
 	inicializarColores();
 
 	connect(btnParar, SIGNAL(clicked()),
@@ -17,6 +18,12 @@ WidgetBola::WidgetBola(Bola *bolaPasada, QWidget *parent): QWidget(parent), miBo
 	connect(btnColor, SIGNAL(clicked()),
 			this, SLOT(slotColorBola()));
 	
+}
+
+void WidgetBola::setVidas(int vidas) {
+
+	lblVidasBola->setText(QString::number(vidas));
+
 }
 
 void WidgetBola::inicializarColores() {
