@@ -44,6 +44,7 @@ public:
     QLabel *lblIntAzul;
     QHBoxLayout *horizontalLayout_5;
     QPushButton *btnPararBola;
+    QPushButton *btnMoverBola;
     QWidget *layoutWidget_2;
     QHBoxLayout *horizontalLayout_7;
     QLabel *lblNombreBola;
@@ -158,6 +159,13 @@ public:
 
         horizontalLayout_5->addWidget(btnPararBola);
 
+        btnMoverBola = new QPushButton(layoutWidget);
+        btnMoverBola->setObjectName(QString::fromUtf8("btnMoverBola"));
+        sizePolicy.setHeightForWidth(btnMoverBola->sizePolicy().hasHeightForWidth());
+        btnMoverBola->setSizePolicy(sizePolicy);
+
+        horizontalLayout_5->addWidget(btnMoverBola);
+
 
         verticalLayout_2->addLayout(horizontalLayout_5);
 
@@ -190,6 +198,7 @@ public:
         label_4->setText(QCoreApplication::translate("WidgetDetalleBola", "Azul", nullptr));
         lblIntAzul->setText(QCoreApplication::translate("WidgetDetalleBola", "0", nullptr));
         btnPararBola->setText(QCoreApplication::translate("WidgetDetalleBola", "Parar Bola", nullptr));
+        btnMoverBola->setText(QCoreApplication::translate("WidgetDetalleBola", "Mover Bola", nullptr));
         lblNombreBola->setText(QCoreApplication::translate("WidgetDetalleBola", "Nombre", nullptr));
     } // retranslateUi
 

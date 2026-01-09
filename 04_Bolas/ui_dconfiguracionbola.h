@@ -16,7 +16,6 @@
 #include <QtWidgets/QDialogButtonBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -33,19 +32,20 @@ public:
     QWidget *tab_2;
     QHBoxLayout *horizontalLayout;
     QPushButton *btnPararTodas;
-    QSpacerItem *horizontalSpacer;
     QCheckBox *cbActivarBotones;
+    QPushButton *btnMoverTodas;
     QDialogButtonBox *buttonBox;
 
     void setupUi(QDialog *DConfiguracionBola)
     {
         if (DConfiguracionBola->objectName().isEmpty())
             DConfiguracionBola->setObjectName(QString::fromUtf8("DConfiguracionBola"));
-        DConfiguracionBola->resize(474, 400);
+        DConfiguracionBola->resize(523, 401);
         layoutWidget = new QWidget(DConfiguracionBola);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 0, 441, 391));
+        layoutWidget->setGeometry(QRect(20, 0, 493, 391));
         verticalLayout = new QVBoxLayout(layoutWidget);
+        verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
         tabWidget = new QTabWidget(layoutWidget);
@@ -63,17 +63,27 @@ public:
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         btnPararTodas = new QPushButton(layoutWidget);
         btnPararTodas->setObjectName(QString::fromUtf8("btnPararTodas"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(btnPararTodas->sizePolicy().hasHeightForWidth());
+        btnPararTodas->setSizePolicy(sizePolicy);
 
         horizontalLayout->addWidget(btnPararTodas);
 
-        horizontalSpacer = new QSpacerItem(140, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer);
-
         cbActivarBotones = new QCheckBox(layoutWidget);
         cbActivarBotones->setObjectName(QString::fromUtf8("cbActivarBotones"));
+        sizePolicy.setHeightForWidth(cbActivarBotones->sizePolicy().hasHeightForWidth());
+        cbActivarBotones->setSizePolicy(sizePolicy);
 
         horizontalLayout->addWidget(cbActivarBotones);
+
+        btnMoverTodas = new QPushButton(layoutWidget);
+        btnMoverTodas->setObjectName(QString::fromUtf8("btnMoverTodas"));
+        sizePolicy.setHeightForWidth(btnMoverTodas->sizePolicy().hasHeightForWidth());
+        btnMoverTodas->setSizePolicy(sizePolicy);
+
+        horizontalLayout->addWidget(btnMoverTodas);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -85,6 +95,7 @@ public:
 
         verticalLayout->addWidget(buttonBox);
 
+        verticalLayout->setStretch(2, 1);
 
         retranslateUi(DConfiguracionBola);
         QObject::connect(buttonBox, SIGNAL(accepted()), DConfiguracionBola, SLOT(accept()));
@@ -100,6 +111,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("DConfiguracionBola", "Tab 2", nullptr));
         btnPararTodas->setText(QCoreApplication::translate("DConfiguracionBola", "Parar Todas", nullptr));
         cbActivarBotones->setText(QCoreApplication::translate("DConfiguracionBola", "Activar Bot\303\263n Parar", nullptr));
+        btnMoverTodas->setText(QCoreApplication::translate("DConfiguracionBola", "Mover Todas", nullptr));
     } // retranslateUi
 
 };

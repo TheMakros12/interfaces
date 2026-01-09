@@ -18,6 +18,7 @@ public:
 public slots:
 	void on_btnPararTodas_clicked();
 	void on_cbActivarBotones_toggled(bool);
+	void on_btnMoverTodas_clicked();
 
 };
 

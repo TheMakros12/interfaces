@@ -22,6 +22,7 @@ public slots:
 	void slotCambiarVerde(int);
 	void slotCambiarAzul(int);
 	void on_btnPararBola_clicked();
+	void on_btnMoverBola_clicked();
 
 };
 

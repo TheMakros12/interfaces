@@ -22,18 +22,10 @@ DConfiguracionBola::DConfiguracionBola(QVector<Bola*> *bolasPasadas, QWidget *pa
 
 void DConfiguracionBola::on_btnPararTodas_clicked() {
 
-	for (int i = 0; i < lasBolas->size(); i++) {
-		QWidget *widgetPestanya;
-		WidgetDetalleBola *widgetBolaPestanya;
-
-		widgetPestanya = tabWidget->widget(i);
-		widgetBolaPestanya = qobject_cast<WidgetDetalleBola*>(widgetPestanya);
-
-		widgetBolaPestanya->on_btnPararBola_clicked();
-	}
+	for (int i = 0; i < lasBolas->size(); i++)
+		qobject_cast<WidgetDetalleBola*>(tabWidget->widget(i))->btnPararBola->animateClick(100);
 
 }
-
 
 void DConfiguracionBola::on_cbActivarBotones_toggled(bool activo) {
 
@@ -42,3 +34,8 @@ void DConfiguracionBola::on_cbActivarBotones_toggled(bool activo) {
 
 }
 
+void DConfiguracionBola::on_btnMoverTodas_clicked() {
+
+	for (int i = 0; i < lasBolas->size(); i++)
+		qobject_cast<WidgetDetalleBola*>(tabWidget->widget(i))->btnMoverBola->animateClick(100);
+}

@@ -70,3 +70,12 @@ void WidgetDetalleBola::on_btnPararBola_clicked(){
 	laBola->velY = 0;
 
 }
+
+void WidgetDetalleBola::on_btnMoverBola_clicked(){
+
+	float velIniX = (float)(random() % 100) / 50 - 1;
+	float velIniY = (float)(random() % 100) / 50 - 1;
+	laBola->velX = velIniX;
+	laBola->velY = velIniY;
+
+}
