@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int Bola::diametro = 40;
-int Bola::vidasIniciales = 5;
+int Bola::vidasIniciales = 10;
 
 Bola::Bola(QObject *parent): Bola(0, 0, 0, 0, parent) {
 }
@@ -139,5 +139,11 @@ void Bola::pintar(QPainter &pintor) {
                     5);
 
     pintor.drawText(posX+diametro/2, posY+diametro/2, QString::number(vidas));
+
+}
+
+void Bola::restablecerRebotes() {
+
+    rArriba = rAbajo = rIzquierda = rDerecha = 0;
 
 }

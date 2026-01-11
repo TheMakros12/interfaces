@@ -15,19 +15,20 @@ public:
 
     static int diametro;
     static int vidasIniciales;
+
     float posX, posY;
     float velX, velY;
     QColor color;
     QString nombre;
     int vidas;
     int rArriba, rAbajo, rDerecha, rIzquierda;
-
     bool especial;
 
     void mover(int, int, int);
     float distancia(Bola *otraBola);
     bool choca(Bola *otraBola);
     void pintar(QPainter &pintor);
+    void restablecerRebotes();
 
 };
 #endif

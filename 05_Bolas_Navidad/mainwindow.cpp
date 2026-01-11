@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     dTablaBolas = NULL;
     dTablaRebotes = NULL;
     dControlBolas = NULL;
+    dTablaReboteBolas = NULL;
 
     QTimer *temporizador = new QTimer();
     temporizador->setSingleShot(false);
@@ -33,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
 void MainWindow::crearBolas() {
 
-    QStringList nombres = {"marcos", "lucia", "juan","david","alex","paula","aroa","alba","diego","modest","perico","andres"};
+    QStringList nombres = {"marcos", "lucia", "juan","david","alex","paula","aroa","alba","diego","jose","perico","andres"};
 
     int anchura = width();
     int altura = height();
@@ -56,6 +57,13 @@ void MainWindow::crearBolas() {
     bolaJugador = new Bola(200, 300, 0, 0, this);
     bolaJugador->color = QColor(255, 0, 0);
     bolaJugador->especial = true;
+
+    int n = bolas.size();
+    rebotes.resize(n);
+    for (int i = 0; i < n; ++i) {
+        rebotes[i].resize(n);
+        rebotes[i].fill(0);
+    }
 
 }
 
@@ -97,6 +105,10 @@ void MainWindow::crearActions() {
     connect(actionDControlBolas, SIGNAL(triggered()),
             this, SLOT(slotDControlBolas()));
 
+    actionDTablaReboteBolas = new QAction("Rebotes entre Bolas");
+    connect(actionDTablaReboteBolas, SIGNAL(triggered()),
+            this, SLOT(slotDTablaReboteBolas()));
+
 }
 
 void MainWindow::crearMenu() {
@@ -114,6 +126,7 @@ void MainWindow::crearMenu() {
     menuDialogos->addAction(actionDTablaBolas);
     menuDialogos->addAction(actionDTablaRebotes);
     menuDialogos->addAction(actionDControlBolas);
+    menuDialogos->addAction(actionDTablaReboteBolas);
 
 }
 
@@ -282,15 +295,16 @@ void MainWindow::slotTemporizador() {
     }
 
     for (int i = 0; i < bolas.size(); i++) {
-        for (int j = 0; j < bolas.size(); j++) {
-            if ( i != j )
-                if ( bolas[i]->choca(bolas[j]) ) {
-                    bolas.at(i)->vidas--;
-                    bolas.at(j)->vidas--;
-
-                }
+        for (int j = i + 1; j < bolas.size(); j++) {
+            if (bolas[i]->choca(bolas[j])) {
+                bolas[i]->vidas--;
+                bolas[j]->vidas--;
+                rebotes[i][j]++;
+                rebotes[j][i]++;
+            }
         }
     }
+
 
     if ( bolaJugador ) {
         bolaJugador->mover(anchuraV, alturaV, alturaMenuBar);
@@ -361,6 +375,15 @@ void MainWindow::slotDControlBolas() {
         dControlBolas = new DControlBolas(&bolas);
 
     dControlBolas->show();
+
+}
+
+void MainWindow::slotDTablaReboteBolas() {
+
+    if ( dTablaReboteBolas == NULL )
+        dTablaReboteBolas = new DTablaReboteBolas(&bolas, &rebotes);
+
+    dTablaReboteBolas->show();
 
 }
 

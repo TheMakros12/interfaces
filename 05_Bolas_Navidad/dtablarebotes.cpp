@@ -47,22 +47,22 @@ QVariant ModeloBolasRebotes::headerData(int section, Qt::Orientation orientation
 
 		Bola *laBola = nullptr;
 
-	if (bolaJugador && *bolaJugador) {
-		laBola = (section == 0)
-		? *bolaJugador
-		: pBolas->at(section - 1);
-	} else {
-		laBola = pBolas->at(section);
-	}
+		if (bolaJugador && *bolaJugador) {
+			laBola = (section == 0)
+			? *bolaJugador
+			: pBolas->at(section - 1);
+		} else {
+			laBola = pBolas->at(section);
+		}
 
-	if (role == Qt::BackgroundRole)
-		return QBrush(laBola->color);
+		if (role == Qt::BackgroundRole)
+			return QBrush(laBola->color);
 
 		if (role == Qt::ForegroundRole)
 			return QBrush(laBola->color.lightness() > 128
 			? Qt::black
 			: Qt::white);
-		}
+	}
 
 	return QVariant();
 
@@ -181,12 +181,11 @@ void DTablaRebotes::slotTemporizador(){
 
 void DTablaRebotes::slotRestablecerRebotes(){
 
-	for (Bola *bola : *modeloRebotes->pBolas) {
-		bola->rArriba = 0;
-		bola->rAbajo = 0;
-		bola->rIzquierda = 0;
-		bola->rDerecha = 0;
-	}
+	for (Bola *bola : *modeloRebotes->pBolas)
+		bola->restablecerRebotes();
+
+	if (modeloRebotes->bolaJugador && *modeloRebotes->bolaJugador)
+		(*modeloRebotes->bolaJugador)->restablecerRebotes();
 
 	modeloRebotes->update();
 

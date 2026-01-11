@@ -26,6 +26,7 @@
 #include "dtablabolas.h"
 #include "dtablarebotes.h"
 #include "dcontrolbolas.h"
+#include "dtablarebotebolas.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -37,6 +38,7 @@ public:
 
     QVector<Bola*> bolas;
     Bola *bolaJugador;
+    QVector<QVector<int>> rebotes;
 
     void crearBolas();
     void crearActions();
@@ -55,12 +57,14 @@ public:
     QAction *actionGuardarPartida;
     QAction *actionCargarPartida;
     QAction *actionSalir;
+    QAction *actionDTablaReboteBolas;
 
     DInformacion *dInformacion;
     DInfoBolas *dInfoBolas;
     DTablaBolas *dTablaBolas;
     DTablaRebotes *dTablaRebotes;
     DControlBolas *dControlBolas;
+    DTablaReboteBolas *dTablaReboteBolas;
 
 public slots:
     void slotTemporizador();
@@ -71,6 +75,7 @@ public slots:
     void slotDControlBolas();
     void slotGuardarPartida();
     void slotCargarPartida();
+    void slotDTablaReboteBolas();
 
 };
 #endif
