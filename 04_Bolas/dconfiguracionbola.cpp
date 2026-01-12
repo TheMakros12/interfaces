@@ -32,6 +32,8 @@ void DConfiguracionBola::on_cbActivarBotones_toggled(bool activo) {
 	for (int i = 0; i < lasBolas->size(); i++)
 		qobject_cast<WidgetDetalleBola*>(tabWidget->widget(i))->btnPararBola->setEnabled(activo);
 
+	btnPararTodas->setEnabled(activo);
+
 }
 
 void DConfiguracionBola::on_btnMoverTodas_clicked() {

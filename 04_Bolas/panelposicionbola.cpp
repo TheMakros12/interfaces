@@ -25,13 +25,13 @@ void PanelPosicionBola::paintEvent(QPaintEvent *event) {
 
     pintor.drawRect(posicionX,
                     0,
-                    10,
+                    12,
                     height());
 
     pintor.drawRect(0,
                     posicionY,
                     width(),
-                    10);
+                    12);
 
 }
 

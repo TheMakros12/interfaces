@@ -49,18 +49,21 @@ void WidgetDetalleBola::inicializarColores() {
 void WidgetDetalleBola::slotCambiarRojo(int rojo){
 
 	laBola->color.setRed(rojo);
+	lblIntRojo->setText(QString::number(rojo));
 
 }
 
 void WidgetDetalleBola::slotCambiarVerde(int verde){
 
 	laBola->color.setGreen(verde);
+	lblIntVerde->setText(QString::number(verde));
 
 }
 
 void WidgetDetalleBola::slotCambiarAzul(int azul){
 
 	laBola->color.setBlue(azul);
+	lblIntAzul->setText(QString::number(azul));
 
 }
 
