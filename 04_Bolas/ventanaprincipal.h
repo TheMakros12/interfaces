@@ -33,6 +33,7 @@ public:
 
     static bool bolasDesaparecen;
     QVector<Bola *> bolas;
+
     DInformacion *dInformacion;
     DListaBolas *dListaBolas;
     DTablaBolas *dTablaBolas;
@@ -52,12 +53,13 @@ public:
     QAction *actionDDetalleBola;
     QAction *actionDConfiguracionBola;
 
-    void paintEvent(QPaintEvent *event);
-    void closeEvent(QCloseEvent *event);
-    void inicializarBolas();
     void crearActions();
     void crearMenus();
+    void inicializarBolas();
+    void showEvent(QShowEvent *event);
+    void paintEvent(QPaintEvent *event);
     bool crearBolaJson(QJsonValue &);
+    void closeEvent(QCloseEvent *event);
 
 public slots:
     void slotTemporizador();
@@ -66,9 +68,9 @@ public slots:
     void slotDTablaBolas();
     void slotDTablaRebotes();
     void slotGuardarPartida();
+    void slotDDConfiguracionBola();
     void slotCargarPartida();
     void slotDDetalleBola();
-    void slotDDConfiguracionBola();
 
 };
 #endif

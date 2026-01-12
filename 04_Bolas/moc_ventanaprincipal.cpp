@@ -40,16 +40,16 @@ QT_MOC_LITERAL(4, 52, 15), // "slotDListaBolas"
 QT_MOC_LITERAL(5, 68, 15), // "slotDTablaBolas"
 QT_MOC_LITERAL(6, 84, 17), // "slotDTablaRebotes"
 QT_MOC_LITERAL(7, 102, 18), // "slotGuardarPartida"
-QT_MOC_LITERAL(8, 121, 17), // "slotCargarPartida"
-QT_MOC_LITERAL(9, 139, 16), // "slotDDetalleBola"
-QT_MOC_LITERAL(10, 156, 23) // "slotDDConfiguracionBola"
+QT_MOC_LITERAL(8, 121, 23), // "slotDDConfiguracionBola"
+QT_MOC_LITERAL(9, 145, 17), // "slotCargarPartida"
+QT_MOC_LITERAL(10, 163, 16) // "slotDDetalleBola"
 
     },
     "VentanaPrincipal\0slotTemporizador\0\0"
     "slotDInformacion\0slotDListaBolas\0"
     "slotDTablaBolas\0slotDTablaRebotes\0"
-    "slotGuardarPartida\0slotCargarPartida\0"
-    "slotDDetalleBola\0slotDDConfiguracionBola"
+    "slotGuardarPartida\0slotDDConfiguracionBola\0"
+    "slotCargarPartida\0slotDDetalleBola"
 };
 #undef QT_MOC_LITERAL
 
@@ -103,9 +103,9 @@ void VentanaPrincipal::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         case 3: _t->slotDTablaBolas(); break;
         case 4: _t->slotDTablaRebotes(); break;
         case 5: _t->slotGuardarPartida(); break;
-        case 6: _t->slotCargarPartida(); break;
-        case 7: _t->slotDDetalleBola(); break;
-        case 8: _t->slotDDConfiguracionBola(); break;
+        case 6: _t->slotDDConfiguracionBola(); break;
+        case 7: _t->slotCargarPartida(); break;
+        case 8: _t->slotDDetalleBola(); break;
         default: ;
         }
     }

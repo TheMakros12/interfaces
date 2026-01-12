@@ -7,12 +7,6 @@ bool VentanaPrincipal::bolasDesaparecen = true;
 
 VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 
-    qDebug() << "";
-    qDebug() << "|===========================|";
-    qDebug() << "|  Has iniciado la Partida  |";
-    qDebug() << "|===========================|";
-    qDebug() << "";
-
     temporizador = new QTimer();
     temporizador->setInterval(10);
     temporizador->setSingleShot(false);
@@ -108,7 +102,7 @@ void VentanaPrincipal::inicializarBolas() {
 
     /* Este método es el encargado de la creación del QVector<Bola*> con todos sus atributos iniciales */
 
-    QStringList nombres = {"marcos", "lucia", "juan","david","alex","paula","aroa","alba","diego","modest","perico","andres"
+    QStringList nombres = {"marcos", "lucia", "juan","david","alex","paula","aroa","alba","diego","jose","perico","andres"
     };
 
     int anchura = width();
@@ -141,6 +135,16 @@ void VentanaPrincipal::inicializarBolas() {
 
 }
 
+void VentanaPrincipal::showEvent(QShowEvent *event) {
+
+    qDebug() << "";
+    qDebug() << "|========================|";
+    qDebug() << "|  Has abierto el juego  |";
+    qDebug() << "|========================|";
+    qDebug() << "";
+
+}
+
 void VentanaPrincipal::paintEvent(QPaintEvent *){
 
     /* Aquí llamamos al método que tiene la clase Bola, para poder pintarlas */
@@ -149,116 +153,6 @@ void VentanaPrincipal::paintEvent(QPaintEvent *){
 
     for (int i= 0 ; i < bolas.length(); i++)
         bolas.at(i)->pintar(pintor);
-
-}
-
-void VentanaPrincipal::closeEvent(QCloseEvent *event) {
-
-    /* Simplemente sobreescribimos este métedo par que muestre este mensaje por la terminal */
-
-    qDebug() << "";
-    qDebug() << "|===========================|";
-    qDebug() << "|  Has cerrado el programa  |";
-    qDebug() << "|===========================|";
-    qDebug() << "";
-
-    event->accept();
-}
-
-void VentanaPrincipal::slotGuardarPartida() {
-
-    /* En este método guardamos todos los datos que queremos en un documento .json. Este mismo se guarda en la propia carpeta del programa */
-
-    QJsonObject objectoPrincipal;
-
-    QJsonArray arrayVersiones;
-    arrayVersiones.append(3);
-    arrayVersiones.append(2.3);
-    arrayVersiones.append(QString("beta"));
-
-    objectoPrincipal["version"] = arrayVersiones;
-
-    QJsonArray arrayBolas;
-    for (int i = 0; i < bolas.size(); i++) {
-        QJsonObject objetoBola;
-
-        QJsonArray colorsBola;
-        colorsBola.append(bolas.at(i)->color.red());
-        colorsBola.append(bolas.at(i)->color.green());
-        colorsBola.append(bolas.at(i)->color.blue());
-        objetoBola["color"] = colorsBola;
-
-        objetoBola["nombre"] = bolas.at(i)->nombre;
-        objetoBola["posX"] = bolas.at(i)->posX;
-        objetoBola["posY"] = bolas.at(i)->posY;
-        objetoBola["velX"] = bolas.at(i)->velX;
-        objetoBola["velY"] = bolas.at(i)->velY;
-
-        arrayBolas.append(objetoBola);
-    }
-
-    objectoPrincipal["bolas"] = arrayBolas;
-
-    QJsonDocument documento(objectoPrincipal);
-
-    QFile saveFile(QStringLiteral("partida.json"));
-    saveFile.open(QIODevice::WriteOnly);
-
-    saveFile.write(documento.toJson());
-
-    qDebug() << "";
-    qDebug() << "|===========================|";
-    qDebug() << "|  Has guardado la Partida  |";
-    qDebug() << "|===========================|";
-    qDebug() << "";
-
-}
-
-void VentanaPrincipal::slotCargarPartida() {
-
-    /* Cargamos una partida a partir de un .json que tengamos en la misma carpeta que el proyecto */
-
-    QFile loadFile(QStringLiteral("partida.json"));
-    if ( !loadFile.open(QIODevice::ReadOnly) )
-        return;
-
-    for (int i = 0; i <  bolas.size(); i++)
-        delete bolas[i];
-
-    bolas.clear();
-
-    QByteArray datosBrutos = loadFile.readAll();
-    QJsonDocument documento(QJsonDocument::fromJson(datosBrutos));
-
-    QJsonObject objectoPrincipal = documento.object();
-
-    QStringList listaClaves = objectoPrincipal.keys();
-
-    if ( !objectoPrincipal.contains("bolas") ) {
-        qDebug() << "Error: No hay bolas";
-        return;
-    }
-    QJsonValue valorBolas = objectoPrincipal["bolas"];
-
-    if ( !valorBolas.isArray() ) {
-        qDebug() << "Error: las bolas no son un array";
-        return;
-    }
-    QJsonArray arrayBolas = valorBolas.toArray();
-
-    for (int i = 0; i < arrayBolas.size(); i++) {
-        QJsonValue elemento = arrayBolas [i];
-        if ( !crearBolaJson(elemento) ) {
-            qDebug() << "ERROR! No se pudo crear la Bola " << i;
-            return;
-        }
-    }
-
-    qDebug() << "";
-    qDebug() << "|==========================|";
-    qDebug() << "|  Has cargado la Partida  |";
-    qDebug() << "|==========================|";
-    qDebug() << "";
 
 }
 
@@ -358,6 +252,19 @@ bool VentanaPrincipal::crearBolaJson(QJsonValue &elemento) {
 
 }
 
+void VentanaPrincipal::closeEvent(QCloseEvent *event) {
+
+    /* Simplemente sobreescribimos este métedo par que muestre este mensaje por la terminal */
+
+    qDebug() << "";
+    qDebug() << "|===========================|";
+    qDebug() << "|  Has cerrado el programa  |";
+    qDebug() << "|===========================|";
+    qDebug() << "";
+
+    event->accept();
+}
+
 void VentanaPrincipal::slotTemporizador() {
 
     /* Método que se va a ejectutar repetidamento por el QTimer. Aquí gestionamos el movimiento de las Bolas, los colisiones de las mismas y la gestión de las vidas. */
@@ -441,5 +348,102 @@ void VentanaPrincipal::slotDDConfiguracionBola() {
         dConfiguracionBola = new DConfiguracionBola(&bolas);
 
     dConfiguracionBola->show();
+
+}
+
+void VentanaPrincipal::slotGuardarPartida() {
+
+    /* En este método guardamos todos los datos que queremos en un documento .json. Este mismo se guarda en la propia carpeta del programa */
+
+    QJsonObject objectoPrincipal;
+
+    QJsonArray arrayVersiones;
+    arrayVersiones.append(3);
+    arrayVersiones.append(2.3);
+    arrayVersiones.append(QString("beta"));
+
+    objectoPrincipal["version"] = arrayVersiones;
+
+    QJsonArray arrayBolas;
+    for (int i = 0; i < bolas.size(); i++) {
+        QJsonObject objetoBola;
+
+        QJsonArray colorsBola;
+        colorsBola.append(bolas.at(i)->color.red());
+        colorsBola.append(bolas.at(i)->color.green());
+        colorsBola.append(bolas.at(i)->color.blue());
+        objetoBola["color"] = colorsBola;
+
+        objetoBola["nombre"] = bolas.at(i)->nombre;
+        objetoBola["posX"] = bolas.at(i)->posX;
+        objetoBola["posY"] = bolas.at(i)->posY;
+        objetoBola["velX"] = bolas.at(i)->velX;
+        objetoBola["velY"] = bolas.at(i)->velY;
+
+        arrayBolas.append(objetoBola);
+    }
+
+    objectoPrincipal["bolas"] = arrayBolas;
+
+    QJsonDocument documento(objectoPrincipal);
+
+    QFile saveFile(QStringLiteral("partida.json"));
+    saveFile.open(QIODevice::WriteOnly);
+
+    saveFile.write(documento.toJson());
+
+    qDebug() << "";
+    qDebug() << "|===========================|";
+    qDebug() << "|  Has guardado la Partida  |";
+    qDebug() << "|===========================|";
+    qDebug() << "";
+
+}
+
+void VentanaPrincipal::slotCargarPartida() {
+
+    /* Cargamos una partida a partir de un .json que tengamos en la misma carpeta que el proyecto */
+
+    QFile loadFile(QStringLiteral("partida.json"));
+    if ( !loadFile.open(QIODevice::ReadOnly) )
+        return;
+
+    for (int i = 0; i <  bolas.size(); i++)
+        delete bolas[i];
+
+    bolas.clear();
+
+    QByteArray datosBrutos = loadFile.readAll();
+    QJsonDocument documento(QJsonDocument::fromJson(datosBrutos));
+
+    QJsonObject objectoPrincipal = documento.object();
+
+    QStringList listaClaves = objectoPrincipal.keys();
+
+    if ( !objectoPrincipal.contains("bolas") ) {
+        qDebug() << "Error: No hay bolas";
+        return;
+    }
+    QJsonValue valorBolas = objectoPrincipal["bolas"];
+
+    if ( !valorBolas.isArray() ) {
+        qDebug() << "Error: las bolas no son un array";
+        return;
+    }
+    QJsonArray arrayBolas = valorBolas.toArray();
+
+    for (int i = 0; i < arrayBolas.size(); i++) {
+        QJsonValue elemento = arrayBolas [i];
+        if ( !crearBolaJson(elemento) ) {
+            qDebug() << "ERROR! No se pudo crear la Bola " << i;
+            return;
+        }
+    }
+
+    qDebug() << "";
+    qDebug() << "|==========================|";
+    qDebug() << "|  Has cargado la Partida  |";
+    qDebug() << "|==========================|";
+    qDebug() << "";
 
 }
