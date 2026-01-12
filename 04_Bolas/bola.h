@@ -19,6 +19,7 @@ public:
     QImage img;
     int vidas;
     int rArriba, rAbajo, rDerecha, rIzquierda;
+    float anchuraJuego, alturaJuego;
 
     void mover(float, float, int);
     float distancia(Bola*);

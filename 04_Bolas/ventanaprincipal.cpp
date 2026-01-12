@@ -24,6 +24,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     dTablaRebotes = NULL;
     dDetalleBola = NULL;
     dConfiguracionBola = NULL;
+    dPosicionBola = NULL;
 
     crearActions();
     crearMenus();
@@ -75,6 +76,10 @@ void VentanaPrincipal::crearActions() {
     connect(actionDConfiguracionBola, SIGNAL(triggered()),
 			this, SLOT(slotDDConfiguracionBola()));
 
+    actionDPosicionBola = new QAction("Posición de la Bola", this);
+    connect(actionDPosicionBola, SIGNAL(triggered()),
+			this, SLOT(slotDPosicionBola()));
+
 }
 
 void VentanaPrincipal::crearMenus() {
@@ -95,6 +100,7 @@ void VentanaPrincipal::crearMenus() {
     menuDialogos->addAction(actionDTablaRebotes);
     menuDialogos->addAction(actionDDetalleBola);
     menuDialogos->addAction(actionDConfiguracionBola);
+    menuDialogos->addAction(actionDPosicionBola);
 
 }
 
@@ -129,6 +135,9 @@ void VentanaPrincipal::inicializarBolas() {
         imagen = imagen.scaled(Bola::diametro,Bola::diametro);
         nueva->img = imagen;
 #endif
+
+        nueva->anchuraJuego = anchura;
+        nueva->alturaJuego = altura;
 
         bolas.append(nueva);
     }
@@ -348,6 +357,15 @@ void VentanaPrincipal::slotDDConfiguracionBola() {
         dConfiguracionBola = new DConfiguracionBola(&bolas);
 
     dConfiguracionBola->show();
+
+}
+
+void VentanaPrincipal::slotDPosicionBola() {
+
+    if (dPosicionBola == NULL)
+        dPosicionBola = new DPosicionBola(&bolas);
+
+    dPosicionBola->show();
 
 }
 
