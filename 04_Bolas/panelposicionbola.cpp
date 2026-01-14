@@ -1,5 +1,7 @@
 #include "panelposicionbola.h"
 
+#include <QDebug>
+
 PanelPosicionBola::PanelPosicionBola(Bola * bolaPasada, QWidget *parent) : QWidget(parent), laBola(bolaPasada) {
 
     QTimer *temporizador = new QTimer();
@@ -32,6 +34,16 @@ void PanelPosicionBola::paintEvent(QPaintEvent *event) {
                     posicionY,
                     width(),
                     12);
+
+}
+
+void PanelPosicionBola::mousePressEvent(QMouseEvent *event) {
+
+    float posicionX = (event->x() * laBola->anchuraJuego) / width();
+    float posicionY = (event->y() * laBola->alturaJuego) / height();
+
+    laBola->posX = posicionX;
+    laBola->posY = posicionY;
 
 }
 

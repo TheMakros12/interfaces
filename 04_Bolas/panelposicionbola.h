@@ -4,6 +4,7 @@
 
 #include <QWidget>
 #include <QTimer>
+#include <QMouseEvent>
 
 class PanelPosicionBola : public QWidget {
 Q_OBJECT
@@ -13,6 +14,7 @@ public:
     Bola *laBola;
 
     void paintEvent(QPaintEvent *event);
+    void mousePressEvent(QMouseEvent *event);
 
 public slots:
     void slotTemporizador();

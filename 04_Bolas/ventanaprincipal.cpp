@@ -18,6 +18,13 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 
     resize(800,600);
 
+    anchuraV = width();
+    alturaV = height();
+    alturaMenuBar = menuBar()->height();
+
+
+    nuevaBola = new Bola();
+
     dInformacion = NULL;
     dListaBolas = NULL;
     dTablaBolas = NULL;
@@ -274,13 +281,40 @@ void VentanaPrincipal::closeEvent(QCloseEvent *event) {
     event->accept();
 }
 
+void VentanaPrincipal::mousePressEvent(QMouseEvent *event) {
+
+    float nuevaPosX = event->x();
+    float nuevaPosY = event->y();
+    float velX = 0;
+    float velY = 0;
+
+    nuevaBola->posX = nuevaPosX;
+    nuevaBola->posY = nuevaPosY;
+    nuevaBola->color = QColor(rand() % 255, rand() % 255, rand() % 255);
+    nuevaBola->nombre = "bola " + QString::number(bolas.size());
+    nuevaBola->esImagen = false;
+    nuevaBola->anchuraJuego = anchuraV;
+    nuevaBola->alturaJuego = alturaV;
+
+}
+
+void VentanaPrincipal::mouseReleaseEvent(QMouseEvent * event) {
+
+    float velX = (event->x() - nuevaBola->posX) / 100;
+    float velY = (event->y() - nuevaBola->posY) / 100;
+
+    nuevaBola->velX = velX;
+    nuevaBola->velY = velY;
+
+    bolas.append(nuevaBola);
+
+    repaint();
+
+}
+
 void VentanaPrincipal::slotTemporizador() {
 
     /* Método que se va a ejectutar repetidamento por el QTimer. Aquí gestionamos el movimiento de las Bolas, los colisiones de las mismas y la gestión de las vidas. */
-
-    float anchuraV = width();
-    float alturaV = height();
-    float alturaMenuBar = menuBar()->height();
 
     for (int i = 0; i < bolas.size(); i++) {
         bolas.at(i)->mover(anchuraV, alturaV, alturaMenuBar);

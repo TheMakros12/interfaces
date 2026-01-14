@@ -16,6 +16,7 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QByteArray>
+#include <QMouseEvent>
 
 #include "bola.h"
 #include "dinformacion.h"
@@ -34,6 +35,11 @@ public:
 
     static bool bolasDesaparecen;
     QVector<Bola *> bolas;
+    Bola *nuevaBola;
+
+    float anchuraV;
+    float alturaV;
+    float alturaMenuBar;
 
     DInformacion *dInformacion;
     DListaBolas *dListaBolas;
@@ -63,6 +69,8 @@ public:
     void paintEvent(QPaintEvent *event);
     bool crearBolaJson(QJsonValue &);
     void closeEvent(QCloseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
 
 public slots:
     void slotTemporizador();
