@@ -15,8 +15,10 @@ public:
 	DPosicionBola(QVector<Bola*> *, QWidget *parent = NULL);
 	QVector<Bola*> *lasBolas;
 
+	void actualizarTabs();
+
 public slots:
-	void slotEjemplo();
+	void slotTemporizador();
 
 };
 
