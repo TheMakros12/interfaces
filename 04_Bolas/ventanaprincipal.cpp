@@ -22,9 +22,6 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     alturaV = height();
     alturaMenuBar = menuBar()->height();
 
-
-    nuevaBola = new Bola();
-
     dInformacion = NULL;
     dListaBolas = NULL;
     dTablaBolas = NULL;
@@ -288,6 +285,7 @@ void VentanaPrincipal::mousePressEvent(QMouseEvent *event) {
     float velX = 0;
     float velY = 0;
 
+    nuevaBola = new Bola();
     nuevaBola->posX = nuevaPosX;
     nuevaBola->posY = nuevaPosY;
     nuevaBola->color = QColor(rand() % 255, rand() % 255, rand() % 255);
