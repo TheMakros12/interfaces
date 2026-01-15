@@ -76,6 +76,31 @@ QVariant ModeloBolas::data(const QModelIndex &index, int role) const {
 
 }
 
+bool ModeloBolas::setData(const QModelIndex &index, const QVariant &value, int role) {
+
+	if ( role != Qt::EditRole )
+		return false;
+
+	Bola *laBola = pBolas->at(index.row());
+	float valor = value.toFloat();
+
+	switch ( index.column() ) {
+		case 0: laBola->posX = valor; break;
+		case 1: laBola->posY = valor; break;
+		case 2: laBola->velX = valor; break;
+		case 3: laBola->velY = valor; break;
+	};
+
+	emit dataChanged(index, index);
+
+	return true;
+
+}
+
+Qt::ItemFlags ModeloBolas::flags(const QModelIndex &index) const {
+	return Qt::ItemIsEditable | QAbstractTableModel::flags(index);
+}
+
 void ModeloBolas::update() {
 
 	beginResetModel();
@@ -99,7 +124,7 @@ DTablaBolas::DTablaBolas(QVector<Bola*> *pBolas, QWidget *parent): QDialog(paren
 	vistaBolas->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 	temporizador = new QTimer();
-	temporizador->setInterval(10);
+	temporizador->setInterval(500);
 	temporizador->setSingleShot(false);
 
 	connect(temporizador, SIGNAL(timeout()),
