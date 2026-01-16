@@ -128,10 +128,9 @@ DTablaRebotes::DTablaRebotes(QVector<Bola*> *pBolas, QWidget *parent): QDialog(p
 	modeloRebotes = new ModeloBolasRebotes(pBolas);
 	tablaRebotes->setModel(modeloRebotes);
 	tablaRebotes->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	tablaRebotes->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 	temporizador = new QTimer();
-    temporizador->setInterval(10);
+    temporizador->setInterval(500);
     temporizador->setSingleShot(false);
 
     connect(temporizador, SIGNAL(timeout()),
