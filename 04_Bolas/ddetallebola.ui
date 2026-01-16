@@ -44,7 +44,7 @@
       <item>
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>NUevo nombre:</string>
+         <string>Nuevo nombre:</string>
         </property>
        </widget>
       </item>
@@ -168,9 +168,9 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>100</x>
      <y>20</y>
-     <width>205</width>
+     <width>241</width>
      <height>23</height>
     </rect>
    </property>
@@ -200,7 +200,7 @@
       <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Nº:</string>
+         <string>Bola Nº:</string>
         </property>
        </widget>
       </item>

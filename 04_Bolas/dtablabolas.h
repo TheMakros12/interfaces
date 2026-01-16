@@ -42,8 +42,6 @@ public:
 	ModeloBolas *modeloBolas;
 	QTimer *temporizador;
 
-	void ajustarTamano();
-
 public slots:
 	void slotTemporizador();
 

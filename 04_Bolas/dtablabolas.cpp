@@ -21,6 +21,15 @@ int ModeloBolas::columnCount(const QModelIndex &parent) const {
 
 QVariant ModeloBolas::headerData(int section, Qt::Orientation orientation, int role) const {
 
+	if ( role == Qt::TextAlignmentRole )
+		return Qt::AlignCenter;
+
+	if ( role == Qt::FontRole ) {
+		QFont font;
+		font.setBold(true);
+		return font;
+	}
+
 	if ( role == Qt::DisplayRole ) {
 
 		if ( orientation == Qt::Horizontal ) {
@@ -56,6 +65,9 @@ QVariant ModeloBolas::headerData(int section, Qt::Orientation orientation, int r
 }
 
 QVariant ModeloBolas::data(const QModelIndex &index, int role) const {
+
+	if ( role == Qt::TextAlignmentRole )
+		return Qt::AlignCenter;
 
 	if ( role != Qt::DisplayRole )
 		return QVariant();
@@ -107,8 +119,8 @@ void ModeloBolas::update() {
 	emit layoutChanged();
 	QModelIndex topLeft = index(0,0);
 	QModelIndex bottomRight = index(pBolas->size()-1, 3);
-	emit dataChanged(topLeft, bottomRight);
 
+	emit dataChanged(topLeft, bottomRight);
 
 }
 
@@ -121,7 +133,6 @@ DTablaBolas::DTablaBolas(QVector<Bola*> *pBolas, QWidget *parent): QDialog(paren
 	modeloBolas = new ModeloBolas(pBolas);
 	vistaBolas->setModel(modeloBolas);
 	vistaBolas->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	vistaBolas->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 	temporizador = new QTimer();
 	temporizador->setInterval(500);
@@ -134,46 +145,9 @@ DTablaBolas::DTablaBolas(QVector<Bola*> *pBolas, QWidget *parent): QDialog(paren
 	
 }
 
-void DTablaBolas::ajustarTamano()
-{
-	int ancho =
-	vistaBolas->verticalHeader()->width() +
-	vistaBolas->frameWidth() * 2;
-
-	for (int c = 0; c < modeloBolas->columnCount(); ++c)
-		ancho += vistaBolas->columnWidth(c);
-
-	int alto =
-	vistaBolas->horizontalHeader()->height() +
-	vistaBolas->frameWidth() * 2;
-
-	for (int r = 0; r < modeloBolas->rowCount(); ++r)
-		alto += vistaBolas->rowHeight(r);
-
-	vistaBolas->setFixedSize(ancho, alto);
-	setFixedSize(sizeHint());
-}
-
 void DTablaBolas::slotTemporizador(){
 
-	ajustarTamano();
-
-	vistaBolas->resizeColumnsToContents();
-	vistaBolas->resizeRowsToContents();
-
-	int ancho = vistaBolas->verticalHeader()->width();
-	for (int i = 0; i <  modeloBolas->columnCount(); i++) {
-		ancho += vistaBolas->columnWidth(i);
-	}
-
-	int largo = vistaBolas->horizontalHeader()->height();
-	for (int j = 0; j <  modeloBolas->rowCount(); j++) {
-		largo += vistaBolas->rowHeight(j);
-	}
-
-	vistaBolas->setMinimumSize(ancho, largo);
-	adjustSize();
-
 	modeloBolas->update();
+
 }
 

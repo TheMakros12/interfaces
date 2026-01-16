@@ -16,12 +16,14 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_DTablaBolas
 {
 public:
+    QWidget *widget;
     QVBoxLayout *verticalLayout;
     QTableView *vistaBolas;
     QDialogButtonBox *buttonBox;
@@ -30,15 +32,19 @@ public:
     {
         if (DTablaBolas->objectName().isEmpty())
             DTablaBolas->setObjectName(QString::fromUtf8("DTablaBolas"));
-        DTablaBolas->resize(604, 403);
-        verticalLayout = new QVBoxLayout(DTablaBolas);
+        DTablaBolas->resize(477, 381);
+        widget = new QWidget(DTablaBolas);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(9, 9, 461, 361));
+        verticalLayout = new QVBoxLayout(widget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        vistaBolas = new QTableView(DTablaBolas);
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        vistaBolas = new QTableView(widget);
         vistaBolas->setObjectName(QString::fromUtf8("vistaBolas"));
 
         verticalLayout->addWidget(vistaBolas);
 
-        buttonBox = new QDialogButtonBox(DTablaBolas);
+        buttonBox = new QDialogButtonBox(widget);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);

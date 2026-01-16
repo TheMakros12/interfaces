@@ -139,3 +139,9 @@ void Bola::pintar(QPainter &pintor) {
     pintor.drawText((posX+diametro/2)-5, (posY+diametro/2)+4, QString::number(vidas));
 
 }
+
+void Bola::restablecerRebotes() {
+
+    rArriba = rAbajo = rIzquierda = rDerecha = 0;
+
+}

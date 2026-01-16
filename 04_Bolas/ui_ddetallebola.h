@@ -178,7 +178,7 @@ public:
 
         layoutWidget1 = new QWidget(DDetalleBola);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(120, 20, 205, 23));
+        layoutWidget1->setGeometry(QRect(100, 20, 241, 23));
         horizontalLayout_7 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
         horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
@@ -217,7 +217,7 @@ public:
     void retranslateUi(QDialog *DDetalleBola)
     {
         DDetalleBola->setWindowTitle(QCoreApplication::translate("DDetalleBola", "Dialog", nullptr));
-        label->setText(QCoreApplication::translate("DDetalleBola", "NUevo nombre:", nullptr));
+        label->setText(QCoreApplication::translate("DDetalleBola", "Nuevo nombre:", nullptr));
         label_2->setText(QCoreApplication::translate("DDetalleBola", "Rojo:", nullptr));
         lblIntRojo->setText(QCoreApplication::translate("DDetalleBola", "0", nullptr));
         label_3->setText(QCoreApplication::translate("DDetalleBola", "Verde:", nullptr));
@@ -227,7 +227,7 @@ public:
         btnAnterior->setText(QCoreApplication::translate("DDetalleBola", "Bola Anterior", nullptr));
         btnSiguiente->setText(QCoreApplication::translate("DDetalleBola", "Bola Siguiente", nullptr));
         lblNombreBola->setText(QCoreApplication::translate("DDetalleBola", "Nombre", nullptr));
-        label_5->setText(QCoreApplication::translate("DDetalleBola", "N\302\272:", nullptr));
+        label_5->setText(QCoreApplication::translate("DDetalleBola", "Bola N\302\272:", nullptr));
         lblNumBola->setText(QCoreApplication::translate("DDetalleBola", "TextLabel", nullptr));
     } // retranslateUi
 

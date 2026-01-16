@@ -59,17 +59,20 @@ void DDetalleBola::slotCambiarNombre() {
 void DDetalleBola::slotCambiarRojo(int valorRojo){
 
 	lasBolas->at(numBola)->color.setRed(valorRojo);
+	lblIntRojo->setText(QString::number(valorRojo));
 }
 
 void DDetalleBola::slotCambiarVerde(int valorVerde){
 
 	lasBolas->at(numBola)->color.setGreen(valorVerde);
+	lblIntVerde->setText(QString::number(valorVerde));
 
 }
 
 void DDetalleBola::slotCambiarAzul(int valorAzul){
 
 	lasBolas->at(numBola)->color.setBlue(valorAzul);
+	lblIntAzul->setText(QString::number(valorAzul));
 
 }
 

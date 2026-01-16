@@ -22,6 +22,15 @@ int ModeloBolasRebotes::columnCount(const QModelIndex &parent) const {
 
 QVariant ModeloBolasRebotes::headerData(int section, Qt::Orientation orientation, int role) const {
 
+	if ( role == Qt::TextAlignmentRole )
+		return Qt::AlignCenter;
+
+	if ( role == Qt::FontRole ) {
+		QFont font;
+		font.setBold(true);
+		return font;
+	}
+
 	if ( role == Qt::DisplayRole ) {
 
 		if ( orientation == Qt::Horizontal ) {
@@ -57,6 +66,9 @@ QVariant ModeloBolasRebotes::headerData(int section, Qt::Orientation orientation
 }
 
 QVariant ModeloBolasRebotes::data(const QModelIndex &index, int role) const {
+
+	if ( role == Qt::TextAlignmentRole )
+		return Qt::AlignCenter;
 
 	if ( role != Qt::DisplayRole )
 		return QVariant();
@@ -126,29 +138,26 @@ DTablaRebotes::DTablaRebotes(QVector<Bola*> *pBolas, QWidget *parent): QDialog(p
             this, SLOT(slotTemporizador()));
 
     temporizador->start();
+
+	slotRestablecerRebotes();
+
+	connect(btnRestablecerRebotes, SIGNAL(clicked()),
+			this, SLOT(slotRestablecerRebotes()));
 	
 }
 
 
 void DTablaRebotes::slotTemporizador(){
 
-	tablaRebotes->resizeColumnsToContents();
-	tablaRebotes->resizeRowsToContents();
-
-	int ancho = tablaRebotes->verticalHeader()->width();
-	for (int i = 0; i <  modeloRebotes->columnCount(); i++) {
-		ancho += tablaRebotes->columnWidth(i);
-	}
-
-	int largo = tablaRebotes->horizontalHeader()->height();
-	for (int j = 0; j <  modeloRebotes->rowCount(); j++) {
-		largo += tablaRebotes->rowHeight(j);
-	}
-
-	tablaRebotes->setMinimumSize(ancho, largo);
-	adjustSize();
-
 	modeloRebotes->update();
 
 }
 
+void DTablaRebotes::slotRestablecerRebotes() {
+
+	for (Bola *bola : *modeloRebotes->pBolas)
+		bola->restablecerRebotes();
+
+	modeloRebotes->update();
+
+}

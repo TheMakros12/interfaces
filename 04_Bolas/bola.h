@@ -25,6 +25,7 @@ public:
     float distancia(Bola*);
     bool choca(Bola*);
     void pintar(QPainter&);
+    void restablecerRebotes();
 
 };
 
