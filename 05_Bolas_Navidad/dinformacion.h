@@ -11,6 +11,7 @@ Q_OBJECT
 
 public:
 	DInformacion(int anchura, int altura, int numBolas, QWidget *parent = NULL);
+	int bolas;
 
 public slots:
 	void slotEjemplo();

@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     connect(temporizador, SIGNAL(timeout()),
             this, SLOT(slotTemporizador()));
 
-    resize(800,600);
+    resize(600,450);
 
     crearActions();
     crearMenu();
@@ -149,14 +149,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
         return;
 
     switch( event->key() ) {
-        case Qt::Key_Up:
-            bolaJugador->velY = bolaJugador->velY - 0.1; break;
-        case Qt::Key_Down:
-            bolaJugador->velY = bolaJugador->velY + 0.1; break;
-        case Qt::Key_Right:
-            bolaJugador->velX = bolaJugador->velX + 0.1; break;
-        case Qt::Key_Left:
-            bolaJugador->velX = bolaJugador->velX - 0.1; break;
+        case Qt::Key_Up: bolaJugador->velY = bolaJugador->velY - 0.1; break;
+        case Qt::Key_Down: bolaJugador->velY = bolaJugador->velY + 0.1; break;
+        case Qt::Key_Right: bolaJugador->velX = bolaJugador->velX + 0.1; break;
+        case Qt::Key_Left: bolaJugador->velX = bolaJugador->velX - 0.1; break;
     }
 
 }
@@ -281,6 +277,40 @@ bool MainWindow::crearBolaJson(QJsonValue &elemento) {
     bolas.append(nuevaBola);
 
     return true;
+
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event) {
+
+    nuevaPosX = event->x();
+    nuevaPosY = event->y();
+
+}
+
+void MainWindow::mouseReleaseEvent(QMouseEvent *event) {
+
+    float nuevaVelX = (event->x() - nuevaPosX) / 100.0;
+    float nuevaVelY = (event->y() - nuevaPosY) / 100.0;
+
+    Bola *nueva = new Bola(nuevaPosX,nuevaPosY,nuevaVelX,nuevaVelY, this);
+    nueva->color = QColor(rand() % 255, rand() % 255, rand() % 255);
+    bolas.append(nueva);
+    anyadirRebotesParaNuevaBola();
+
+    repaint();
+
+}
+
+void MainWindow::anyadirRebotesParaNuevaBola() {
+    int n = bolas.size();
+
+    for (int i = 0; i < rebotes.size(); ++i) {
+        rebotes[i].append(0);
+    }
+
+    QVector<int> nuevaFila(n);
+    nuevaFila.fill(0);
+    rebotes.append(nuevaFila);
 
 }
 

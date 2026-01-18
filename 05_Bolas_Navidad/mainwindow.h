@@ -19,6 +19,7 @@
 #include <QJsonArray>
 #include <QJsonValue>
 #include <QByteArray>
+#include <QMouseEvent>
 
 #include "bola.h"
 #include "dinformacion.h"
@@ -40,6 +41,8 @@ public:
     Bola *bolaJugador;
     QVector<QVector<int>> rebotes;
 
+    int nuevaPosX, nuevaPosY;
+
     void crearBolas();
     void crearActions();
     void crearMenu();
@@ -48,6 +51,9 @@ public:
     void showEvent(QShowEvent *event);
     void closeEvent(QCloseEvent *event);
     bool crearBolaJson(QJsonValue &);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void anyadirRebotesParaNuevaBola();
 
     QAction *actionDInformacion;
     QAction *actionDInfoBolas;
