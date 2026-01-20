@@ -29,6 +29,7 @@
 #include "ddetallebola.h"
 #include "dconfiguracionbola.h"
 #include "dposicionbola.h"
+#include "widgetchoque.h"
 
 class VentanaPrincipal : public QMainWindow {
 Q_OBJECT
@@ -54,6 +55,7 @@ public:
     DDetalleBola *dDetalleBola;
     DConfiguracionBola *dConfiguracionBola;
     DPosicionBola *dPosicionBola;
+    WidgetChoque *widgetChoque;
 
     QTimer *temporizador;
 
@@ -67,6 +69,7 @@ public:
     QAction *actionDDetalleBola;
     QAction *actionDConfiguracionBola;
     QAction *actionDPosicionBola;
+    QAction *actionWidgetChoque;
 
     void crearActions();
     void crearMenus();
@@ -91,6 +94,7 @@ public slots:
     void slotCargarPartida();
     void slotDDetalleBola();
     void slotDPosicionBola();
+    void slotWidgetChoque();
 
 };
 #endif

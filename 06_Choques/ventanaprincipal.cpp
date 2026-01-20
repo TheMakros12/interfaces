@@ -2,6 +2,7 @@
 
 #include <QPainter>
 #include <QTimer>
+#include <QDebug>
 
 bool VentanaPrincipal::bolasDesaparecen = true;
 
@@ -32,6 +33,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     dDetalleBola = NULL;
     dConfiguracionBola = NULL;
     dPosicionBola = NULL;
+    widgetChoque = NULL;
 
     crearActions();
     crearMenus();
@@ -87,7 +89,11 @@ void VentanaPrincipal::crearActions() {
 
     actionDPosicionBola = new QAction("Posición de la Bola", this);
     connect(actionDPosicionBola, SIGNAL(triggered()),
-			this, SLOT(slotDPosicionBola()));
+            this, SLOT(slotDPosicionBola()));
+
+    actionWidgetChoque = new QAction("Choques de las Bolas", this);
+    connect(actionWidgetChoque, SIGNAL(triggered()),
+            this, SLOT(slotWidgetChoque()));
 
 }
 
@@ -110,6 +116,9 @@ void VentanaPrincipal::crearMenus() {
     menuDialogos->addAction(actionDDetalleBola);
     menuDialogos->addAction(actionDConfiguracionBola);
     menuDialogos->addAction(actionDPosicionBola);
+
+    QMenu *menuChoques = barraMenu->addMenu("Choques");
+    menuChoques->addAction(actionWidgetChoque);
 
 }
 
@@ -369,6 +378,9 @@ void VentanaPrincipal::slotTemporizador() {
             if ( bolas.at(i)->choca(bolas.at(j)) ) {
                 bolas.at(i)->vidas--;
                 bolas.at(j)->vidas--;
+
+                Choque choque(bolas.at(i)->posX, bolas.at(i)->posY);
+                bolas.at(i)->posicionesChoques.append(choque);
             }
 
     for (int i = 0; i < bolas.length() && bolasDesaparecen; i++) {
@@ -541,5 +553,14 @@ void VentanaPrincipal::slotCargarPartida() {
     qDebug() << "|  Has cargado la Partida  |";
     qDebug() << "|==========================|";
     qDebug() << "";
+
+}
+
+void VentanaPrincipal::slotWidgetChoque() {
+
+    if ( widgetChoque == NULL )
+        widgetChoque = new WidgetChoque(&bolas);
+
+    widgetChoque->show();
 
 }

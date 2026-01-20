@@ -8,6 +8,8 @@
 
 class Choque {
 
+public:
+    Choque(float x = 0.0f, float y = 0.0f);
     float x,y;
 
 };

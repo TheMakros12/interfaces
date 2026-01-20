@@ -2,6 +2,10 @@
 
 #include <math.h>
 
+Choque::Choque(float x, float y): x(x), y(y) {
+
+}
+
 int Bola::diametro = 40;
 int Bola::vidasIniciales = 10;
 
