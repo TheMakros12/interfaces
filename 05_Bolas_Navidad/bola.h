@@ -5,6 +5,15 @@
 #include <QPainter>
 #include <QColor>
 #include <QObject>
+#include <QVector>
+
+class Choque {
+
+public:
+    Choque(float x = 0.0f, float y = 0.0f);
+    float x,y;
+
+};
 
 class Bola : public QObject {
 Q_OBJECT
@@ -23,6 +32,9 @@ public:
     int vidas;
     int rArriba, rAbajo, rDerecha, rIzquierda;
     bool especial;
+    float anchuraJuego, alturaJuego;
+
+    QVector<Choque> posicionesChoque;
 
     void mover(int, int, int);
     float distancia(Bola *otraBola);

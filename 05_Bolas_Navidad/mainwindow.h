@@ -28,6 +28,7 @@
 #include "dtablarebotes.h"
 #include "dcontrolbolas.h"
 #include "dtablarebotebolas.h"
+#include "dchoquesbolas.h"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -64,6 +65,7 @@ public:
     QAction *actionCargarPartida;
     QAction *actionSalir;
     QAction *actionDTablaReboteBolas;
+    QAction *actionDChoquesBolas;
 
     DInformacion *dInformacion;
     DInfoBolas *dInfoBolas;
@@ -71,6 +73,7 @@ public:
     DTablaRebotes *dTablaRebotes;
     DControlBolas *dControlBolas;
     DTablaReboteBolas *dTablaReboteBolas;
+    DChoquesBolas *dChoquesBolas;
 
 public slots:
     void slotTemporizador();
@@ -82,6 +85,7 @@ public slots:
     void slotGuardarPartida();
     void slotCargarPartida();
     void slotDTablaReboteBolas();
+    void slotDChoquesBolas();
 
 };
 #endif

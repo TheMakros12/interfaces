@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <stdlib.h>
 
-bool MainWindow::bolasDesaparecen = false;
+bool MainWindow::bolasDesaparecen = true;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     dTablaRebotes = NULL;
     dControlBolas = NULL;
     dTablaReboteBolas = NULL;
+    dChoquesBolas = NULL;
 
     QTimer *temporizador = new QTimer();
     temporizador->setSingleShot(false);
@@ -50,6 +51,8 @@ void MainWindow::crearBolas() {
 
         nueva->color = QColor( rand() % 255, rand() % 255, rand() % 255 );
         nueva->nombre = nombres.at( i % nombres.size() );
+        nueva->anchuraJuego = anchura;
+        nueva->alturaJuego = altura;
 
         bolas.append(nueva);
     }
@@ -109,6 +112,10 @@ void MainWindow::crearActions() {
     connect(actionDTablaReboteBolas, SIGNAL(triggered()),
             this, SLOT(slotDTablaReboteBolas()));
 
+    actionDChoquesBolas = new QAction("Choques de las Bolas");
+    connect(actionDChoquesBolas, SIGNAL(triggered()),
+            this, SLOT(slotDChoquesBolas()));
+
 }
 
 void MainWindow::crearMenu() {
@@ -127,6 +134,9 @@ void MainWindow::crearMenu() {
     menuDialogos->addAction(actionDTablaRebotes);
     menuDialogos->addAction(actionDControlBolas);
     menuDialogos->addAction(actionDTablaReboteBolas);
+
+    QMenu *menuChoques = barraMenu->addMenu("Choques");
+    menuChoques->addAction(actionDChoquesBolas);
 
 }
 
@@ -331,6 +341,12 @@ void MainWindow::slotTemporizador() {
                 bolas[j]->vidas--;
                 rebotes[i][j]++;
                 rebotes[j][i]++;
+
+                Choque c1(bolas.at(i)->posX, bolas.at(i)->posY);
+                Choque c2(bolas.at(j)->posX, bolas.at(j)->posY);
+
+                bolas.at(i)->posicionesChoque.append(c1);
+                bolas.at(j)->posicionesChoque.append(c2);
             }
         }
     }
@@ -500,5 +516,15 @@ void MainWindow::slotCargarPartida() {
     qDebug() << "|  Has cargado la Partida  |";
     qDebug() << "|==========================|";
     qDebug() << "";
+
+}
+
+void MainWindow::slotDChoquesBolas() {
+
+    if (dChoquesBolas == NULL) {
+        dChoquesBolas = new DChoquesBolas(&bolas);
+    }
+
+    dChoquesBolas->show();
 
 }
