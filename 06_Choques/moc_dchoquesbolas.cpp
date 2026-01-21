@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DChoquesBolas_t {
     QByteArrayData data[3];
-    char stringdata0[27];
+    char stringdata0[32];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,11 +33,11 @@ struct qt_meta_stringdata_DChoquesBolas_t {
 static const qt_meta_stringdata_DChoquesBolas_t qt_meta_stringdata_DChoquesBolas = {
     {
 QT_MOC_LITERAL(0, 0, 13), // "DChoquesBolas"
-QT_MOC_LITERAL(1, 14, 11), // "slotEjemplo"
-QT_MOC_LITERAL(2, 26, 0) // ""
+QT_MOC_LITERAL(1, 14, 16), // "slotTemporizador"
+QT_MOC_LITERAL(2, 31, 0) // ""
 
     },
-    "DChoquesBolas\0slotEjemplo\0"
+    "DChoquesBolas\0slotTemporizador\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +69,7 @@ void DChoquesBolas::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         auto *_t = static_cast<DChoquesBolas *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->slotEjemplo(); break;
+        case 0: _t->slotTemporizador(); break;
         default: ;
         }
     }

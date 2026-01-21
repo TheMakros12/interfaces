@@ -452,6 +452,7 @@ compiler_moc_header_clean:
 	-$(DEL_FILE) moc_dchoquesbolas.cpp moc_dconfiguracionbola.cpp moc_ddetallebola.cpp moc_dinformacion.cpp moc_dlistabolas.cpp moc_dposicionbola.cpp moc_drebotesentrebolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_panelposicionbola.cpp moc_ventanaprincipal.cpp moc_widgetchoque.cpp moc_widgetdetallebola.cpp moc_widgetposicionbola.cpp
 moc_dchoquesbolas.cpp: dchoquesbolas.h \
 		ui_dchoquesbolas.h \
+		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dchoquesbolas.h -o moc_dchoquesbolas.cpp
@@ -543,6 +544,8 @@ moc_ventanaprincipal.cpp: ventanaprincipal.h \
 		ui_widgetposicionbola.h \
 		panelposicionbola.h \
 		widgetchoque.h \
+		dchoquesbolas.h \
+		ui_dchoquesbolas.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ventanaprincipal.h -o moc_ventanaprincipal.cpp
@@ -633,7 +636,8 @@ bola.o: bola.cpp bola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bola.o bola.cpp
 
 dchoquesbolas.o: dchoquesbolas.cpp dchoquesbolas.h \
-		ui_dchoquesbolas.h
+		ui_dchoquesbolas.h \
+		bola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dchoquesbolas.o dchoquesbolas.cpp
 
 dconfiguracionbola.o: dconfiguracionbola.cpp dconfiguracionbola.h \
@@ -700,7 +704,9 @@ main.o: main.cpp ventanaprincipal.h \
 		widgetposicionbola.h \
 		ui_widgetposicionbola.h \
 		panelposicionbola.h \
-		widgetchoque.h
+		widgetchoque.h \
+		dchoquesbolas.h \
+		ui_dchoquesbolas.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 panelposicionbola.o: panelposicionbola.cpp panelposicionbola.h \
@@ -728,7 +734,9 @@ ventanaprincipal.o: ventanaprincipal.cpp ventanaprincipal.h \
 		widgetposicionbola.h \
 		ui_widgetposicionbola.h \
 		panelposicionbola.h \
-		widgetchoque.h
+		widgetchoque.h \
+		dchoquesbolas.h \
+		ui_dchoquesbolas.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ventanaprincipal.o ventanaprincipal.cpp
 
 widgetchoque.o: widgetchoque.cpp widgetchoque.h \

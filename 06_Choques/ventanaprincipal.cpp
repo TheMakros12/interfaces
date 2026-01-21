@@ -34,6 +34,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     dConfiguracionBola = NULL;
     dPosicionBola = NULL;
     widgetChoque = NULL;
+    dChoquesBolas = NULL;
 
     crearActions();
     crearMenus();
@@ -91,9 +92,13 @@ void VentanaPrincipal::crearActions() {
     connect(actionDPosicionBola, SIGNAL(triggered()),
             this, SLOT(slotDPosicionBola()));
 
-    actionWidgetChoque = new QAction("Choques de las Bolas", this);
+    actionWidgetChoque = new QAction("Choques de una Bola", this);
     connect(actionWidgetChoque, SIGNAL(triggered()),
             this, SLOT(slotWidgetChoque()));
+
+    actionDChoquesBolas = new QAction("Choques de las Bolas", this);
+    connect(actionDChoquesBolas, SIGNAL(triggered()),
+            this, SLOT(slotDChoquesBolas()));
 
 }
 
@@ -119,6 +124,7 @@ void VentanaPrincipal::crearMenus() {
 
     QMenu *menuChoques = barraMenu->addMenu("Choques");
     menuChoques->addAction(actionWidgetChoque);
+    menuChoques->addAction(actionDChoquesBolas);
 
 }
 
@@ -156,7 +162,7 @@ void VentanaPrincipal::inicializarBolas() {
 
         nueva->anchuraJuego = anchura;
         nueva->alturaJuego = altura;
-        nueva->acumuladoChoques.resize(10);
+        nueva->acumuladoChoques = QVector<int>(10, 0);
 
         bolas.append(nueva);
     }
@@ -382,6 +388,9 @@ void VentanaPrincipal::slotTemporizador() {
 
                 bolas.at(i)->anotarChoque(j);
                 bolas.at(j)->anotarChoque(i);
+
+                bolas.at(i)->acumuladoChoques[j]++;
+                bolas.at(j)->acumuladoChoques[i]++;
             }
 
     for (int i = 0; i < bolas.length() && bolasDesaparecen; i++) {
@@ -563,5 +572,14 @@ void VentanaPrincipal::slotWidgetChoque() {
         widgetChoque = new WidgetChoque(bolas.at(0));
 
     widgetChoque->show();
+
+}
+
+void VentanaPrincipal::slotDChoquesBolas() {
+
+    if ( dChoquesBolas == NULL )
+        dChoquesBolas = new DChoquesBolas(&bolas);
+
+    dChoquesBolas->show();
 
 }
