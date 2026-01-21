@@ -53,6 +53,7 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = bola.cpp \
+		dchoquesbolas.cpp \
 		dconfiguracionbola.cpp \
 		ddetallebola.cpp \
 		dinformacion.cpp \
@@ -66,7 +67,8 @@ SOURCES       = bola.cpp \
 		ventanaprincipal.cpp \
 		widgetchoque.cpp \
 		widgetdetallebola.cpp \
-		widgetposicionbola.cpp moc_dconfiguracionbola.cpp \
+		widgetposicionbola.cpp moc_dchoquesbolas.cpp \
+		moc_dconfiguracionbola.cpp \
 		moc_ddetallebola.cpp \
 		moc_dinformacion.cpp \
 		moc_dlistabolas.cpp \
@@ -80,6 +82,7 @@ SOURCES       = bola.cpp \
 		moc_widgetdetallebola.cpp \
 		moc_widgetposicionbola.cpp
 OBJECTS       = bola.o \
+		dchoquesbolas.o \
 		dconfiguracionbola.o \
 		ddetallebola.o \
 		dinformacion.o \
@@ -94,6 +97,7 @@ OBJECTS       = bola.o \
 		widgetchoque.o \
 		widgetdetallebola.o \
 		widgetposicionbola.o \
+		moc_dchoquesbolas.o \
 		moc_dconfiguracionbola.o \
 		moc_ddetallebola.o \
 		moc_dinformacion.o \
@@ -189,6 +193,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		06_Choques.pro bola.h \
+		dchoquesbolas.h \
 		dconfiguracionbola.h \
 		ddetallebola.h \
 		dinformacion.h \
@@ -202,6 +207,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		widgetchoque.h \
 		widgetdetallebola.h \
 		widgetposicionbola.h bola.cpp \
+		dchoquesbolas.cpp \
 		dconfiguracionbola.cpp \
 		ddetallebola.cpp \
 		dinformacion.cpp \
@@ -224,7 +230,7 @@ TARGET        = 06_Choques
 first: all
 ####### Build rules
 
-06_Choques: ui_dconfiguracionbola.h ui_ddetallebola.h ui_dinformacion.h ui_dlistabolas.h ui_dposicionbola.h ui_drebotesentrebolas.h ui_dtablabolas.h ui_dtablarebotes.h ui_widgetdetallebola.h ui_widgetposicionbola.h $(OBJECTS)  
+06_Choques: ui_dchoquesbolas.h ui_dconfiguracionbola.h ui_ddetallebola.h ui_dinformacion.h ui_dlistabolas.h ui_dposicionbola.h ui_drebotesentrebolas.h ui_dtablabolas.h ui_dtablarebotes.h ui_widgetdetallebola.h ui_widgetposicionbola.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: 06_Choques.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -407,9 +413,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents bola.h dconfiguracionbola.h ddetallebola.h dinformacion.h dlistabolas.h dposicionbola.h drebotesentrebolas.h dtablabolas.h dtablarebotes.h panelposicionbola.h ventanaprincipal.h widgetchoque.h widgetdetallebola.h widgetposicionbola.h $(DISTDIR)/
-	$(COPY_FILE) --parents bola.cpp dconfiguracionbola.cpp ddetallebola.cpp dinformacion.cpp dlistabolas.cpp dposicionbola.cpp drebotesentrebolas.cpp dtablabolas.cpp dtablarebotes.cpp main.cpp panelposicionbola.cpp ventanaprincipal.cpp widgetchoque.cpp widgetdetallebola.cpp widgetposicionbola.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents dconfiguracionbola.ui ddetallebola.ui dinformacion.ui dlistabolas.ui dposicionbola.ui drebotesentrebolas.ui dtablabolas.ui dtablarebotes.ui widgetdetallebola.ui widgetposicionbola.ui $(DISTDIR)/
+	$(COPY_FILE) --parents bola.h dchoquesbolas.h dconfiguracionbola.h ddetallebola.h dinformacion.h dlistabolas.h dposicionbola.h drebotesentrebolas.h dtablabolas.h dtablarebotes.h panelposicionbola.h ventanaprincipal.h widgetchoque.h widgetdetallebola.h widgetposicionbola.h $(DISTDIR)/
+	$(COPY_FILE) --parents bola.cpp dchoquesbolas.cpp dconfiguracionbola.cpp ddetallebola.cpp dinformacion.cpp dlistabolas.cpp dposicionbola.cpp drebotesentrebolas.cpp dtablabolas.cpp dtablarebotes.cpp main.cpp panelposicionbola.cpp ventanaprincipal.cpp widgetchoque.cpp widgetdetallebola.cpp widgetposicionbola.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents dchoquesbolas.ui dconfiguracionbola.ui ddetallebola.ui dinformacion.ui dlistabolas.ui dposicionbola.ui drebotesentrebolas.ui dtablabolas.ui dtablarebotes.ui widgetdetallebola.ui widgetposicionbola.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -441,9 +447,15 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_dconfiguracionbola.cpp moc_ddetallebola.cpp moc_dinformacion.cpp moc_dlistabolas.cpp moc_dposicionbola.cpp moc_drebotesentrebolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_panelposicionbola.cpp moc_ventanaprincipal.cpp moc_widgetchoque.cpp moc_widgetdetallebola.cpp moc_widgetposicionbola.cpp
+compiler_moc_header_make_all: moc_dchoquesbolas.cpp moc_dconfiguracionbola.cpp moc_ddetallebola.cpp moc_dinformacion.cpp moc_dlistabolas.cpp moc_dposicionbola.cpp moc_drebotesentrebolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_panelposicionbola.cpp moc_ventanaprincipal.cpp moc_widgetchoque.cpp moc_widgetdetallebola.cpp moc_widgetposicionbola.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_dconfiguracionbola.cpp moc_ddetallebola.cpp moc_dinformacion.cpp moc_dlistabolas.cpp moc_dposicionbola.cpp moc_drebotesentrebolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_panelposicionbola.cpp moc_ventanaprincipal.cpp moc_widgetchoque.cpp moc_widgetdetallebola.cpp moc_widgetposicionbola.cpp
+	-$(DEL_FILE) moc_dchoquesbolas.cpp moc_dconfiguracionbola.cpp moc_ddetallebola.cpp moc_dinformacion.cpp moc_dlistabolas.cpp moc_dposicionbola.cpp moc_drebotesentrebolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_panelposicionbola.cpp moc_ventanaprincipal.cpp moc_widgetchoque.cpp moc_widgetdetallebola.cpp moc_widgetposicionbola.cpp
+moc_dchoquesbolas.cpp: dchoquesbolas.h \
+		ui_dchoquesbolas.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dchoquesbolas.h -o moc_dchoquesbolas.cpp
+
 moc_dconfiguracionbola.cpp: dconfiguracionbola.h \
 		ui_dconfiguracionbola.h \
 		bola.h \
@@ -560,9 +572,13 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_dconfiguracionbola.h ui_ddetallebola.h ui_dinformacion.h ui_dlistabolas.h ui_dposicionbola.h ui_drebotesentrebolas.h ui_dtablabolas.h ui_dtablarebotes.h ui_widgetdetallebola.h ui_widgetposicionbola.h
+compiler_uic_make_all: ui_dchoquesbolas.h ui_dconfiguracionbola.h ui_ddetallebola.h ui_dinformacion.h ui_dlistabolas.h ui_dposicionbola.h ui_drebotesentrebolas.h ui_dtablabolas.h ui_dtablarebotes.h ui_widgetdetallebola.h ui_widgetposicionbola.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_dconfiguracionbola.h ui_ddetallebola.h ui_dinformacion.h ui_dlistabolas.h ui_dposicionbola.h ui_drebotesentrebolas.h ui_dtablabolas.h ui_dtablarebotes.h ui_widgetdetallebola.h ui_widgetposicionbola.h
+	-$(DEL_FILE) ui_dchoquesbolas.h ui_dconfiguracionbola.h ui_ddetallebola.h ui_dinformacion.h ui_dlistabolas.h ui_dposicionbola.h ui_drebotesentrebolas.h ui_dtablabolas.h ui_dtablarebotes.h ui_widgetdetallebola.h ui_widgetposicionbola.h
+ui_dchoquesbolas.h: dchoquesbolas.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic dchoquesbolas.ui -o ui_dchoquesbolas.h
+
 ui_dconfiguracionbola.h: dconfiguracionbola.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic dconfiguracionbola.ui -o ui_dconfiguracionbola.h
@@ -615,6 +631,10 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 bola.o: bola.cpp bola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bola.o bola.cpp
+
+dchoquesbolas.o: dchoquesbolas.cpp dchoquesbolas.h \
+		ui_dchoquesbolas.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dchoquesbolas.o dchoquesbolas.cpp
 
 dconfiguracionbola.o: dconfiguracionbola.cpp dconfiguracionbola.h \
 		ui_dconfiguracionbola.h \
@@ -725,6 +745,9 @@ widgetposicionbola.o: widgetposicionbola.cpp widgetposicionbola.h \
 		bola.h \
 		panelposicionbola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o widgetposicionbola.o widgetposicionbola.cpp
+
+moc_dchoquesbolas.o: moc_dchoquesbolas.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dchoquesbolas.o moc_dchoquesbolas.cpp
 
 moc_dconfiguracionbola.o: moc_dconfiguracionbola.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dconfiguracionbola.o moc_dconfiguracionbola.cpp

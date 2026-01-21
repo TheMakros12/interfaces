@@ -4,7 +4,7 @@
 #include <QTimer>
 #include <QDebug>
 
-bool VentanaPrincipal::bolasDesaparecen = true;
+bool VentanaPrincipal::bolasDesaparecen = false;
 
 VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 
@@ -156,6 +156,7 @@ void VentanaPrincipal::inicializarBolas() {
 
         nueva->anchuraJuego = anchura;
         nueva->alturaJuego = altura;
+        nueva->acumuladoChoques.resize(10);
 
         bolas.append(nueva);
     }
@@ -379,8 +380,8 @@ void VentanaPrincipal::slotTemporizador() {
                 bolas.at(i)->vidas--;
                 bolas.at(j)->vidas--;
 
-                Choque choque(bolas.at(i)->posX, bolas.at(i)->posY);
-                bolas.at(i)->posicionesChoques.append(choque);
+                bolas.at(i)->anotarChoque(j);
+                bolas.at(j)->anotarChoque(i);
             }
 
     for (int i = 0; i < bolas.length() && bolasDesaparecen; i++) {
@@ -559,7 +560,7 @@ void VentanaPrincipal::slotCargarPartida() {
 void VentanaPrincipal::slotWidgetChoque() {
 
     if ( widgetChoque == NULL )
-        widgetChoque = new WidgetChoque(&bolas);
+        widgetChoque = new WidgetChoque(bolas.at(0));
 
     widgetChoque->show();
 

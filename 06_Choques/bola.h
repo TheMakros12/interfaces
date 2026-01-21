@@ -9,8 +9,8 @@
 class Choque {
 
 public:
-    Choque(float x = 0.0f, float y = 0.0f);
     float x,y;
+    int idOtraBola;
 
 };
 
@@ -31,12 +31,14 @@ public:
     float anchuraJuego, alturaJuego;
 
     QVector<Choque> posicionesChoques;
+    QVector<int> acumuladoChoques;
 
     void mover(float, float, int);
     float distancia(Bola*);
     bool choca(Bola*);
     void pintar(QPainter&);
     void restablecerRebotes();
+    void anotarChoque(int);
 
 };
 

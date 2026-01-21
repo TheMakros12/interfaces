@@ -2,10 +2,6 @@
 
 #include <math.h>
 
-Choque::Choque(float x, float y): x(x), y(y) {
-
-}
-
 int Bola::diametro = 40;
 int Bola::vidasIniciales = 10;
 
@@ -147,5 +143,16 @@ void Bola::pintar(QPainter &pintor) {
 void Bola::restablecerRebotes() {
 
     rArriba = rAbajo = rIzquierda = rDerecha = 0;
+
+}
+
+void Bola::anotarChoque(int idBola) {
+
+    Choque unChoque;
+    unChoque.x = posX;
+    unChoque.y = posY;
+    unChoque.idOtraBola = idBola;
+
+    posicionesChoques.append( unChoque );
 
 }

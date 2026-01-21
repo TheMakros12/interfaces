@@ -11,8 +11,8 @@ class WidgetChoque : public QWidget {
 Q_OBJECT
 
 public:
-    WidgetChoque(QVector<Bola*> *, QWidget *parent = NULL);
-    QVector<Bola*> *bolas;
+    WidgetChoque(Bola *, QWidget *parent = NULL);
+    Bola *bola;
 
     void paintEvent(QPaintEvent *event);
 

@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QTimer>
 
-WidgetChoque::WidgetChoque(QVector<Bola*> *lasBolas, QWidget *parent): QWidget(parent), bolas(lasBolas) {
+WidgetChoque::WidgetChoque(Bola *laBola, QWidget *parent): QWidget(parent), bola(laBola) {
 
     setWindowTitle("Choques de las Bolas");
 
@@ -22,13 +22,12 @@ void WidgetChoque::paintEvent(QPaintEvent *event) {
 
     QPainter pintor(this);
 
-    for (Bola *b : *bolas) {
-        for (const Choque &c : b->posicionesChoques) {
-            float posicionX = (c.x * width()) / b->anchuraJuego;
-            float posicionY = (c.y * height()) / b->alturaJuego;
-            pintor.setBrush(b->color);
-            pintor.drawEllipse(posicionX, posicionY, 8, 8);
-        }
+
+    for (const Choque &c : bola->posicionesChoques) {
+        float posicionX = (c.x * width()) / bola->anchuraJuego;
+        float posicionY = (c.y * height()) / bola->alturaJuego;
+        pintor.setBrush(bola->color);
+        pintor.drawEllipse(posicionX, posicionY, 8, 8);
     }
 
 }
