@@ -23,7 +23,7 @@ QT_BEGIN_NAMESPACE
 class Ui_DChoquesBolas
 {
 public:
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QTableView *tablaChoques;
     QDialogButtonBox *buttonBox;
@@ -32,19 +32,19 @@ public:
     {
         if (DChoquesBolas->objectName().isEmpty())
             DChoquesBolas->setObjectName(QString::fromUtf8("DChoquesBolas"));
-        DChoquesBolas->resize(675, 385);
-        widget = new QWidget(DChoquesBolas);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 10, 651, 361));
-        verticalLayout = new QVBoxLayout(widget);
+        DChoquesBolas->resize(616, 430);
+        layoutWidget = new QWidget(DChoquesBolas);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 10, 591, 411));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        tablaChoques = new QTableView(widget);
+        tablaChoques = new QTableView(layoutWidget);
         tablaChoques->setObjectName(QString::fromUtf8("tablaChoques"));
 
         verticalLayout->addWidget(tablaChoques);
 
-        buttonBox = new QDialogButtonBox(widget);
+        buttonBox = new QDialogButtonBox(layoutWidget);
         buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
         buttonBox->setOrientation(Qt::Horizontal);
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);

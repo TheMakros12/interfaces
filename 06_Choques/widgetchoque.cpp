@@ -22,11 +22,10 @@ void WidgetChoque::paintEvent(QPaintEvent *event) {
 
     QPainter pintor(this);
 
-
     for (const Choque &c : bola->posicionesChoques) {
-        float posicionX = (c.x * width()) / bola->anchuraJuego;
-        float posicionY = (c.y * height()) / bola->alturaJuego;
-        pintor.setBrush(bola->color);
+        float posicionX = (c.x * (float)width()) / (float)bola->anchuraJuego;
+        float posicionY = (c.y * (float)height()) / (float)bola->alturaJuego;
+        pintor.setBrush(c.pBola->color);
         pintor.drawEllipse(posicionX, posicionY, 8, 8);
     }
 

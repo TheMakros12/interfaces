@@ -20,7 +20,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     posIniX = 0;
     posIniY = 0;
 
-    resize(800,600);
+    resize(600,450);
 
     anchuraV = width();
     alturaV = height();
@@ -154,7 +154,7 @@ void VentanaPrincipal::inicializarBolas() {
 
 #define IMAGEN
 #ifdef IMAGEN
-        nueva->esImagen = true;
+        //nueva->esImagen = true;
         QImage imagen = QImage("./img/smiley_PNG180.png");
         imagen = imagen.scaled(Bola::diametro,Bola::diametro);
         nueva->img = imagen;
@@ -386,8 +386,8 @@ void VentanaPrincipal::slotTemporizador() {
                 bolas.at(i)->vidas--;
                 bolas.at(j)->vidas--;
 
-                bolas.at(i)->anotarChoque(j);
-                bolas.at(j)->anotarChoque(i);
+                bolas.at(i)->anotarChoque(j, bolas.at(j));
+                bolas.at(j)->anotarChoque(i, bolas.at(i));
 
                 bolas.at(i)->acumuladoChoques[j]++;
                 bolas.at(j)->acumuladoChoques[i]++;

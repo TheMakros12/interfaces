@@ -6,11 +6,14 @@
 #include <QImage>
 #include <QVector>
 
+class Bola;
+
 class Choque {
 
 public:
     float x,y;
     int idOtraBola;
+    Bola *pBola;
 
 };
 
@@ -38,7 +41,7 @@ public:
     bool choca(Bola*);
     void pintar(QPainter&);
     void restablecerRebotes();
-    void anotarChoque(int);
+    void anotarChoque(int, Bola*);
 
 };
 

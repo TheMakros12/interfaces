@@ -1,4 +1,3 @@
-
 #include "dchoquesbolas.h"
 #include <QDebug>
 
@@ -16,13 +15,22 @@ int	ModeloChoques::columnCount(const QModelIndex &parent) const {
 
 QVariant ModeloChoques::headerData(int section, Qt::Orientation orientation, int role) const {
 
+	if ( role == Qt::TextAlignmentRole )
+		return Qt::AlignCenter;
+
+	if ( role == Qt::FontRole ) {
+		QFont font;
+		font.setBold(true);
+		return font;
+	}
+
 	if ( role == Qt::DisplayRole ) {
 		if ( orientation == Qt::Horizontal ) {
-			return bolas->at(section)->nombre;
+			return section;
 		}
 
 		if ( orientation == Qt::Vertical ) {
-			return bolas->at(section)->nombre;
+			return " " + QString::number(section) + " ";
 		}
 	}
 
@@ -57,7 +65,32 @@ QVariant ModeloChoques::headerData(int section, Qt::Orientation orientation, int
 }
 
 QVariant ModeloChoques::data(const QModelIndex &index, int role) const {
+
+	int i = index.row();
+	int j = index.column();
+
+	int aux = 0;
+
+	if ( role == Qt::TextAlignmentRole )
+		return Qt::AlignCenter;
+
+	if ( role == Qt::DisplayRole ) {
+
+		if ( i < 0 || j < 0 || i >= 10 || j >= 10)
+			return QVariant();
+
+		if ( i == j) {
+			return QString("-");
+		}
+
+		for (int i = 0; i < bolas->at(i)->posicionesChoques.size(); i++) {
+			if ()
+		}
+
+	}
+
 	return QVariant();
+
 }
 
 DChoquesBolas::DChoquesBolas(QVector<Bola*> *lasBolas, QWidget *parent): QDialog(parent), bolas(lasBolas) {
@@ -68,6 +101,23 @@ DChoquesBolas::DChoquesBolas(QVector<Bola*> *lasBolas, QWidget *parent): QDialog
 
 	modeloChoques = new ModeloChoques(bolas);
 	tablaChoques->setModel(modeloChoques);
+
+	const int anchoColumna = 55;
+
+	tablaChoques->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+	tablaChoques->horizontalHeader()->setStretchLastSection(false);
+
+	for (int i = 0; i < modeloChoques->columnCount(); i++)
+		tablaChoques->setColumnWidth(i, anchoColumna);
+
+	const int altoFila = 35;
+
+
+	tablaChoques->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+	tablaChoques->verticalHeader()->setStretchLastSection(false);
+
+	for (int i = 0; i < modeloChoques->rowCount(); i++)
+		tablaChoques->setRowHeight(i, altoFila);
 	
 }
 

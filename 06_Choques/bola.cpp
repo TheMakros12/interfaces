@@ -146,12 +146,13 @@ void Bola::restablecerRebotes() {
 
 }
 
-void Bola::anotarChoque(int idBola) {
+void Bola::anotarChoque(int idBola, Bola *pBola) {
 
     Choque unChoque;
     unChoque.x = posX;
     unChoque.y = posY;
     unChoque.idOtraBola = idBola;
+    unChoque.pBola = pBola;
 
     posicionesChoques.append( unChoque );
 
