@@ -25,6 +25,8 @@ public:
 
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
+	void update();
+
 };
 
 class DChoquesBolas : public QDialog, public Ui::DChoquesBolas {

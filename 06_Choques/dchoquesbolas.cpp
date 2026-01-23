@@ -1,5 +1,6 @@
 #include "dchoquesbolas.h"
 #include <QDebug>
+#include <QTimer>
 
 ModeloChoques::ModeloChoques(QVector<Bola*> *lasBolas): bolas(lasBolas) {
 
@@ -66,31 +67,64 @@ QVariant ModeloChoques::headerData(int section, Qt::Orientation orientation, int
 
 QVariant ModeloChoques::data(const QModelIndex &index, int role) const {
 
+	if (!index.isValid())
+        return QVariant();
+
 	int i = index.row();
 	int j = index.column();
-
-	int aux = 0;
 
 	if ( role == Qt::TextAlignmentRole )
 		return Qt::AlignCenter;
 
-	if ( role == Qt::DisplayRole ) {
+	if (i == j) {
+        if (role == Qt::DisplayRole)
+            return "-";
+        return QVariant();
+    }
 
-		if ( i < 0 || j < 0 || i >= 10 || j >= 10)
-			return QVariant();
+    // Contar choques i -> j
+    int choques = 0;
+    Bola *bola = bolas->at(i);
+    for (const Choque &c : bola->posicionesChoques)
+        if (c.idOtraBola == j)
+            choques++;
 
-		if ( i == j) {
-			return QString("-");
+    // Texto
+    if (role == Qt::DisplayRole)
+        return choques;
+
+	if(role == Qt::BackgroundRole) {
+		// Buscar el máximo global de choques
+		int maxChoques = 0;
+		for (int x = 0; x < bolas->size(); x++) {
+			Bola *b = bolas->at(x);
+			for (int y = 0; y < bolas->size(); y++) {
+				if (x == y) continue;
+				int cAux = 0;
+				for (const Choque &c : b->posicionesChoques)
+					if (c.idOtraBola == y)
+						cAux++;
+				maxChoques = std::max(maxChoques, cAux);
+			}
 		}
 
-		for (int i = 0; i < bolas->at(i)->posicionesChoques.size(); i++) {
-			if ()
-		}
+		if(maxChoques == 0)
+			return QBrush(Qt::white);
 
+		double ratio = static_cast<double>(choques) / maxChoques;
+		int rojo = static_cast<int>(255 * ratio);
+		return QBrush(QColor(rojo, 0, 0));
 	}
 
-	return QVariant();
+    return QVariant();
 
+}
+
+void ModeloChoques::update() {
+	emit dataChanged(
+        index(0,0),
+        index(rowCount()-1, columnCount()-1)
+    );
 }
 
 DChoquesBolas::DChoquesBolas(QVector<Bola*> *lasBolas, QWidget *parent): QDialog(parent), bolas(lasBolas) {
@@ -98,6 +132,13 @@ DChoquesBolas::DChoquesBolas(QVector<Bola*> *lasBolas, QWidget *parent): QDialog
 	setupUi(this);
 
 	setWindowTitle("Choques de las Bolas");
+
+	QTimer *temporizador = new QTimer();
+	temporizador->setSingleShot(false);
+	temporizador->setInterval(200);
+	connect(temporizador, SIGNAL(timeout()),
+			this, SLOT(slotTemporizador()));
+	temporizador->start();
 
 	modeloChoques = new ModeloChoques(bolas);
 	tablaChoques->setModel(modeloChoques);
@@ -122,6 +163,6 @@ DChoquesBolas::DChoquesBolas(QVector<Bola*> *lasBolas, QWidget *parent): QDialog
 }
 
 void DChoquesBolas::slotTemporizador(){
-
+	modeloChoques->update();
 }
 

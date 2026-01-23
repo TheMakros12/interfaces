@@ -1,4 +1,3 @@
-
 #include "dtablarebotes.h"
 #include <QDebug>
 

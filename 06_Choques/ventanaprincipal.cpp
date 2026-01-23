@@ -165,6 +165,7 @@ void VentanaPrincipal::inicializarBolas() {
         nueva->acumuladoChoques = QVector<int>(10, 0);
 
         bolas.append(nueva);
+
     }
 
 }
@@ -326,6 +327,10 @@ void VentanaPrincipal::mouseReleaseEvent(QMouseEvent * event) {
     nuevaBola->velY = velY;
 
     bolas.append(nuevaBola);
+
+    int nuevoTam = bolas.size();
+    for (Bola *b : bolas)
+        b->acumuladoChoques.resize(nuevoTam);
 
     repaint();
 
