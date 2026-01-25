@@ -82,25 +82,33 @@ QVariant ModeloChoques::data(const QModelIndex &index, int role) const {
         return QVariant();
     }
 
+    int choques = 0;
+    Bola *bola = bolas->at(i);
+    for (const Choque &c : bola->posicionesChoques)
+        if (c.idOtraBola == j)
+            choques++;
+
     if (role == Qt::DisplayRole)
-        return bolas->at(i)->acumuladoChoques[j];
+        return choques;
 
 	if (role == Qt::BackgroundRole) {
-
-		int choques = bolas->at(i)->acumuladoChoques[j];
 
 		if (choques == 0)
 			return QBrush(Qt::white);
 
 		// Buscar el máximo global de choques
 		int maxChoques = 0;
-		for (int x = 0; x < bolas->size(); ++x) {
-			const QVector<int> &v = bolas->at(x)->acumuladoChoques;
-			for (int y = 0; y < v.size(); ++y) {
+		for (int x = 0; x < bolas->size(); x++) {
+			Bola *b = bolas->at(x);
+			for (int y = 0; y < bolas->size(); y++) {
 				if (x == y) continue;
-				maxChoques = std::max(maxChoques, v[y]);
+				int cAux = 0;
+				for (const Choque &c : b->posicionesChoques)
+					if (c.idOtraBola == y)
+						cAux++;
+				maxChoques = std::max(maxChoques, cAux);
 			}
-    }
+		}
 
 		if (maxChoques == 0)
 			return QBrush(Qt::white);
@@ -161,7 +169,7 @@ DChoquesBolas::DChoquesBolas(QVector<Bola*> *lasBolas, QWidget *parent): QDialog
 
 	for (int i = 0; i < modeloChoques->rowCount(); i++)
 		tablaChoques->setRowHeight(i, altoFila);
-	
+
 }
 
 void DChoquesBolas::slotTemporizador(){
