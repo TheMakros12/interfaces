@@ -105,7 +105,6 @@ QVariant ModeloChoques::data(const QModelIndex &index, int role) const {
 		if (maxChoques == 0)
 			return QBrush(Qt::white);
 
-
 		//Aquí calculamos las tonanilades de rojo de manera más suave
 
 		double ratio = static_cast<double>(choques) / maxChoques;

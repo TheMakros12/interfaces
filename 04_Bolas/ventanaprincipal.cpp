@@ -18,6 +18,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 
     posIniX = 0;
     posIniY = 0;
+    actuacionJugador = 0.1;
 
     resize(800,600);
 
@@ -115,6 +116,11 @@ void VentanaPrincipal::crearMenus() {
 
 void VentanaPrincipal::inicializarBolas() {
 
+    bolaJugador = new Bola(100, 100, 0, 0);
+    bolaJugador->nombre = "Jugador";
+    bolaJugador->color = QColor("black");
+    bolaJugador->esImagen = false;
+
     /* Este método es el encargado de la creación del QVector<Bola*> con todos sus atributos iniciales */
 
     QStringList nombres = {"marcos", "lucia", "juan","david","alex","paula","aroa","alba","diego","jose","perico","andres"
@@ -168,6 +174,8 @@ void VentanaPrincipal::paintEvent(QPaintEvent *){
     /* Aquí llamamos al método que tiene la clase Bola, para poder pintarlas */
 
     QPainter pintor(this);
+
+    bolaJugador->pintar(pintor);
 
     for (int i= 0 ; i < bolas.length(); i++)
         bolas.at(i)->pintar(pintor);
@@ -356,9 +364,25 @@ void VentanaPrincipal::dropEvent(QDropEvent *event) {
 
 }
 
+void VentanaPrincipal::keyPressEvent(QKeyEvent *event) {
+
+    if ( !bolaJugador )
+        return;
+
+    switch ( event->key() ) {
+        case Qt::Key_Up: bolaJugador->velY = bolaJugador->velY - actuacionJugador; break;
+        case Qt::Key_Down: bolaJugador->velY = bolaJugador->velY + actuacionJugador; break;
+        case Qt::Key_Right: bolaJugador->velX = bolaJugador->velX - actuacionJugador; break;
+        case Qt::Key_Left: bolaJugador->velX = bolaJugador->velX + actuacionJugador ; break;
+    }
+
+}
+
 void VentanaPrincipal::slotTemporizador() {
 
-    /* Método que se va a ejectutar repetidamento por el QTimer. Aquí gestionamos el movimiento de las Bolas, los colisiones de las mismas y la gestión de las vidas. */
+    /* Método que se va a ejectutar repetidamento por el QTimer. Aquí gestionamos el movimiento de las Bolas, los colisiones de las mismas      y la gestión de las vidas. */
+
+    bolaJugador->mover(anchuraV, alturaV, alturaMenuBar);
 
     for (int i = 0; i < bolas.size(); i++) {
         bolas.at(i)->mover(anchuraV, alturaV, alturaMenuBar);
