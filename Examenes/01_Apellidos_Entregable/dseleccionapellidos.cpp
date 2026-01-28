@@ -1,7 +1,7 @@
 #include "dseleccionapellidos.h"
 #include <QDebug>
 
-DSeleccionApellidos::DSeleccionApellidos(QVector<Bola*> *bolasPasadas, QStringList apellidosPasados, QWidget *parent): QDialog(parent), bolas(bolasPasadas), apellidos(apellidosPasados) {
+DSeleccionApellidos::DSeleccionApellidos(QVector<Bola*> *bolasPasadas, QStringList apellidosPasados, ModeloApellidos *modeloPasado, QWidget *parent): QDialog(parent), bolas(bolasPasadas), apellidos(apellidosPasados), modelo(modeloPasado) {
 
 	setupUi(this);
 
@@ -67,6 +67,9 @@ void DSeleccionApellidos::slotCambiarPrimerApellido() {
 	bolaSeleccionada->apellido_1 = nuevoApellido;
 	actualizarNombre();
 
+	int fila = bolas->indexOf(bolaSeleccionada);
+	modelo->refrescarFila(fila);
+
 }
 
 void DSeleccionApellidos::slotCambiarSegundoApellido() {
@@ -77,6 +80,9 @@ void DSeleccionApellidos::slotCambiarSegundoApellido() {
 
 	bolaSeleccionada->apellido_2 = nuevoApellido;
 	actualizarNombre();
+
+	int fila = bolas->indexOf(bolaSeleccionada);
+	modelo->refrescarFila(fila);
 
 }
 

@@ -53,13 +53,22 @@ QVariant ModeloApellidos::data(const QModelIndex &index, int role) const {
 	int fila = index.row();
 	int columna = index.column();
 	Bola *bola = bolas->at(fila);
+    QString apellidoColumna = apellidos.at(columna);
 
-	switch (columna) {
+    if (apellidoColumna == bola->apellido_1)
+            return QString("1");
 
-	}
+    if (apellidoColumna == bola->apellido_2)
+        return QString("2");
 
 	return QVariant();
 
+}
+
+void ModeloApellidos::refrescarFila(int fila) {
+        QModelIndex izquierda = index(fila, 0);
+        QModelIndex derecha   = index(fila, columnCount() - 1);
+        emit dataChanged(izquierda, derecha);
 }
 
 DTablaApellidos::DTablaApellidos(QVector<Bola*> *bolasPasadas, QStringList apellidosPasados, QWidget *parent): QDialog(parent), bolas(bolasPasadas), apellidos(apellidosPasados) {

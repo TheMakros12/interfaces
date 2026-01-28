@@ -509,8 +509,16 @@ void VentanaPrincipal::slotDPosicionBolas(){
 
 void VentanaPrincipal::slotDSeleccionApellidos(){
 
-     if (dSeleccionApellidos == NULL)
-                    dSeleccionApellidos = new DSeleccionApellidos( &bolas , todosApellidos );
+    if (dTablaApellidos == NULL)
+        dTablaApellidos = new DTablaApellidos(&bolas, apellidosUsados);
+
+    if (dSeleccionApellidos == NULL)
+        dSeleccionApellidos = new DSeleccionApellidos(
+            &bolas,
+            todosApellidos,
+            dTablaApellidos->modeloApellidos,
+            this
+        );
 
     dSeleccionApellidos->show();
 
@@ -518,8 +526,8 @@ void VentanaPrincipal::slotDSeleccionApellidos(){
 
 void VentanaPrincipal::slotDTablaApellidos(){
 
-     if (dTablaApellidos == NULL)
-                    dTablaApellidos = new DTablaApellidos( &bolas, apellidosUsados );
+    if (dTablaApellidos == NULL)
+        dTablaApellidos = new DTablaApellidos(&bolas, apellidosUsados);
 
     dTablaApellidos->show();
 
