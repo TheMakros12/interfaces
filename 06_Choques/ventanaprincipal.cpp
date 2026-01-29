@@ -138,6 +138,11 @@ void VentanaPrincipal::inicializarBolas() {
     int anchura = width();
     int altura = height();
 
+    bolaJugador = new Bola(width() / 2, height() / 2, 0, 0);
+    bolaJugador->color = QColor("Black");
+    bolaJugador->nombre = QString("CHUAOR");
+    bolaJugador->esImagen = false;
+
     for (int i = 0; i < 10; i++) {
 
         int posIniX = random() % anchura;
@@ -185,6 +190,8 @@ void VentanaPrincipal::paintEvent(QPaintEvent *){
     /* Aquí llamamos al método que tiene la clase Bola, para poder pintarlas */
 
     QPainter pintor(this);
+
+    bolaJugador->pintar(pintor);
 
     for (int i= 0 ; i < bolas.length(); i++)
         bolas.at(i)->pintar(pintor);
@@ -377,6 +384,17 @@ void VentanaPrincipal::dropEvent(QDropEvent *event) {
 
 }
 
+void VentanaPrincipal::keyPressEvent(QKeyEvent *event) {
+
+    switch (event->key()) {
+        case Qt::Key_Up: bolaJugador->velY = bolaJugador->velY - 0.1; break;
+        case Qt::Key_Down: bolaJugador->velY = bolaJugador->velY + 0.1; break;
+        case Qt::Key_Right: bolaJugador->velX = bolaJugador->velX + 0.1; break;
+        case Qt::Key_Left: bolaJugador->velX = bolaJugador->velX - 0.1; break;
+    }
+
+}
+
 void VentanaPrincipal::slotTemporizador() {
 
     /* Método que se va a ejectutar repetidamento por el QTimer. Aquí gestionamos el movimiento de las Bolas, los colisiones de las mismas y la gestión de las vidas. */
@@ -384,6 +402,8 @@ void VentanaPrincipal::slotTemporizador() {
     for (int i = 0; i < bolas.size(); i++) {
         bolas.at(i)->mover(anchuraV, alturaV, alturaMenuBar);
     }
+
+    bolaJugador->mover(anchuraV, alturaV, alturaMenuBar);
 
     for (int i = 0; i < bolas.length(); i++)
         for (int j = 0; j < bolas.length(); j++)
@@ -397,6 +417,12 @@ void VentanaPrincipal::slotTemporizador() {
                 bolas.at(i)->acumuladoChoques[j]++;
                 bolas.at(j)->acumuladoChoques[i]++;
             }
+
+    for (int i = 0; i < bolas.length(); i++)
+        if ( bolas.at(i)->choca(bolaJugador) ) {
+            bolas.at(i)->vidas--;
+            bolaJugador->vidas--;
+        }
 
     for (int i = 0; i < bolas.length() && bolasDesaparecen; i++) {
         if ( bolas.at(i)->vidas <= 0 ) {

@@ -19,6 +19,7 @@
 #include <QMouseEvent>
 #include <QDragEnterEvent>
 #include <QDropEvent>
+#include <QKeyEvent>
 #include <QMimeData>
 
 #include "bola.h"
@@ -40,6 +41,7 @@ public:
 
     static bool bolasDesaparecen;
     QVector<Bola *> bolas;
+    Bola *bolaJugador;
     Bola *nuevaBola;
 
     float anchuraV;
@@ -85,6 +87,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *event);
     void dragEnterEvent(QDragEnterEvent *event);
     void dropEvent(QDropEvent *event);
+    void keyPressEvent(QKeyEvent *event);
 
 public slots:
     void slotTemporizador();

@@ -13,11 +13,10 @@ class DSeleccionApellidos : public QDialog, public Ui::DSeleccionApellidos {
 Q_OBJECT
 
 public:
-	DSeleccionApellidos(QVector<Bola*> *, QStringList, ModeloApellidos *, QWidget *parent = nullptr);
+	DSeleccionApellidos(QVector<Bola*> *, QStringList, QWidget *parent = NULL);
 	QVector<Bola*> *bolas;
 	QStringList apellidos;
 	Bola *bolaSeleccionada;
-	ModeloApellidos *modelo;
 
 	void actualizarNombre();
 
@@ -25,6 +24,9 @@ public slots:
 	void slotSeleccionarBola(QListWidgetItem *);
 	void slotCambiarPrimerApellido();
 	void slotCambiarSegundoApellido();
+
+signals:
+	void senyalApellidoActuzalizado();
 
 };
 

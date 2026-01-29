@@ -507,18 +507,17 @@ void VentanaPrincipal::slotDPosicionBolas(){
     dPosicionBolas->show();
 }
 
-void VentanaPrincipal::slotDSeleccionApellidos(){
+void VentanaPrincipal::slotDSeleccionApellidos() {
 
-    if (dTablaApellidos == NULL)
-        dTablaApellidos = new DTablaApellidos(&bolas, apellidosUsados);
+    if (dSeleccionApellidos == NULL){
+        dSeleccionApellidos = new DSeleccionApellidos(&bolas, todosApellidos);
 
-    if (dSeleccionApellidos == NULL)
-        dSeleccionApellidos = new DSeleccionApellidos(
-            &bolas,
-            todosApellidos,
-            dTablaApellidos->modeloApellidos,
-            this
-        );
+        if ( dTablaApellidos != NULL ){
+            connect(dSeleccionApellidos, SIGNAL(senyalApellidoActuzalizado()),
+            dTablaApellidos, SLOT(slotCambioApellido()));
+
+        }
+    }
 
     dSeleccionApellidos->show();
 
@@ -528,6 +527,12 @@ void VentanaPrincipal::slotDTablaApellidos(){
 
     if (dTablaApellidos == NULL)
         dTablaApellidos = new DTablaApellidos(&bolas, apellidosUsados);
+
+    if ( dSeleccionApellidos != NULL ){
+            connect(dSeleccionApellidos, SIGNAL(senyalApellidoActuzalizado()),
+            dTablaApellidos, SLOT(slotCambioApellido()));
+
+        }
 
     dTablaApellidos->show();
 

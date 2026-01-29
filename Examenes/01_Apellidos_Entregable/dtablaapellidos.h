@@ -25,8 +25,6 @@ public:
 
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
-	void refrescarFila(int);
-
 };
 
 class DTablaApellidos : public QDialog, public Ui::DTablaApellidos {
@@ -39,7 +37,7 @@ public:
 	QStringList apellidos;
 
 public slots:
-	void slotEjemplo();
+	void slotCambioApellido();
 
 };
 

@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_VentanaPrincipal_t {
     QByteArrayData data[3];
-    char stringdata0[30];
+    char stringdata0[37];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,11 +33,12 @@ struct qt_meta_stringdata_VentanaPrincipal_t {
 static const qt_meta_stringdata_VentanaPrincipal_t qt_meta_stringdata_VentanaPrincipal = {
     {
 QT_MOC_LITERAL(0, 0, 16), // "VentanaPrincipal"
-QT_MOC_LITERAL(1, 17, 11), // "slotEjemplo"
-QT_MOC_LITERAL(2, 29, 0) // ""
+QT_MOC_LITERAL(1, 17, 18), // "slotDatosRecibidos"
+QT_MOC_LITERAL(2, 36, 0) // ""
 
     },
-    "VentanaPrincipal\0slotEjemplo\0"
+    "VentanaPrincipal\0slotDatosRecibidos\0"
+    ""
 };
 #undef QT_MOC_LITERAL
 
@@ -55,10 +56,10 @@ static const uint qt_meta_data_VentanaPrincipal[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x0a /* Public */,
+       1,    1,   19,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QByteArray,    2,
 
        0        // eod
 };
@@ -69,11 +70,10 @@ void VentanaPrincipal::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         auto *_t = static_cast<VentanaPrincipal *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->slotEjemplo(); break;
+        case 0: _t->slotDatosRecibidos((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 QT_INIT_METAOBJECT const QMetaObject VentanaPrincipal::staticMetaObject = { {

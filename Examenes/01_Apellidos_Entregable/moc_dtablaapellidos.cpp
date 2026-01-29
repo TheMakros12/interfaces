@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DTablaApellidos_t {
     QByteArrayData data[3];
-    char stringdata0[29];
+    char stringdata0[36];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,11 +33,11 @@ struct qt_meta_stringdata_DTablaApellidos_t {
 static const qt_meta_stringdata_DTablaApellidos_t qt_meta_stringdata_DTablaApellidos = {
     {
 QT_MOC_LITERAL(0, 0, 15), // "DTablaApellidos"
-QT_MOC_LITERAL(1, 16, 11), // "slotEjemplo"
-QT_MOC_LITERAL(2, 28, 0) // ""
+QT_MOC_LITERAL(1, 16, 18), // "slotCambioApellido"
+QT_MOC_LITERAL(2, 35, 0) // ""
 
     },
-    "DTablaApellidos\0slotEjemplo\0"
+    "DTablaApellidos\0slotCambioApellido\0"
 };
 #undef QT_MOC_LITERAL
 
@@ -69,7 +69,7 @@ void DTablaApellidos::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         auto *_t = static_cast<DTablaApellidos *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->slotEjemplo(); break;
+        case 0: _t->slotCambioApellido(); break;
         default: ;
         }
     }
