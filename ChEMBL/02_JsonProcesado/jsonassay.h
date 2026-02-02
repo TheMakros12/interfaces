@@ -4,18 +4,26 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QVector>
 
 class Assay {
 
 public:
-    QString assay_group;
+    QString assay_chembl_id;
+    QString description;
 
 };
 
 class JsonAssay {
 
 public:
-    JsonAssay(QByteArray, Assay*);
+    Assay miAssay;
+    JsonAssay(QByteArray);
+    QStringList claves;
+    QJsonObject objeto;
+
+    Assay assay(QJsonObject objeto);
+    QVector<Assay> assays(QJsonObject objeto);
 
 
 };

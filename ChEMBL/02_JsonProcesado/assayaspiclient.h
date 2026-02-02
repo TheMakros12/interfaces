@@ -1,15 +1,17 @@
-#ifndef _API_CLIENT_
-#define _API_CLIENT_
+#ifndef _ASSAYS_API_CLIENT_
+#define _ASSAYS_API_CLIENT_
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 
-class ApiClient : public QObject {
+class AssaysApiClient : public QObject {
 Q_OBJECT
 public:
-	ApiClient(QObject *parent = NULL);
+	AssaysApiClient(QString, QObject *parent = NULL);
 
 	QNetworkAccessManager *manager;
+	QString assay_chembl_id;
+
 
 	void fetch();
 

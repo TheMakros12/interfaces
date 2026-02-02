@@ -2,15 +2,15 @@
 #include "ventanaprincipal.h"
 #include <QDebug>
 
-#include "apiclient.h"
+#include "assayapiclient.h"
 #include "jsonassay.h"
 
 VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent){
 		setupUi(this);
 
-		ApiClient *apiClient = new ApiClient();
+		//AssayApiClient *assayApiClient = new AssayApiClient("CHEMBL615117");
 
-		connect(apiClient, SIGNAL(senyalDatosRecibidos(QByteArray)),
+		connect(assayApiClient, SIGNAL(senyalDatosRecibidos(QByteArray)),
 				this, SLOT(slotDatosRecibidos(QByteArray)));
 }
 
@@ -18,6 +18,11 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent){
 void VentanaPrincipal::slotDatosRecibidos(QByteArray datosRecibidos){
 
 	JsonAssay parser(datosRecibidos);
+
+	// Assay unAssay = parser.assay(parser.objeto);
+ //
+	// DialogoAssay *dialogo = new DialogoAssay(unAssay);
+	// dialogo->show();
 
 }
 

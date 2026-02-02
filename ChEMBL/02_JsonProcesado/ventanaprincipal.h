@@ -2,6 +2,7 @@
 #ifndef VENTANAPRINCIPAL_H
 #define VENTANAPRINCIPAL_H
 #include "ui_ventanaprincipal.h"
+#include "dialogoassay.h"
 
 #include <QVector>
 #include <QMainWindow>

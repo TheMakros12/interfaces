@@ -1,5 +1,5 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'apiclient.h'
+** Meta object code from reading C++ file 'assayapiclient.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.13)
 **
@@ -7,11 +7,11 @@
 *****************************************************************************/
 
 #include <memory>
-#include "apiclient.h"
+#include "assayapiclient.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'apiclient.h' doesn't include <QObject>."
+#error "The header file 'assayapiclient.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.15.13. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -21,33 +21,33 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_ApiClient_t {
+struct qt_meta_stringdata_AssayApiClient_t {
     QByteArrayData data[7];
-    char stringdata0[101];
+    char stringdata0[106];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_ApiClient_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_AssayApiClient_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_ApiClient_t qt_meta_stringdata_ApiClient = {
+static const qt_meta_stringdata_AssayApiClient_t qt_meta_stringdata_AssayApiClient = {
     {
-QT_MOC_LITERAL(0, 0, 9), // "ApiClient"
-QT_MOC_LITERAL(1, 10, 20), // "senyalDatosRecibidos"
-QT_MOC_LITERAL(2, 31, 0), // ""
-QT_MOC_LITERAL(3, 32, 19), // "senyalErrorPeticion"
-QT_MOC_LITERAL(4, 52, 23), // "slotRespuestaFinalizada"
-QT_MOC_LITERAL(5, 76, 14), // "QNetworkReply*"
-QT_MOC_LITERAL(6, 91, 9) // "respuesta"
+QT_MOC_LITERAL(0, 0, 14), // "AssayApiClient"
+QT_MOC_LITERAL(1, 15, 20), // "senyalDatosRecibidos"
+QT_MOC_LITERAL(2, 36, 0), // ""
+QT_MOC_LITERAL(3, 37, 19), // "senyalErrorPeticion"
+QT_MOC_LITERAL(4, 57, 23), // "slotRespuestaFinalizada"
+QT_MOC_LITERAL(5, 81, 14), // "QNetworkReply*"
+QT_MOC_LITERAL(6, 96, 9) // "respuesta"
 
     },
-    "ApiClient\0senyalDatosRecibidos\0\0"
-    "senyalErrorPeticion\0slotRespuestaFinalizada\0"
+    "AssayApiClient\0senyalDatosRecibidos\0"
+    "\0senyalErrorPeticion\0slotRespuestaFinalizada\0"
     "QNetworkReply*\0respuesta"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_ApiClient[] = {
+static const uint qt_meta_data_AssayApiClient[] = {
 
  // content:
        8,       // revision
@@ -77,10 +77,10 @@ static const uint qt_meta_data_ApiClient[] = {
        0        // eod
 };
 
-void ApiClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void AssayApiClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        auto *_t = static_cast<ApiClient *>(_o);
+        auto *_t = static_cast<AssayApiClient *>(_o);
         (void)_t;
         switch (_id) {
         case 0: _t->senyalDatosRecibidos((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
@@ -102,15 +102,15 @@ void ApiClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (ApiClient::*)(QByteArray );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ApiClient::senyalDatosRecibidos)) {
+            using _t = void (AssayApiClient::*)(QByteArray );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&AssayApiClient::senyalDatosRecibidos)) {
                 *result = 0;
                 return;
             }
         }
         {
-            using _t = void (ApiClient::*)(QString );
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&ApiClient::senyalErrorPeticion)) {
+            using _t = void (AssayApiClient::*)(QString );
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&AssayApiClient::senyalErrorPeticion)) {
                 *result = 1;
                 return;
             }
@@ -118,30 +118,30 @@ void ApiClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
     }
 }
 
-QT_INIT_METAOBJECT const QMetaObject ApiClient::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject AssayApiClient::staticMetaObject = { {
     QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_ApiClient.data,
-    qt_meta_data_ApiClient,
+    qt_meta_stringdata_AssayApiClient.data,
+    qt_meta_data_AssayApiClient,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *ApiClient::metaObject() const
+const QMetaObject *AssayApiClient::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *ApiClient::qt_metacast(const char *_clname)
+void *AssayApiClient::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_ApiClient.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_AssayApiClient.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int ApiClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int AssayApiClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
@@ -159,14 +159,14 @@ int ApiClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void ApiClient::senyalDatosRecibidos(QByteArray _t1)
+void AssayApiClient::senyalDatosRecibidos(QByteArray _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 
 // SIGNAL 1
-void ApiClient::senyalErrorPeticion(QString _t1)
+void AssayApiClient::senyalErrorPeticion(QString _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

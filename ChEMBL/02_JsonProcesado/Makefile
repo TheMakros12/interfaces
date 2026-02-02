@@ -52,16 +52,20 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = apiclient.cpp \
+SOURCES       = assayapiclient.cpp \
+		dialogoassay.cpp \
 		jsonassay.cpp \
 		main.cpp \
-		ventanaprincipal.cpp moc_apiclient.cpp \
+		ventanaprincipal.cpp moc_assayapiclient.cpp \
+		moc_dialogoassay.cpp \
 		moc_ventanaprincipal.cpp
-OBJECTS       = apiclient.o \
+OBJECTS       = assayapiclient.o \
+		dialogoassay.o \
 		jsonassay.o \
 		main.o \
 		ventanaprincipal.o \
-		moc_apiclient.o \
+		moc_assayapiclient.o \
+		moc_dialogoassay.o \
 		moc_ventanaprincipal.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -144,9 +148,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		02_JsonProcesado.pro apiclient.h \
+		02_JsonProcesado.pro assayapiclient.h \
+		dialogoassay.h \
 		jsonassay.h \
-		ventanaprincipal.h apiclient.cpp \
+		ventanaprincipal.h assayapiclient.cpp \
+		dialogoassay.cpp \
 		jsonassay.cpp \
 		main.cpp \
 		ventanaprincipal.cpp
@@ -158,7 +164,7 @@ TARGET        = 02_JsonProcesado
 first: all
 ####### Build rules
 
-02_JsonProcesado: ui_ventanaprincipal.h $(OBJECTS)  
+02_JsonProcesado: ui_dialogoassay.h ui_ventanaprincipal.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: 02_JsonProcesado.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -341,9 +347,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents apiclient.h jsonassay.h ventanaprincipal.h $(DISTDIR)/
-	$(COPY_FILE) --parents apiclient.cpp jsonassay.cpp main.cpp ventanaprincipal.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ventanaprincipal.ui $(DISTDIR)/
+	$(COPY_FILE) --parents assayapiclient.h dialogoassay.h jsonassay.h ventanaprincipal.h $(DISTDIR)/
+	$(COPY_FILE) --parents assayapiclient.cpp dialogoassay.cpp jsonassay.cpp main.cpp ventanaprincipal.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents dialogoassay.ui ventanaprincipal.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -375,16 +381,26 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_apiclient.cpp moc_ventanaprincipal.cpp
+compiler_moc_header_make_all: moc_assayapiclient.cpp moc_dialogoassay.cpp moc_ventanaprincipal.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_apiclient.cpp moc_ventanaprincipal.cpp
-moc_apiclient.cpp: apiclient.h \
+	-$(DEL_FILE) moc_assayapiclient.cpp moc_dialogoassay.cpp moc_ventanaprincipal.cpp
+moc_assayapiclient.cpp: assayapiclient.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado -I/home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include apiclient.h -o moc_apiclient.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado -I/home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include assayapiclient.h -o moc_assayapiclient.cpp
+
+moc_dialogoassay.cpp: dialogoassay.h \
+		ui_dialogoassay.h \
+		jsonassay.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado -I/home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dialogoassay.h -o moc_dialogoassay.cpp
 
 moc_ventanaprincipal.cpp: ventanaprincipal.h \
 		ui_ventanaprincipal.h \
+		dialogoassay.h \
+		ui_dialogoassay.h \
+		jsonassay.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado -I/home/marcosdi12/Documentos/interfaces/ChEMBL/02_JsonProcesado -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ventanaprincipal.h -o moc_ventanaprincipal.cpp
@@ -393,9 +409,13 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_ventanaprincipal.h
+compiler_uic_make_all: ui_dialogoassay.h ui_ventanaprincipal.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_ventanaprincipal.h
+	-$(DEL_FILE) ui_dialogoassay.h ui_ventanaprincipal.h
+ui_dialogoassay.h: dialogoassay.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic dialogoassay.ui -o ui_dialogoassay.h
+
 ui_ventanaprincipal.h: ventanaprincipal.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic ventanaprincipal.ui -o ui_ventanaprincipal.h
@@ -410,23 +430,37 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 
 ####### Compile
 
-apiclient.o: apiclient.cpp apiclient.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o apiclient.o apiclient.cpp
+assayapiclient.o: assayapiclient.cpp assayapiclient.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assayapiclient.o assayapiclient.cpp
+
+dialogoassay.o: dialogoassay.cpp dialogoassay.h \
+		ui_dialogoassay.h \
+		jsonassay.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dialogoassay.o dialogoassay.cpp
 
 jsonassay.o: jsonassay.cpp jsonassay.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o jsonassay.o jsonassay.cpp
 
 main.o: main.cpp ventanaprincipal.h \
-		ui_ventanaprincipal.h
+		ui_ventanaprincipal.h \
+		dialogoassay.h \
+		ui_dialogoassay.h \
+		jsonassay.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 ventanaprincipal.o: ventanaprincipal.cpp ventanaprincipal.h \
 		ui_ventanaprincipal.h \
-		apiclient.h
+		dialogoassay.h \
+		ui_dialogoassay.h \
+		jsonassay.h \
+		assayapiclient.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ventanaprincipal.o ventanaprincipal.cpp
 
-moc_apiclient.o: moc_apiclient.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_apiclient.o moc_apiclient.cpp
+moc_assayapiclient.o: moc_assayapiclient.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_assayapiclient.o moc_assayapiclient.cpp
+
+moc_dialogoassay.o: moc_dialogoassay.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dialogoassay.o moc_dialogoassay.cpp
 
 moc_ventanaprincipal.o: moc_ventanaprincipal.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ventanaprincipal.o moc_ventanaprincipal.cpp
