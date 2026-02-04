@@ -1,27 +1,27 @@
-#include "assaysapiclient.h"
+#include "assayapiclient.h"
 #include <QDebug>
 #include <QByteArray>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
 
-AssaysApiClient::AssaysApiClient(QString id, QObject * parent): QObject(parent), assay_chembl_id(id) {
+AssayApiClient::AssayApiClient(QString id, QObject * parent): QObject(parent), assay_chembl_id(id) {
 
     manager = new QNetworkAccessManager(this);
 
     connect(manager, SIGNAL(finished(QNetworkReply *)),
             this, SLOT(slotRespuestaFinalizada(QNetworkReply *)));
 
-    fetch(assay_chembl_id);
+    fetch();
 
 }
 
-void AssaysApiClient::fetch(QString idBuscada) {
+void AssayApiClient::fetch() {
 
     QNetworkRequest request;
 
-	request.setRawHeader("Accept", "application/json");
-	QString stringUrl = QString("https://www.ebi.ac.uk/chembl/api/data/assay/") + idBuscada + QString("?format=json");
+    request.setRawHeader("Accept", "application/json");
+    QString stringUrl = QString("https://www.ebi.ac.uk/chembl/api/data/assay/" + assay_chembl_id + "?format=json");
 
     // stringUrl = QString("https://www.ebi.ac.uk/chembl/api/data/assay/?format=json");
 
@@ -31,7 +31,7 @@ void AssaysApiClient::fetch(QString idBuscada) {
 
 }
 
-void AssaysApiClient::slotRespuestaFinalizada(QNetworkReply *respuesta) {
+void AssayApiClient::slotRespuestaFinalizada(QNetworkReply *respuesta) {
 
     if (respuesta->error() != QNetworkReply::NoError) {
     qDebug() << "Error: " << respuesta->error();

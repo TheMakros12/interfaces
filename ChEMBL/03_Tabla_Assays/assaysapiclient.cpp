@@ -5,23 +5,23 @@
 #include <QNetworkReply>
 
 
-AssaysApiClient::AssaysApiClient(QString id, QObject * parent): QObject(parent), assay_chembl_id(id) {
+AssaysApiClient::AssaysApiClient(QObject * parent): QObject(parent) {
 
     manager = new QNetworkAccessManager(this);
 
     connect(manager, SIGNAL(finished(QNetworkReply *)),
             this, SLOT(slotRespuestaFinalizada(QNetworkReply *)));
 
-    fetch(assay_chembl_id);
+    fetch();
 
 }
 
-void AssaysApiClient::fetch(QString idBuscada) {
+void AssaysApiClient::fetch() {
 
     QNetworkRequest request;
 
 	request.setRawHeader("Accept", "application/json");
-	QString stringUrl = QString("https://www.ebi.ac.uk/chembl/api/data/assay/") + idBuscada + QString("?format=json");
+	QString stringUrl = QString("https://www.ebi.ac.uk/chembl/api/data/assay/?format=json");
 
     // stringUrl = QString("https://www.ebi.ac.uk/chembl/api/data/assay/?format=json");
 
