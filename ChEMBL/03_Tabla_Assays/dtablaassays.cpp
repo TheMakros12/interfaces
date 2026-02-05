@@ -69,6 +69,9 @@ QVariant ModeloAssays::data(const QModelIndex &index, int role) const {
 
 }
 
+Qt::ItemFlags ModeloAssays::flags(const QModelIndex &index) const {
+	return Qt::ItemIsSelectable | QAbstractTableModel::flags(index);
+}
 
 DTablaAssays::DTablaAssays(QVector<Assay> losAssays, QWidget *parent): QDialog(parent), assays(losAssays) {
 
@@ -76,11 +79,21 @@ DTablaAssays::DTablaAssays(QVector<Assay> losAssays, QWidget *parent): QDialog(p
 
 	modeloAssays = new ModeloAssays(assays);
 	tablaAssays->setModel(modeloAssays);
-	
+
+	connect(tablaAssays, &QTableView::clicked,
+        this, &DTablaAssays::slotDAssay);
+
 }
 
 
-void DTablaAssays::slotEjemplo(){
+void DTablaAssays::slotDAssay(const QModelIndex &index) {
+
+	int fila = index.row();
+
+	Assay assay = assays.at(fila);
+
+	DialogoAssay *dAssay = new DialogoAssay(assay, this);
+	dAssay->show();
 
 }
 

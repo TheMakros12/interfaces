@@ -2,11 +2,13 @@
 #define DTABLAASSAYS_H
 #include "ui_dtablaassays.h"
 #include "jsonassays.h"
+#include "dialogoassay.h"
 
 #include <QVector>
 #include <QDialog>
 #include <QHBoxLayout>
 #include <QAbstractTableModel>
+#include <QModelIndex>
 
 class ModeloAssays : public QAbstractTableModel {
 
@@ -22,6 +24,8 @@ public:
 
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
+	Qt::ItemFlags flags(const QModelIndex &index) const;
+
 };
 
 class DTablaAssays : public QDialog, public Ui::DTablaAssays {
@@ -33,7 +37,7 @@ public:
 	QVector<Assay> assays;
 
 public slots:
-	void slotEjemplo();
+	void slotDAssay(const QModelIndex &index);
 
 };
 

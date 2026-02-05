@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DTablaAssays_t {
-    QByteArrayData data[3];
-    char stringdata0[26];
+    QByteArrayData data[5];
+    char stringdata0[43];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,11 +33,14 @@ struct qt_meta_stringdata_DTablaAssays_t {
 static const qt_meta_stringdata_DTablaAssays_t qt_meta_stringdata_DTablaAssays = {
     {
 QT_MOC_LITERAL(0, 0, 12), // "DTablaAssays"
-QT_MOC_LITERAL(1, 13, 11), // "slotEjemplo"
-QT_MOC_LITERAL(2, 25, 0) // ""
+QT_MOC_LITERAL(1, 13, 10), // "slotDAssay"
+QT_MOC_LITERAL(2, 24, 0), // ""
+QT_MOC_LITERAL(3, 25, 11), // "QModelIndex"
+QT_MOC_LITERAL(4, 37, 5) // "index"
 
     },
-    "DTablaAssays\0slotEjemplo\0"
+    "DTablaAssays\0slotDAssay\0\0QModelIndex\0"
+    "index"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,10 +58,10 @@ static const uint qt_meta_data_DTablaAssays[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x0a /* Public */,
+       1,    1,   19,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 3,    4,
 
        0        // eod
 };
@@ -69,11 +72,10 @@ void DTablaAssays::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         auto *_t = static_cast<DTablaAssays *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->slotEjemplo(); break;
+        case 0: _t->slotDAssay((*reinterpret_cast< const QModelIndex(*)>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 QT_INIT_METAOBJECT const QMetaObject DTablaAssays::staticMetaObject = { {

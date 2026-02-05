@@ -1,4 +1,3 @@
-
 #include "ventanaprincipal.h"
 #include <QDebug>
 
