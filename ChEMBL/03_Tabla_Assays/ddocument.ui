@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DDocuent</class>
- <widget class="QDialog" name="DDocuent">
+ <class>DDocument</class>
+ <widget class="QDialog" name="DDocument">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>872</width>
+    <width>875</width>
     <height>718</height>
    </rect>
   </property>
@@ -29,7 +29,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -162,7 +162,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>DDocuent</receiver>
+   <receiver>DDocument</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -178,7 +178,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>DDocuent</receiver>
+   <receiver>DDocument</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -2,6 +2,7 @@
 #define DDOCUMENT_H
 #include "ui_ddocument.h"
 #include "jsondocument.h"
+#include "documentapiclient.h"
 
 #include <QVector>
 #include <QDialog>
@@ -13,7 +14,7 @@ Q_OBJECT
 public:
 	DDocument(QString, QWidget *parent = NULL);
 	QString document_assay_id;
-	Document document;
+	Document miDocument;
 
 public slots:
 	void slotDocumentoRecibido(QByteArray);

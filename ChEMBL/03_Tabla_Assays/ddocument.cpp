@@ -1,4 +1,5 @@
 #include "ddocument.h"
+
 #include <QDebug>
 
 DDocument::DDocument(QString id, QWidget *parent): QDialog(parent), document_assay_id(id) {
@@ -10,22 +11,23 @@ DDocument::DDocument(QString id, QWidget *parent): QDialog(parent), document_ass
 	connect(documentApiClient, SIGNAL(senyalDatosRecibidos(QByteArray)),
 			this, SLOT(slotDocumentoRecibido(QByteArray)));
 
-	lblDocumentTitle->setText(document.title);
-	QString autores = "";
-	for (int i = 0; i < document.authors.size(); i++) {
-		autores += document.authors.at(i) + ", ";
-	}
-	txtAuthors->setText(autores);
-	txtJournalFullTitle->setText(document.journal_full_title);
-	txtAbstract->setText(document.abstract);
-	
 }
 
 
 void DDocument::slotDocumentoRecibido(QByteArray datos) {
 
 	JsonDocument documentJson(datos);
-	document = documentJson.document();
+	miDocument = documentJson.document(documentJson.objeto);
+
+	lblDocumentTitle->setText(miDocument.title);
+	QString autores;
+	for (const QString &autor : miDocument.authors) {
+        autores += autor + ", ";
+    }
+	txtAuthors->setText(autores);
+	txtJournalFullTitle->setText(miDocument.journal_full_title);
+	txtAbstract->setText(miDocument.abstract);
 
 }
+
 

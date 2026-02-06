@@ -10,7 +10,7 @@ DocumentApiClient::DocumentApiClient(QString id, QObject *parent): QObject(paren
     manager = new QNetworkAccessManager(this);
 
     connect(manager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT (slotRespuestaFinalizada(QNetworkReply*)));
+            this, SLOT(slotRespuestaFinalizada(QNetworkReply*)));
 
     fetch();
 
@@ -22,6 +22,8 @@ void DocumentApiClient::fetch() {
 
     request.setRawHeader("Accept", "application/json");
     QString stringUrl = QString("https://www.ebi.ac.uk/chembl/api/data/document/" + document_chembl_id + "?format=json");
+
+    qDebug() << stringUrl;
 
     request.setUrl(QUrl(stringUrl));
 

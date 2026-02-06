@@ -3,6 +3,7 @@
 #include "ui_dtablaassays.h"
 #include "jsonassays.h"
 #include "dialogoassay.h"
+#include "ddocument.h"
 
 #include <QVector>
 #include <QDialog>
@@ -38,6 +39,7 @@ public:
 
 public slots:
 	void slotDAssay(const QModelIndex &index);
+	void slotDDocuemnt(const QModelIndex &index);
 
 };
 

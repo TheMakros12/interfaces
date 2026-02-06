@@ -38,6 +38,20 @@ Assay JsonAssay::assay(QJsonObject objeto) {
     }
     assay.description = cadenaDescription;
 
+    QString documentChemblId;
+    if ( claves.contains(QString("document_chembl_id")) ) {
+        QJsonValue valor_document_id = objeto["document_chembl_id"];
+        qDebug() << valor_document_id;
+        if ( valor_document_id.isString() ) {
+            documentChemblId = valor_document_id.toString();
+        }
+    }
+    assay.document_chembl_id = documentChemblId;
+
+    qDebug() << "====================================================";
+    qDebug() << documentChemblId;
+    qDebug() << "====================================================";
+
     return assay;
 
 }

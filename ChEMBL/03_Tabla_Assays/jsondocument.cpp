@@ -10,7 +10,7 @@ JsonDocument::JsonDocument(QByteArray bytes) {
 
 }
 
-JsonDocument::document(QJsonObject objeto) {
+Document JsonDocument::document(QJsonObject objeto) {
 
     Document document;
 
@@ -29,18 +29,18 @@ JsonDocument::document(QJsonObject objeto) {
         QJsonValue valorAuthors = objeto["authors"];
 
         if ( valorAuthors.isNull() ) {
-            documentAuthors = "";
+            documentAuthors.clear();
         }
 
         if ( valorAuthors.isString() ) {
-            QString documentAuthor = valorAuthors.toString();
-            documentAuthors.append(documentAuthor);
+            documentAuthors.append(valorAuthors.toString());
         }
 
         if ( valorAuthors.isArray() ) {
-            for (int i = 0; i < valorAuthors.size(); i++) {
-                QString author = valorAuthors.at(i).toString;
-                documentAuthors.append(author);
+            QJsonArray arrayAuthors = valorAuthors.toArray();
+
+            for (int i = 0; i < arrayAuthors.size(); i++) {
+                documentAuthors.append(arrayAuthors.at(i).toString());
             }
         }
 

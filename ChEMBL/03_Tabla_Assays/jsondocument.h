@@ -4,6 +4,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include <QJsonArray>
 #include <QVector>
 
 class Document {

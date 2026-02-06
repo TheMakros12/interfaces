@@ -5,6 +5,7 @@
 #include <QNetworkReply>
 
 class DocumentApiClient : public QObject {
+Q_OBJECT
 
 public:
     DocumentApiClient(QString, QObject *parent = NULL);
@@ -21,3 +22,5 @@ signals:
     void senyalErrorPeticion(QString);
 
 };
+
+#endif

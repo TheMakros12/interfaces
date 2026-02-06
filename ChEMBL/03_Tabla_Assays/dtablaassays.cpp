@@ -81,10 +81,9 @@ DTablaAssays::DTablaAssays(QVector<Assay> losAssays, QWidget *parent): QDialog(p
 	tablaAssays->setModel(modeloAssays);
 
 	connect(tablaAssays, &QTableView::clicked,
-        this, &DTablaAssays::slotDAssay);
+        this, &DTablaAssays::slotDDocuemnt);
 
 }
-
 
 void DTablaAssays::slotDAssay(const QModelIndex &index) {
 
@@ -97,3 +96,14 @@ void DTablaAssays::slotDAssay(const QModelIndex &index) {
 
 }
 
+void DTablaAssays::slotDDocuemnt(const QModelIndex &index) {
+
+	int fila = index.row();
+
+	Assay assay = assays.at(fila);
+	QString id = assay.document_chembl_id;
+
+	DDocument *dDocument = new DDocument(id);
+	dDocument->show();
+
+}

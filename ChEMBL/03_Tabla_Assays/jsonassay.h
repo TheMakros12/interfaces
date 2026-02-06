@@ -11,6 +11,7 @@ class Assay {
 public:
     QString assay_chembl_id;
     QString description;
+    QString document_chembl_id;
 
 };
 

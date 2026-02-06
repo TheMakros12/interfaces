@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = 03_Tabla_Assays1.0.0
-DISTDIR = /home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays/.tmp/03_Tabla_Assays1.0.0
+DISTDIR = /home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays/.tmp/03_Tabla_Assays1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Network.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread   
@@ -66,6 +66,7 @@ SOURCES       = assayapiclient.cpp \
 		moc_assaysapiclient.cpp \
 		moc_ddocument.cpp \
 		moc_dialogoassay.cpp \
+		moc_documentapiclient.cpp \
 		moc_dtablaassays.cpp \
 		moc_ventanaprincipal.cpp
 OBJECTS       = assayapiclient.o \
@@ -83,6 +84,7 @@ OBJECTS       = assayapiclient.o \
 		moc_assaysapiclient.o \
 		moc_ddocument.o \
 		moc_dialogoassay.o \
+		moc_documentapiclient.o \
 		moc_dtablaassays.o \
 		moc_ventanaprincipal.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -411,32 +413,38 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_assayapiclient.cpp moc_assaysapiclient.cpp moc_ddocument.cpp moc_dialogoassay.cpp moc_dtablaassays.cpp moc_ventanaprincipal.cpp
+compiler_moc_header_make_all: moc_assayapiclient.cpp moc_assaysapiclient.cpp moc_ddocument.cpp moc_dialogoassay.cpp moc_documentapiclient.cpp moc_dtablaassays.cpp moc_ventanaprincipal.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_assayapiclient.cpp moc_assaysapiclient.cpp moc_ddocument.cpp moc_dialogoassay.cpp moc_dtablaassays.cpp moc_ventanaprincipal.cpp
+	-$(DEL_FILE) moc_assayapiclient.cpp moc_assaysapiclient.cpp moc_ddocument.cpp moc_dialogoassay.cpp moc_documentapiclient.cpp moc_dtablaassays.cpp moc_ventanaprincipal.cpp
 moc_assayapiclient.cpp: assayapiclient.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include assayapiclient.h -o moc_assayapiclient.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include assayapiclient.h -o moc_assayapiclient.cpp
 
 moc_assaysapiclient.cpp: assaysapiclient.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include assaysapiclient.h -o moc_assaysapiclient.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include assaysapiclient.h -o moc_assaysapiclient.cpp
 
 moc_ddocument.cpp: ddocument.h \
 		ui_ddocument.h \
 		jsondocument.h \
+		documentapiclient.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ddocument.h -o moc_ddocument.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ddocument.h -o moc_ddocument.cpp
 
 moc_dialogoassay.cpp: dialogoassay.h \
 		ui_dialogoassay.h \
 		jsonassay.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dialogoassay.h -o moc_dialogoassay.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dialogoassay.h -o moc_dialogoassay.cpp
+
+moc_documentapiclient.cpp: documentapiclient.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include documentapiclient.h -o moc_documentapiclient.cpp
 
 moc_dtablaassays.cpp: dtablaassays.h \
 		ui_dtablaassays.h \
@@ -446,7 +454,7 @@ moc_dtablaassays.cpp: dtablaassays.h \
 		ui_dialogoassay.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dtablaassays.h -o moc_dtablaassays.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dtablaassays.h -o moc_dtablaassays.cpp
 
 moc_ventanaprincipal.cpp: ventanaprincipal.h \
 		ui_ventanaprincipal.h \
@@ -455,7 +463,7 @@ moc_ventanaprincipal.cpp: ventanaprincipal.h \
 		jsonassay.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/di/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ventanaprincipal.h -o moc_ventanaprincipal.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/home/marcosdi12/Documentos/interfaces/ChEMBL/03_Tabla_Assays -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtNetwork -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ventanaprincipal.h -o moc_ventanaprincipal.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -498,7 +506,8 @@ assaysapiclient.o: assaysapiclient.cpp assaysapiclient.h
 
 ddocument.o: ddocument.cpp ddocument.h \
 		ui_ddocument.h \
-		jsondocument.h
+		jsondocument.h \
+		documentapiclient.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ddocument.o ddocument.cpp
 
 dialogoassay.o: dialogoassay.cpp dialogoassay.h \
@@ -556,6 +565,9 @@ moc_ddocument.o: moc_ddocument.cpp
 
 moc_dialogoassay.o: moc_dialogoassay.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dialogoassay.o moc_dialogoassay.cpp
+
+moc_documentapiclient.o: moc_documentapiclient.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_documentapiclient.o moc_documentapiclient.cpp
 
 moc_dtablaassays.o: moc_dtablaassays.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dtablaassays.o moc_dtablaassays.cpp
