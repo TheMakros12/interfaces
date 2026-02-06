@@ -19,7 +19,7 @@ public:
 class JsonDocument {
 
 public:
-    Document document;
+    Document miDocument;
     JsonDocument(QByteArray);
     QStringList claves;
     QJsonObject objeto;

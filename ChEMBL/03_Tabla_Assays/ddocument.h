@@ -11,11 +11,12 @@ class DDocument : public QDialog, public Ui::DDocument {
 Q_OBJECT
 
 public:
-	DDocument(Document, QWidget *parent = NULL);
+	DDocument(QString, QWidget *parent = NULL);
 	QString document_assay_id;
+	Document document;
 
 public slots:
-	void slotDocumentoRecibido();
+	void slotDocumentoRecibido(QByteArray);
 
 };
 
