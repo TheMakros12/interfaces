@@ -39,7 +39,7 @@ QVariant ModeloAssays::headerData(int section, Qt::Orientation orientation, int 
 		}
 
 		if ( orientation == Qt::Vertical ) {
-			return assays.at(section).assay_chembl_id;
+			return section;
 		}
 	}
 
@@ -102,6 +102,7 @@ void DTablaAssays::slotDDocuemnt(const QModelIndex &index) {
 
 	Assay assay = assays.at(fila);
 	QString id = assay.document_chembl_id;
+	qDebug() << id;
 
 	DDocument *dDocument = new DDocument(id);
 	dDocument->show();

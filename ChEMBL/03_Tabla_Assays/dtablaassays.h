@@ -2,6 +2,7 @@
 #define DTABLAASSAYS_H
 #include "ui_dtablaassays.h"
 #include "jsonassays.h"
+#include "jsonassay.h"
 #include "dialogoassay.h"
 #include "ddocument.h"
 

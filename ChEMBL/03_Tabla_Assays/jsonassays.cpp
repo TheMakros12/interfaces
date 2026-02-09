@@ -34,6 +34,7 @@ JsonAssays::JsonAssays(QByteArray bytes) {
         Assay assay;
         assay.assay_chembl_id = asssayObject.value("assay_chembl_id").toString();
         assay.description = asssayObject.value("description").toString();
+        assay.document_chembl_id = asssayObject.value("document_chembl_id").toString();
 
         misAssays.append(assay);
 
