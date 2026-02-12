@@ -30,6 +30,7 @@
 #include "ddetallebola.h"
 #include "dconfiguracionbola.h"
 #include "dposicionbola.h"
+#include "bolawidget.h"
 
 class VentanaPrincipal : public QMainWindow {
 Q_OBJECT

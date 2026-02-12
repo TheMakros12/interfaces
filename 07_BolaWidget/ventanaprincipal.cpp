@@ -137,7 +137,7 @@ void VentanaPrincipal::inicializarBolas() {
         float velIniX = (float)(random() % 100) / 50 - 1;
         float velIniY = (float)(random() % 100) / 50 - 1;
 
-        Bola *nueva = new Bola(posIniX, posIniY, velIniX, velIniY);
+        Bola *nueva = new BolaWidget(posIniX, posIniY, velIniX, velIniY);
 
         nueva->color = QColor(rand()%255, rand()%255, rand()%255);
         nueva->nombre = nombres.at(i % nombres.size());

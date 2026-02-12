@@ -157,3 +157,25 @@ void Bola::anotarChoque(int idBola, Bola *pBola) {
     posicionesChoques.append( unChoque );
 
 }
+
+void Bola::atraer(Bola *pBola) {
+
+    const int FACTOR = 0200;
+
+    float dist = distancia(pBola);
+    dist = dist < diametro * 2 ? diametro * 2: dist;
+
+    float F = FACTOR * 1.1 / powf(dist, 2);
+    float dx = pBola->posX - posX;
+    float px = dx / dist;
+
+    float dy = pBola->posY - posY;
+    float py = dy / dist;
+
+    float Fx = px * F;
+    float Fy = py * F;
+
+    velX = velX + Fx;
+    velY = velY + Fy;
+
+}

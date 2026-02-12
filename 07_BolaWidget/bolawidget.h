@@ -5,7 +5,6 @@
 #include "panelposicionbola.h"
 
 class BolaWidget : public Bola, public PanelPosicionBola {
-Q_OBJECT
 
 public:
     BolaWidget(float posX, float posY, float velX, float velY, QWidget *parent = NULL);

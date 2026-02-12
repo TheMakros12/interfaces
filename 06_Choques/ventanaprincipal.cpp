@@ -432,6 +432,10 @@ void VentanaPrincipal::slotTemporizador() {
         }
     }
 
+    for (int i = 0; i < bolas.length(); i++) {
+        bolas.at(i)->atraer(bolaJugador);
+    }
+
     repaint();
 }
 

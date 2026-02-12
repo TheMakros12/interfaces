@@ -53,6 +53,7 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = bola.cpp \
+		bolawidget.cpp \
 		dconfiguracionbola.cpp \
 		ddetallebola.cpp \
 		dinformacion.cpp \
@@ -78,6 +79,7 @@ SOURCES       = bola.cpp \
 		moc_widgetdetallebola.cpp \
 		moc_widgetposicionbola.cpp
 OBJECTS       = bola.o \
+		bolawidget.o \
 		dconfiguracionbola.o \
 		ddetallebola.o \
 		dinformacion.o \
@@ -185,6 +187,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		07_BolaWidget.pro bola.h \
+		bolawidget.h \
 		dconfiguracionbola.h \
 		ddetallebola.h \
 		dinformacion.h \
@@ -197,6 +200,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		ventanaprincipal.h \
 		widgetdetallebola.h \
 		widgetposicionbola.h bola.cpp \
+		bolawidget.cpp \
 		dconfiguracionbola.cpp \
 		ddetallebola.cpp \
 		dinformacion.cpp \
@@ -401,8 +405,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents bola.h dconfiguracionbola.h ddetallebola.h dinformacion.h dlistabolas.h dposicionbola.h drebotesentrebolas.h dtablabolas.h dtablarebotes.h panelposicionbola.h ventanaprincipal.h widgetdetallebola.h widgetposicionbola.h $(DISTDIR)/
-	$(COPY_FILE) --parents bola.cpp dconfiguracionbola.cpp ddetallebola.cpp dinformacion.cpp dlistabolas.cpp dposicionbola.cpp drebotesentrebolas.cpp dtablabolas.cpp dtablarebotes.cpp main.cpp panelposicionbola.cpp ventanaprincipal.cpp widgetdetallebola.cpp widgetposicionbola.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents bola.h bolawidget.h dconfiguracionbola.h ddetallebola.h dinformacion.h dlistabolas.h dposicionbola.h drebotesentrebolas.h dtablabolas.h dtablarebotes.h panelposicionbola.h ventanaprincipal.h widgetdetallebola.h widgetposicionbola.h $(DISTDIR)/
+	$(COPY_FILE) --parents bola.cpp bolawidget.cpp dconfiguracionbola.cpp ddetallebola.cpp dinformacion.cpp dlistabolas.cpp dposicionbola.cpp drebotesentrebolas.cpp dtablabolas.cpp dtablarebotes.cpp main.cpp panelposicionbola.cpp ventanaprincipal.cpp widgetdetallebola.cpp widgetposicionbola.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents dconfiguracionbola.ui ddetallebola.ui dinformacion.ui dlistabolas.ui dposicionbola.ui drebotesentrebolas.ui dtablabolas.ui dtablarebotes.ui widgetdetallebola.ui widgetposicionbola.ui $(DISTDIR)/
 
 
@@ -473,6 +477,7 @@ moc_dposicionbola.cpp: dposicionbola.h \
 		widgetposicionbola.h \
 		ui_widgetposicionbola.h \
 		panelposicionbola.h \
+		bolawidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/07_BolaWidget/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/07_BolaWidget -I/home/marcosdi12/Documentos/interfaces/07_BolaWidget -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dposicionbola.h -o moc_dposicionbola.cpp
@@ -524,6 +529,7 @@ moc_ventanaprincipal.cpp: ventanaprincipal.h \
 		widgetposicionbola.h \
 		ui_widgetposicionbola.h \
 		panelposicionbola.h \
+		bolawidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/07_BolaWidget/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/07_BolaWidget -I/home/marcosdi12/Documentos/interfaces/07_BolaWidget -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ventanaprincipal.h -o moc_ventanaprincipal.cpp
@@ -539,6 +545,7 @@ moc_widgetposicionbola.cpp: widgetposicionbola.h \
 		ui_widgetposicionbola.h \
 		bola.h \
 		panelposicionbola.h \
+		bolawidget.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/07_BolaWidget/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/07_BolaWidget -I/home/marcosdi12/Documentos/interfaces/07_BolaWidget -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include widgetposicionbola.h -o moc_widgetposicionbola.cpp
@@ -603,6 +610,11 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 bola.o: bola.cpp bola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bola.o bola.cpp
 
+bolawidget.o: bolawidget.cpp bolawidget.h \
+		bola.h \
+		panelposicionbola.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bolawidget.o bolawidget.cpp
+
 dconfiguracionbola.o: dconfiguracionbola.cpp dconfiguracionbola.h \
 		ui_dconfiguracionbola.h \
 		bola.h \
@@ -629,7 +641,8 @@ dposicionbola.o: dposicionbola.cpp dposicionbola.h \
 		bola.h \
 		widgetposicionbola.h \
 		ui_widgetposicionbola.h \
-		panelposicionbola.h
+		panelposicionbola.h \
+		bolawidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dposicionbola.o dposicionbola.cpp
 
 drebotesentrebolas.o: drebotesentrebolas.cpp drebotesentrebolas.h \
@@ -666,7 +679,8 @@ main.o: main.cpp ventanaprincipal.h \
 		ui_dposicionbola.h \
 		widgetposicionbola.h \
 		ui_widgetposicionbola.h \
-		panelposicionbola.h
+		panelposicionbola.h \
+		bolawidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 panelposicionbola.o: panelposicionbola.cpp panelposicionbola.h \
@@ -693,7 +707,8 @@ ventanaprincipal.o: ventanaprincipal.cpp ventanaprincipal.h \
 		ui_dposicionbola.h \
 		widgetposicionbola.h \
 		ui_widgetposicionbola.h \
-		panelposicionbola.h
+		panelposicionbola.h \
+		bolawidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ventanaprincipal.o ventanaprincipal.cpp
 
 widgetdetallebola.o: widgetdetallebola.cpp widgetdetallebola.h \
@@ -704,7 +719,8 @@ widgetdetallebola.o: widgetdetallebola.cpp widgetdetallebola.h \
 widgetposicionbola.o: widgetposicionbola.cpp widgetposicionbola.h \
 		ui_widgetposicionbola.h \
 		bola.h \
-		panelposicionbola.h
+		panelposicionbola.h \
+		bolawidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o widgetposicionbola.o widgetposicionbola.cpp
 
 moc_dconfiguracionbola.o: moc_dconfiguracionbola.cpp 

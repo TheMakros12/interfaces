@@ -4,6 +4,7 @@
 #include "ui_widgetposicionbola.h"
 #include "bola.h"
 #include "panelposicionbola.h"
+#include "bolawidget.h"
 
 #include <QVector>
 #include <QWidget>

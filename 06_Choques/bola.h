@@ -42,6 +42,7 @@ public:
     void pintar(QPainter&);
     void restablecerRebotes();
     void anotarChoque(int, Bola*);
+    void atraer(Bola *);
 
 };
 

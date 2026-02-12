@@ -5,9 +5,9 @@ WidgetPosicionBola::WidgetPosicionBola(Bola *bolaPasada, QWidget *parent): QWidg
 
 	setupUi(this);
 
-	PanelPosicionBola *pPB = new PanelPosicionBola(laBola);
+	//PanelPosicionBola *pPB = new PanelPosicionBola(laBola);
 	QHBoxLayout *ly = new QHBoxLayout();
-	ly->addWidget(pPB);
+	ly->addWidget(static_cast<BolaWidget*>(laBola));
 
 	framePosicion->setLayout(ly);
 	
