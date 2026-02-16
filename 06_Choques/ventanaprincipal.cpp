@@ -35,6 +35,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     dPosicionBola = NULL;
     widgetChoque = NULL;
     dChoquesBolas = NULL;
+    dParametrosFisicos = NULL;
 
     crearActions();
     crearMenus();
@@ -100,6 +101,10 @@ void VentanaPrincipal::crearActions() {
     connect(actionDChoquesBolas, SIGNAL(triggered()),
             this, SLOT(slotDChoquesBolas()));
 
+    actionDParametrosFisicos = new QAction("Parámetros Físicos", this);
+    connect(actionDParametrosFisicos, SIGNAL(triggered()),
+            this, SLOT(slotDParametrosFisicos()));
+
 }
 
 void VentanaPrincipal::crearMenus() {
@@ -125,6 +130,9 @@ void VentanaPrincipal::crearMenus() {
     QMenu *menuChoques = barraMenu->addMenu("Choques");
     menuChoques->addAction(actionWidgetChoque);
     menuChoques->addAction(actionDChoquesBolas);
+
+    QMenu *menuParametros = barraMenu->addMenu("Parámetros");
+    menuParametros->addAction(actionDParametrosFisicos);
 
 }
 
@@ -413,7 +421,6 @@ void VentanaPrincipal::slotTemporizador() {
 
                 bolas.at(i)->anotarChoque(j, bolas.at(j));
                 bolas.at(j)->anotarChoque(i, bolas.at(i));
-
                 bolas.at(i)->acumuladoChoques[j]++;
                 bolas.at(j)->acumuladoChoques[i]++;
             }
@@ -431,6 +438,12 @@ void VentanaPrincipal::slotTemporizador() {
             break;
         }
     }
+
+    for (int i = 0; i < bolas.length(); i++)
+        for (int j = 0; j < bolas.length(); j++) {
+            bolas.at(i)->atraer(bolas.at(j));
+            bolas.at(j)->atraer(bolas.at(i));
+        }
 
     for (int i = 0; i < bolas.length(); i++) {
         bolas.at(i)->atraer(bolaJugador);
@@ -616,5 +629,14 @@ void VentanaPrincipal::slotDChoquesBolas() {
         dChoquesBolas = new DChoquesBolas(&bolas);
 
     dChoquesBolas->show();
+
+}
+
+void VentanaPrincipal::slotDParametrosFisicos() {
+
+    if ( dParametrosFisicos == NULL )
+        dParametrosFisicos = new DParametrosFisicos();
+
+    dParametrosFisicos->show();
 
 }

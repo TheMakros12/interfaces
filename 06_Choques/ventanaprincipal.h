@@ -32,6 +32,7 @@
 #include "dposicionbola.h"
 #include "widgetchoque.h"
 #include "dchoquesbolas.h"
+#include "dparametrosfisicos.h"
 
 class VentanaPrincipal : public QMainWindow {
 Q_OBJECT
@@ -60,6 +61,7 @@ public:
     DPosicionBola *dPosicionBola;
     WidgetChoque *widgetChoque;
     DChoquesBolas *dChoquesBolas;
+    DParametrosFisicos *dParametrosFisicos;
 
     QTimer *temporizador;
 
@@ -75,6 +77,7 @@ public:
     QAction *actionDPosicionBola;
     QAction *actionWidgetChoque;
     QAction *actionDChoquesBolas;
+    QAction *actionDParametrosFisicos;
 
     void crearActions();
     void crearMenus();
@@ -102,6 +105,7 @@ public slots:
     void slotDPosicionBola();
     void slotWidgetChoque();
     void slotDChoquesBolas();
+    void slotDParametrosFisicos();
 
 };
 #endif

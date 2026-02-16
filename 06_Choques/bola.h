@@ -25,13 +25,17 @@ public:
     float posX, posY, velX, velY;
     QColor color;
     QString nombre;
-    static int diametro;
-    static int vidasIniciales;
     bool esImagen;
     QImage img;
     int vidas;
     int rArriba, rAbajo, rDerecha, rIzquierda;
     float anchuraJuego, alturaJuego;
+
+    static int diametro;
+    static int vidasIniciales;
+    static float rozamiento;
+    static float elasticidad;
+    static float gravitacion;
 
     QVector<Choque> posicionesChoques;
     QVector<int> acumuladoChoques;
@@ -43,6 +47,7 @@ public:
     void restablecerRebotes();
     void anotarChoque(int, Bola*);
     void atraer(Bola *);
+    void atraer(Bola *, float);
 
 };
 

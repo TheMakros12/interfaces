@@ -4,6 +4,9 @@
 
 int Bola::diametro = 40;
 int Bola::vidasIniciales = 10;
+float Bola::rozamiento = 0.9999;
+float Bola::elasticidad = 1.2;
+float Bola::gravitacion = 50;
 
 Bola::Bola() : Bola(0,0,0,0) {
 
@@ -43,6 +46,9 @@ void Bola::mover(float anchura, float altura, int alturaMenuBar) {
 
     posX += velX;
     posY += velY;
+
+    velX = velX * rozamiento;
+    velY = velY * rozamiento;
 
 }
 
@@ -99,6 +105,13 @@ bool Bola::choca(Bola *otra) {
         arriba->velY = abajo->velY;
         abajo->velY = aux;
         hayChoque = true;
+    }
+
+    if ( hayChoque ) {
+        this->velX = this->velX * elasticidad;
+        this->velY = this->velY * elasticidad;
+        otra->velX = otra->velX * elasticidad;
+        otra->velY = otra->velY * elasticidad;
     }
 
     return hayChoque;
@@ -160,12 +173,30 @@ void Bola::anotarChoque(int idBola, Bola *pBola) {
 
 void Bola::atraer(Bola *pBola) {
 
-    const int FACTOR = 0200;
+    float dist = distancia(pBola);
+    dist = dist < diametro * 2 ? diametro * 2: dist;
+
+    float F = gravitacion * 1.1 / powf(dist, 2);
+    float dx = pBola->posX - posX;
+    float px = dx / dist;
+
+    float dy = pBola->posY - posY;
+    float py = dy / dist;
+
+    float Fx = px * F;
+    float Fy = py * F;
+
+    velX = velX + Fx;
+    velY = velY + Fy;
+
+}
+
+void Bola::atraer(Bola *pBola, float gravedad) {
 
     float dist = distancia(pBola);
     dist = dist < diametro * 2 ? diametro * 2: dist;
 
-    float F = FACTOR * 1.1 / powf(dist, 2);
+    float F = gravitacion * 1.1 / powf(dist, 2);
     float dx = pBola->posX - posX;
     float px = dx / dist;
 
