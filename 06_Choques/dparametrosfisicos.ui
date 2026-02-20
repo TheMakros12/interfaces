@@ -33,7 +33,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>80</y>
+     <y>110</y>
      <width>291</width>
      <height>21</height>
     </rect>
@@ -47,7 +47,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="spinnerElasticidad">
+     <widget class="QSlider" name="slElasticidad">
+      <property name="maximum">
+       <number>100</number>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -59,7 +62,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>120</y>
+     <y>30</y>
      <width>291</width>
      <height>21</height>
     </rect>
@@ -73,7 +76,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="spinnerGravitacion">
+     <widget class="QSlider" name="slGravitacion">
+      <property name="maximum">
+       <number>100</number>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -85,7 +91,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>160</y>
+     <y>150</y>
      <width>291</width>
      <height>21</height>
     </rect>
@@ -99,7 +105,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="spinnerJugador">
+     <widget class="QSlider" name="slJugador">
+      <property name="maximum">
+       <number>100</number>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
@@ -111,7 +120,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>40</y>
+     <y>70</y>
      <width>291</width>
      <height>21</height>
     </rect>
@@ -125,7 +134,10 @@
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="spinnerRozamiento">
+     <widget class="QSlider" name="slRozamiento">
+      <property name="maximum">
+       <number>100</number>
+      </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>

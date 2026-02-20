@@ -17,6 +17,8 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
 
     temporizador->start();
 
+    barraMenu = this->menuBar();
+
     posIniX = 0;
     posIniY = 0;
 
@@ -36,6 +38,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     widgetChoque = NULL;
     dChoquesBolas = NULL;
     dParametrosFisicos = NULL;
+    dMenuBolas = NULL;
 
     crearActions();
     crearMenus();
@@ -111,7 +114,7 @@ void VentanaPrincipal::crearMenus() {
 
     /*Creamos un QMenuBar y luego los diferentes menús que vamos a utilizar*/
 
-    QMenuBar *barraMenu = this->menuBar();
+
 
     QMenu *menuPartida = barraMenu->addMenu("Partida");
     menuPartida->addAction(actionDInformacion);
@@ -180,6 +183,8 @@ void VentanaPrincipal::inicializarBolas() {
         bolas.append(nueva);
 
     }
+
+    crearMenuBolas();
 
 }
 
@@ -403,6 +408,20 @@ void VentanaPrincipal::keyPressEvent(QKeyEvent *event) {
 
 }
 
+void VentanaPrincipal::crearMenuBolas() {
+
+    QMenu *menuBolas = barraMenu->addMenu("Bolas");
+
+    for (int i = 0; i < bolas.size(); i++) {
+        QAction *nuevaAction = new QAction(QString(bolas.at(i)->nombre), this);
+        menuBolas->addAction(nuevaAction);
+
+        connect(nuevaAction, SIGNAL(triggered()),
+				this, SLOT(slotDMenuBolas()));
+    }
+
+}
+
 void VentanaPrincipal::slotTemporizador() {
 
     /* Método que se va a ejectutar repetidamento por el QTimer. Aquí gestionamos el movimiento de las Bolas, los colisiones de las mismas y la gestión de las vidas. */
@@ -439,11 +458,11 @@ void VentanaPrincipal::slotTemporizador() {
         }
     }
 
-    for (int i = 0; i < bolas.length(); i++)
-        for (int j = 0; j < bolas.length(); j++) {
-            bolas.at(i)->atraer(bolas.at(j));
-            bolas.at(j)->atraer(bolas.at(i));
-        }
+    // for (int i = 0; i < bolas.length(); i++)
+    //     for (int j = 0; j < bolas.length(); j++) {
+    //         bolas.at(i)->atraer(bolas.at(j));
+    //         bolas.at(j)->atraer(bolas.at(i));
+    //     }
 
     for (int i = 0; i < bolas.length(); i++) {
         bolas.at(i)->atraer(bolaJugador);
@@ -634,9 +653,44 @@ void VentanaPrincipal::slotDChoquesBolas() {
 
 void VentanaPrincipal::slotDParametrosFisicos() {
 
-    if ( dParametrosFisicos == NULL )
+    if ( dParametrosFisicos == NULL ) {
+
         dParametrosFisicos = new DParametrosFisicos();
 
+        connect(dParametrosFisicos->slGravitacion,&QSlider::valueChanged,
+                [] (int valor){ Bola::gravitacion = valor; });
+
+        connect(dParametrosFisicos->slRozamiento,
+               &QSlider::valueChanged,
+                [] (int valor){
+                    float factor = 0.9 + (valor + 900) / 10000.0;
+                    Bola::rozamiento = factor; });
+
+        connect(dParametrosFisicos->slElasticidad,&QSlider::valueChanged,
+                [] (int valor){
+                    float factor = 0.9 + (valor + 900) / 10000.0;
+                    Bola::elasticidad = factor; });
+
+        connect(dParametrosFisicos->slJugador,&QSlider::valueChanged,
+                [] (int valor){
+                    qDebug()<< "Not implemented";
+                });
+    }
+
     dParametrosFisicos->show();
+
+}
+
+void VentanaPrincipal::slotDMenuBolas() {
+
+    QObject *culpable = QObject::sender();
+	QAction *accionCulpable = qobject_cast<QAction*>(culpable);
+    QString textoAccion = accionCulpable->text();
+
+    if ( dMenuBolas == NULL ) {
+        dMenuBolas = new DMenuBolas(textoAccion);
+    }
+
+    dMenuBolas->show();
 
 }

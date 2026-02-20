@@ -27,19 +27,19 @@ public:
     QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
-    QSlider *spinnerElasticidad;
+    QSlider *slElasticidad;
     QWidget *layoutWidget_2;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_3;
-    QSlider *spinnerGravitacion;
+    QSlider *slGravitacion;
     QWidget *layoutWidget_3;
     QHBoxLayout *horizontalLayout_4;
     QLabel *label_4;
-    QSlider *spinnerJugador;
+    QSlider *slJugador;
     QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
-    QSlider *spinnerRozamiento;
+    QSlider *slRozamiento;
 
     void setupUi(QDialog *DParametrosFisicos)
     {
@@ -53,7 +53,7 @@ public:
         buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         layoutWidget = new QWidget(DParametrosFisicos);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(30, 80, 291, 21));
+        layoutWidget->setGeometry(QRect(30, 110, 291, 21));
         horizontalLayout_2 = new QHBoxLayout(layoutWidget);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -62,15 +62,16 @@ public:
 
         horizontalLayout_2->addWidget(label_2);
 
-        spinnerElasticidad = new QSlider(layoutWidget);
-        spinnerElasticidad->setObjectName(QString::fromUtf8("spinnerElasticidad"));
-        spinnerElasticidad->setOrientation(Qt::Horizontal);
+        slElasticidad = new QSlider(layoutWidget);
+        slElasticidad->setObjectName(QString::fromUtf8("slElasticidad"));
+        slElasticidad->setMaximum(100);
+        slElasticidad->setOrientation(Qt::Horizontal);
 
-        horizontalLayout_2->addWidget(spinnerElasticidad);
+        horizontalLayout_2->addWidget(slElasticidad);
 
         layoutWidget_2 = new QWidget(DParametrosFisicos);
         layoutWidget_2->setObjectName(QString::fromUtf8("layoutWidget_2"));
-        layoutWidget_2->setGeometry(QRect(30, 120, 291, 21));
+        layoutWidget_2->setGeometry(QRect(30, 30, 291, 21));
         horizontalLayout_3 = new QHBoxLayout(layoutWidget_2);
         horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -79,15 +80,16 @@ public:
 
         horizontalLayout_3->addWidget(label_3);
 
-        spinnerGravitacion = new QSlider(layoutWidget_2);
-        spinnerGravitacion->setObjectName(QString::fromUtf8("spinnerGravitacion"));
-        spinnerGravitacion->setOrientation(Qt::Horizontal);
+        slGravitacion = new QSlider(layoutWidget_2);
+        slGravitacion->setObjectName(QString::fromUtf8("slGravitacion"));
+        slGravitacion->setMaximum(100);
+        slGravitacion->setOrientation(Qt::Horizontal);
 
-        horizontalLayout_3->addWidget(spinnerGravitacion);
+        horizontalLayout_3->addWidget(slGravitacion);
 
         layoutWidget_3 = new QWidget(DParametrosFisicos);
         layoutWidget_3->setObjectName(QString::fromUtf8("layoutWidget_3"));
-        layoutWidget_3->setGeometry(QRect(30, 160, 291, 21));
+        layoutWidget_3->setGeometry(QRect(30, 150, 291, 21));
         horizontalLayout_4 = new QHBoxLayout(layoutWidget_3);
         horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
@@ -96,15 +98,16 @@ public:
 
         horizontalLayout_4->addWidget(label_4);
 
-        spinnerJugador = new QSlider(layoutWidget_3);
-        spinnerJugador->setObjectName(QString::fromUtf8("spinnerJugador"));
-        spinnerJugador->setOrientation(Qt::Horizontal);
+        slJugador = new QSlider(layoutWidget_3);
+        slJugador->setObjectName(QString::fromUtf8("slJugador"));
+        slJugador->setMaximum(100);
+        slJugador->setOrientation(Qt::Horizontal);
 
-        horizontalLayout_4->addWidget(spinnerJugador);
+        horizontalLayout_4->addWidget(slJugador);
 
         layoutWidget1 = new QWidget(DParametrosFisicos);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(30, 40, 291, 21));
+        layoutWidget1->setGeometry(QRect(30, 70, 291, 21));
         horizontalLayout = new QHBoxLayout(layoutWidget1);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -113,11 +116,12 @@ public:
 
         horizontalLayout->addWidget(label);
 
-        spinnerRozamiento = new QSlider(layoutWidget1);
-        spinnerRozamiento->setObjectName(QString::fromUtf8("spinnerRozamiento"));
-        spinnerRozamiento->setOrientation(Qt::Horizontal);
+        slRozamiento = new QSlider(layoutWidget1);
+        slRozamiento->setObjectName(QString::fromUtf8("slRozamiento"));
+        slRozamiento->setMaximum(100);
+        slRozamiento->setOrientation(Qt::Horizontal);
 
-        horizontalLayout->addWidget(spinnerRozamiento);
+        horizontalLayout->addWidget(slRozamiento);
 
 
         retranslateUi(DParametrosFisicos);

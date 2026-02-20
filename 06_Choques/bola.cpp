@@ -4,9 +4,9 @@
 
 int Bola::diametro = 40;
 int Bola::vidasIniciales = 10;
-float Bola::rozamiento = 0.9999;
-float Bola::elasticidad = 1.2;
-float Bola::gravitacion = 50;
+float Bola::rozamiento = 1;
+float Bola::elasticidad = 1;
+float Bola::gravitacion = 0;
 
 Bola::Bola() : Bola(0,0,0,0) {
 

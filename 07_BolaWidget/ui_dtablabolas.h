@@ -1,0 +1,75 @@
+/********************************************************************************
+** Form generated from reading UI file 'dtablabolas.ui'
+**
+** Created by: Qt User Interface Compiler version 5.15.13
+**
+** WARNING! All changes made in this file will be lost when recompiling UI file!
+********************************************************************************/
+
+#ifndef UI_DTABLABOLAS_H
+#define UI_DTABLABOLAS_H
+
+#include <QtCore/QVariant>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QDialogButtonBox>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QTableView>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
+
+QT_BEGIN_NAMESPACE
+
+class Ui_DTablaBolas
+{
+public:
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
+    QTableView *vistaBolas;
+    QDialogButtonBox *buttonBox;
+
+    void setupUi(QDialog *DTablaBolas)
+    {
+        if (DTablaBolas->objectName().isEmpty())
+            DTablaBolas->setObjectName(QString::fromUtf8("DTablaBolas"));
+        DTablaBolas->resize(477, 381);
+        widget = new QWidget(DTablaBolas);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(9, 9, 461, 361));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        vistaBolas = new QTableView(widget);
+        vistaBolas->setObjectName(QString::fromUtf8("vistaBolas"));
+
+        verticalLayout->addWidget(vistaBolas);
+
+        buttonBox = new QDialogButtonBox(widget);
+        buttonBox->setObjectName(QString::fromUtf8("buttonBox"));
+        buttonBox->setOrientation(Qt::Horizontal);
+        buttonBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+
+        verticalLayout->addWidget(buttonBox);
+
+
+        retranslateUi(DTablaBolas);
+        QObject::connect(buttonBox, SIGNAL(accepted()), DTablaBolas, SLOT(accept()));
+        QObject::connect(buttonBox, SIGNAL(rejected()), DTablaBolas, SLOT(reject()));
+
+        QMetaObject::connectSlotsByName(DTablaBolas);
+    } // setupUi
+
+    void retranslateUi(QDialog *DTablaBolas)
+    {
+        DTablaBolas->setWindowTitle(QCoreApplication::translate("DTablaBolas", "Dialog", nullptr));
+    } // retranslateUi
+
+};
+
+namespace Ui {
+    class DTablaBolas: public Ui_DTablaBolas {};
+} // namespace Ui
+
+QT_END_NAMESPACE
+
+#endif // UI_DTABLABOLAS_H
