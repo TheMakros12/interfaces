@@ -414,6 +414,7 @@ void VentanaPrincipal::crearMenuBolas() {
 
     for (int i = 0; i < bolas.size(); i++) {
         QAction *nuevaAction = new QAction(QString(bolas.at(i)->nombre), this);
+        nuevaAction->setData(i);
         menuBolas->addAction(nuevaAction);
 
         connect(nuevaAction, SIGNAL(triggered()),
@@ -685,12 +686,11 @@ void VentanaPrincipal::slotDMenuBolas() {
 
     QObject *culpable = QObject::sender();
 	QAction *accionCulpable = qobject_cast<QAction*>(culpable);
-    QString textoAccion = accionCulpable->text();
+    int indice = accionCulpable->data().toInt();
 
-    if ( dMenuBolas == NULL ) {
-        dMenuBolas = new DMenuBolas(textoAccion);
-    }
+    Bola *laBola = bolas.at(indice);
 
+    dMenuBolas = new DMenuBolas(laBola);
     dMenuBolas->show();
 
 }

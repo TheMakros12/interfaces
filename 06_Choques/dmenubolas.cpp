@@ -1,10 +1,10 @@
 #include "dmenubolas.h"
 #include <QDebug>
 
-DMenuBolas::DMenuBolas(QString nombreBola, QWidget *parent): QDialog(parent){
+DMenuBolas::DMenuBolas(Bola *laBola, QWidget *parent): QDialog(parent){
 		setupUi(this);
 
-		lblNombreBola->setText(nombreBola);
+		lblNombreBola->setText(laBola->nombre);
 	
 }
 
