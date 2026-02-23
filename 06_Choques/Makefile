@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = 06_Choques1.0.0
-DISTDIR = /home/marcosdi12/Documentos/interfaces/06_Choques/.tmp/06_Choques1.0.0
+DISTDIR = /home/marcosdi12/Documentos/di/interfaces/06_Choques/.tmp/06_Choques1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread   
@@ -66,6 +66,7 @@ SOURCES       = bola.cpp \
 		dtablarebotes.cpp \
 		main.cpp \
 		panelposicionbola.cpp \
+		panelposicionchoquesbola.cpp \
 		ventanaprincipal.cpp \
 		widgetchoque.cpp \
 		widgetdetallebola.cpp \
@@ -81,6 +82,7 @@ SOURCES       = bola.cpp \
 		moc_dtablabolas.cpp \
 		moc_dtablarebotes.cpp \
 		moc_panelposicionbola.cpp \
+		moc_panelposicionchoquesbola.cpp \
 		moc_ventanaprincipal.cpp \
 		moc_widgetchoque.cpp \
 		moc_widgetdetallebola.cpp \
@@ -99,6 +101,7 @@ OBJECTS       = bola.o \
 		dtablarebotes.o \
 		main.o \
 		panelposicionbola.o \
+		panelposicionchoquesbola.o \
 		ventanaprincipal.o \
 		widgetchoque.o \
 		widgetdetallebola.o \
@@ -115,6 +118,7 @@ OBJECTS       = bola.o \
 		moc_dtablabolas.o \
 		moc_dtablarebotes.o \
 		moc_panelposicionbola.o \
+		moc_panelposicionchoquesbola.o \
 		moc_ventanaprincipal.o \
 		moc_widgetchoque.o \
 		moc_widgetdetallebola.o \
@@ -213,6 +217,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		dtablabolas.h \
 		dtablarebotes.h \
 		panelposicionbola.h \
+		panelposicionchoquesbola.h \
 		ventanaprincipal.h \
 		widgetchoque.h \
 		widgetdetallebola.h \
@@ -230,6 +235,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		dtablarebotes.cpp \
 		main.cpp \
 		panelposicionbola.cpp \
+		panelposicionchoquesbola.cpp \
 		ventanaprincipal.cpp \
 		widgetchoque.cpp \
 		widgetdetallebola.cpp \
@@ -425,8 +431,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents bola.h dchoquesbolas.h dconfiguracionbola.h ddetallebola.h dinformacion.h dlistabolas.h dmenubolas.h dparametrosfisicos.h dposicionbola.h drebotesentrebolas.h dtablabolas.h dtablarebotes.h panelposicionbola.h ventanaprincipal.h widgetchoque.h widgetdetallebola.h widgetposicionbola.h $(DISTDIR)/
-	$(COPY_FILE) --parents bola.cpp dchoquesbolas.cpp dconfiguracionbola.cpp ddetallebola.cpp dinformacion.cpp dlistabolas.cpp dmenubolas.cpp dparametrosfisicos.cpp dposicionbola.cpp drebotesentrebolas.cpp dtablabolas.cpp dtablarebotes.cpp main.cpp panelposicionbola.cpp ventanaprincipal.cpp widgetchoque.cpp widgetdetallebola.cpp widgetposicionbola.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents bola.h dchoquesbolas.h dconfiguracionbola.h ddetallebola.h dinformacion.h dlistabolas.h dmenubolas.h dparametrosfisicos.h dposicionbola.h drebotesentrebolas.h dtablabolas.h dtablarebotes.h panelposicionbola.h panelposicionchoquesbola.h ventanaprincipal.h widgetchoque.h widgetdetallebola.h widgetposicionbola.h $(DISTDIR)/
+	$(COPY_FILE) --parents bola.cpp dchoquesbolas.cpp dconfiguracionbola.cpp ddetallebola.cpp dinformacion.cpp dlistabolas.cpp dmenubolas.cpp dparametrosfisicos.cpp dposicionbola.cpp drebotesentrebolas.cpp dtablabolas.cpp dtablarebotes.cpp main.cpp panelposicionbola.cpp panelposicionchoquesbola.cpp ventanaprincipal.cpp widgetchoque.cpp widgetdetallebola.cpp widgetposicionbola.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents dchoquesbolas.ui dconfiguracionbola.ui ddetallebola.ui dinformacion.ui dlistabolas.ui dmenubolas.ui dparametrosfisicos.ui dposicionbola.ui drebotesentrebolas.ui dtablabolas.ui dtablarebotes.ui widgetdetallebola.ui widgetposicionbola.ui $(DISTDIR)/
 
 
@@ -459,15 +465,15 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -Wextra -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_dchoquesbolas.cpp moc_dconfiguracionbola.cpp moc_ddetallebola.cpp moc_dinformacion.cpp moc_dlistabolas.cpp moc_dmenubolas.cpp moc_dparametrosfisicos.cpp moc_dposicionbola.cpp moc_drebotesentrebolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_panelposicionbola.cpp moc_ventanaprincipal.cpp moc_widgetchoque.cpp moc_widgetdetallebola.cpp moc_widgetposicionbola.cpp
+compiler_moc_header_make_all: moc_dchoquesbolas.cpp moc_dconfiguracionbola.cpp moc_ddetallebola.cpp moc_dinformacion.cpp moc_dlistabolas.cpp moc_dmenubolas.cpp moc_dparametrosfisicos.cpp moc_dposicionbola.cpp moc_drebotesentrebolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_panelposicionbola.cpp moc_panelposicionchoquesbola.cpp moc_ventanaprincipal.cpp moc_widgetchoque.cpp moc_widgetdetallebola.cpp moc_widgetposicionbola.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_dchoquesbolas.cpp moc_dconfiguracionbola.cpp moc_ddetallebola.cpp moc_dinformacion.cpp moc_dlistabolas.cpp moc_dmenubolas.cpp moc_dparametrosfisicos.cpp moc_dposicionbola.cpp moc_drebotesentrebolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_panelposicionbola.cpp moc_ventanaprincipal.cpp moc_widgetchoque.cpp moc_widgetdetallebola.cpp moc_widgetposicionbola.cpp
+	-$(DEL_FILE) moc_dchoquesbolas.cpp moc_dconfiguracionbola.cpp moc_ddetallebola.cpp moc_dinformacion.cpp moc_dlistabolas.cpp moc_dmenubolas.cpp moc_dparametrosfisicos.cpp moc_dposicionbola.cpp moc_drebotesentrebolas.cpp moc_dtablabolas.cpp moc_dtablarebotes.cpp moc_panelposicionbola.cpp moc_panelposicionchoquesbola.cpp moc_ventanaprincipal.cpp moc_widgetchoque.cpp moc_widgetdetallebola.cpp moc_widgetposicionbola.cpp
 moc_dchoquesbolas.cpp: dchoquesbolas.h \
 		ui_dchoquesbolas.h \
 		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dchoquesbolas.h -o moc_dchoquesbolas.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dchoquesbolas.h -o moc_dchoquesbolas.cpp
 
 moc_dconfiguracionbola.cpp: dconfiguracionbola.h \
 		ui_dconfiguracionbola.h \
@@ -476,40 +482,41 @@ moc_dconfiguracionbola.cpp: dconfiguracionbola.h \
 		ui_widgetdetallebola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dconfiguracionbola.h -o moc_dconfiguracionbola.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dconfiguracionbola.h -o moc_dconfiguracionbola.cpp
 
 moc_ddetallebola.cpp: ddetallebola.h \
 		ui_ddetallebola.h \
 		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ddetallebola.h -o moc_ddetallebola.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ddetallebola.h -o moc_ddetallebola.cpp
 
 moc_dinformacion.cpp: dinformacion.h \
 		ui_dinformacion.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dinformacion.h -o moc_dinformacion.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dinformacion.h -o moc_dinformacion.cpp
 
 moc_dlistabolas.cpp: dlistabolas.h \
 		ui_dlistabolas.h \
 		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dlistabolas.h -o moc_dlistabolas.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dlistabolas.h -o moc_dlistabolas.cpp
 
 moc_dmenubolas.cpp: dmenubolas.h \
 		ui_dmenubolas.h \
+		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dmenubolas.h -o moc_dmenubolas.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dmenubolas.h -o moc_dmenubolas.cpp
 
 moc_dparametrosfisicos.cpp: dparametrosfisicos.h \
 		ui_dparametrosfisicos.h \
 		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dparametrosfisicos.h -o moc_dparametrosfisicos.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dparametrosfisicos.h -o moc_dparametrosfisicos.cpp
 
 moc_dposicionbola.cpp: dposicionbola.h \
 		ui_dposicionbola.h \
@@ -519,33 +526,39 @@ moc_dposicionbola.cpp: dposicionbola.h \
 		panelposicionbola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dposicionbola.h -o moc_dposicionbola.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dposicionbola.h -o moc_dposicionbola.cpp
 
 moc_drebotesentrebolas.cpp: drebotesentrebolas.h \
 		ui_drebotesentrebolas.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include drebotesentrebolas.h -o moc_drebotesentrebolas.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include drebotesentrebolas.h -o moc_drebotesentrebolas.cpp
 
 moc_dtablabolas.cpp: dtablabolas.h \
 		ui_dtablabolas.h \
 		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dtablabolas.h -o moc_dtablabolas.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dtablabolas.h -o moc_dtablabolas.cpp
 
 moc_dtablarebotes.cpp: dtablarebotes.h \
 		ui_dtablarebotes.h \
 		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dtablarebotes.h -o moc_dtablarebotes.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include dtablarebotes.h -o moc_dtablarebotes.cpp
 
 moc_panelposicionbola.cpp: panelposicionbola.h \
 		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include panelposicionbola.h -o moc_panelposicionbola.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include panelposicionbola.h -o moc_panelposicionbola.cpp
+
+moc_panelposicionchoquesbola.cpp: panelposicionchoquesbola.h \
+		bola.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include panelposicionchoquesbola.h -o moc_panelposicionchoquesbola.cpp
 
 moc_ventanaprincipal.cpp: ventanaprincipal.h \
 		bola.h \
@@ -575,22 +588,23 @@ moc_ventanaprincipal.cpp: ventanaprincipal.h \
 		ui_dparametrosfisicos.h \
 		dmenubolas.h \
 		ui_dmenubolas.h \
+		panelposicionchoquesbola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ventanaprincipal.h -o moc_ventanaprincipal.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ventanaprincipal.h -o moc_ventanaprincipal.cpp
 
 moc_widgetchoque.cpp: widgetchoque.h \
 		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include widgetchoque.h -o moc_widgetchoque.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include widgetchoque.h -o moc_widgetchoque.cpp
 
 moc_widgetdetallebola.cpp: widgetdetallebola.h \
 		ui_widgetdetallebola.h \
 		bola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include widgetdetallebola.h -o moc_widgetdetallebola.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include widgetdetallebola.h -o moc_widgetdetallebola.cpp
 
 moc_widgetposicionbola.cpp: widgetposicionbola.h \
 		ui_widgetposicionbola.h \
@@ -598,7 +612,7 @@ moc_widgetposicionbola.cpp: widgetposicionbola.h \
 		panelposicionbola.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/home/marcosdi12/Documentos/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include widgetposicionbola.h -o moc_widgetposicionbola.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/marcosdi12/Documentos/di/interfaces/06_Choques/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/home/marcosdi12/Documentos/di/interfaces/06_Choques -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include widgetposicionbola.h -o moc_widgetposicionbola.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -699,7 +713,8 @@ dlistabolas.o: dlistabolas.cpp dlistabolas.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dlistabolas.o dlistabolas.cpp
 
 dmenubolas.o: dmenubolas.cpp dmenubolas.h \
-		ui_dmenubolas.h
+		ui_dmenubolas.h \
+		bola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dmenubolas.o dmenubolas.cpp
 
 dparametrosfisicos.o: dparametrosfisicos.cpp dparametrosfisicos.h \
@@ -756,12 +771,17 @@ main.o: main.cpp ventanaprincipal.h \
 		dparametrosfisicos.h \
 		ui_dparametrosfisicos.h \
 		dmenubolas.h \
-		ui_dmenubolas.h
+		ui_dmenubolas.h \
+		panelposicionchoquesbola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 panelposicionbola.o: panelposicionbola.cpp panelposicionbola.h \
 		bola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o panelposicionbola.o panelposicionbola.cpp
+
+panelposicionchoquesbola.o: panelposicionchoquesbola.cpp panelposicionchoquesbola.h \
+		bola.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o panelposicionchoquesbola.o panelposicionchoquesbola.cpp
 
 ventanaprincipal.o: ventanaprincipal.cpp ventanaprincipal.h \
 		bola.h \
@@ -790,7 +810,8 @@ ventanaprincipal.o: ventanaprincipal.cpp ventanaprincipal.h \
 		dparametrosfisicos.h \
 		ui_dparametrosfisicos.h \
 		dmenubolas.h \
-		ui_dmenubolas.h
+		ui_dmenubolas.h \
+		panelposicionchoquesbola.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ventanaprincipal.o ventanaprincipal.cpp
 
 widgetchoque.o: widgetchoque.cpp widgetchoque.h \
@@ -843,6 +864,9 @@ moc_dtablarebotes.o: moc_dtablarebotes.cpp
 
 moc_panelposicionbola.o: moc_panelposicionbola.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_panelposicionbola.o moc_panelposicionbola.cpp
+
+moc_panelposicionchoquesbola.o: moc_panelposicionchoquesbola.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_panelposicionchoquesbola.o moc_panelposicionchoquesbola.cpp
 
 moc_ventanaprincipal.o: moc_ventanaprincipal.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ventanaprincipal.o moc_ventanaprincipal.cpp

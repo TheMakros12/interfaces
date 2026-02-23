@@ -39,6 +39,7 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent): QMainWindow(parent) {
     dChoquesBolas = NULL;
     dParametrosFisicos = NULL;
     dMenuBolas = NULL;
+    panelPosicionChoquesBola = NULL;
 
     crearActions();
     crearMenus();
@@ -690,7 +691,7 @@ void VentanaPrincipal::slotDMenuBolas() {
 
     Bola *laBola = bolas.at(indice);
 
-    dMenuBolas = new DMenuBolas(laBola);
-    dMenuBolas->show();
+    panelPosicionChoquesBola = new PanelPosicionChoquesBola(laBola);
+    panelPosicionChoquesBola->show();
 
 }

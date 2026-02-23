@@ -34,6 +34,7 @@
 #include "dchoquesbolas.h"
 #include "dparametrosfisicos.h"
 #include "dmenubolas.h"
+#include "panelposicionchoquesbola.h"
 
 class VentanaPrincipal : public QMainWindow {
 Q_OBJECT
@@ -64,6 +65,7 @@ public:
     DChoquesBolas *dChoquesBolas;
     DParametrosFisicos *dParametrosFisicos;
     DMenuBolas *dMenuBolas;
+    PanelPosicionChoquesBola *panelPosicionChoquesBola;
 
     QTimer *temporizador;
 
